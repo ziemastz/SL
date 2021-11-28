@@ -14,8 +14,10 @@ SOURCES += \
     dbrecordtdk.cpp
 
 HEADERS += \
+    Model/MeasurementObjectModel.h \
     Model/SettingConnectionModel.h \
     Model/SettingGeneralModel.h \
+    Model/TDKLogModel.h \
     dbrecordtdk.h
 
 # Default rules for deployment.
