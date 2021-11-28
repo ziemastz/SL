@@ -15,6 +15,7 @@ SOURCES += \
 
 HEADERS += \
     Model/MeasurementObjectModel.h \
+    Model/MeasurementProtocolModel.h \
     Model/SettingConnectionModel.h \
     Model/SettingGeneralModel.h \
     Model/TDKLogModel.h \

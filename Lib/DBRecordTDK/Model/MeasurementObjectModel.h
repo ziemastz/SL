@@ -6,7 +6,8 @@ class MeasurementObjectModel : public IDatabaseModel
 {
 public:
     QString solution;
-    QString noSources;
+    QString noSourcesId;
+    int noSources;
     QString sourcePreparationDate;
     QString description;
 
@@ -24,7 +25,8 @@ public:
         int i=0;
         id = record.at(i++).toInt();
         solution = record.at(i++).toString();
-        noSources = record.at(i++).toString();
+        noSourcesId = record.at(i++).toString();
+        noSources = record.at(i++).toInt();
         sourcePreparationDate = record.at(i++).toString();
         description = record.at(i++).toString();
         timestamp = record.at(i++).toString();
@@ -35,6 +37,7 @@ public:
         QVariantList ret;
         ret << id
             << solution
+            << noSourcesId
             << noSources
             << sourcePreparationDate
             << description
@@ -47,8 +50,8 @@ public:
         QString ret;
         if(!solution.isEmpty())
             ret.append(solution);
-        if(!noSources.isEmpty())
-            ret.append(" "+noSources);
+        if(!noSourcesId.isEmpty())
+            ret.append(" "+noSourcesId);
         if(!sourcePreparationDate.isEmpty())
             ret.append(" "+sourcePreparationDate);
         return ret;
