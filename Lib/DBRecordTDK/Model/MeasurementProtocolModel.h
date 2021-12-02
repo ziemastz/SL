@@ -6,14 +6,16 @@ class MeasurementProtocol : public IDatabaseModel
 {
 public:
     QString name;
-    int blankTime;
-    int sourceTime;
-    int repeated;
     int anodaVoltage;
     int voltageShiftA;
     int voltageShiftB;
     int voltageShiftC;
     int focusingVoltage;
+    int resolvingTime;
+    int deadTime;
+    double thrA;
+    double thrB;
+    double thrC;
     QString description;
 
     IDatabaseModel* copy() {
@@ -30,14 +32,16 @@ public:
         int i=0;
         id = record.at(i++).toInt();
         name = record.at(i++).toString();
-        blankTime = record.at(i++).toInt();
-        sourceTime = record.at(i++).toInt();
-        repeated = record.at(i++).toInt();
         anodaVoltage = record.at(i++).toInt();
         voltageShiftA = record.at(i++).toInt();
         voltageShiftB = record.at(i++).toInt();
         voltageShiftC = record.at(i++).toInt();
         focusingVoltage = record.at(i++).toInt();
+        resolvingTime = record.at(i++).toInt();
+        deadTime = record.at(i++).toInt();
+        thrA = record.at(i++).toDouble();
+        thrB = record.at(i++).toDouble();
+        thrC = record.at(i++).toDouble();
         description = record.at(i++).toString();
         timestamp = record.at(i++).toString();
         userId = record.at(i++).toInt();
@@ -47,14 +51,16 @@ public:
         QVariantList ret;
         ret << id
             << name
-            << blankTime
-            << sourceTime
-            << repeated
             << anodaVoltage
             << voltageShiftA
             << voltageShiftB
             << voltageShiftC
             << focusingVoltage
+            << resolvingTime
+            << deadTime
+            << thrA
+            << thrB
+            << thrC
             << description
             << timestamp
             << userId;

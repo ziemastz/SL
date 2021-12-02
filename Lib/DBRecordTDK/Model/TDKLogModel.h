@@ -7,11 +7,12 @@ class TDKLogModel : public IDatabaseModel
 public:
     QString nuclide;
     QString creationDateTime;
-    QString measurementObject;
+    int measurementObjectId;
     QString description;
     QString linked;
     int madeByUserId;
     int status;
+    int measurementProtocolId;
 
     IDatabaseModel* copy() {
         IDatabaseModel* ret = new TDKLogModel;
@@ -28,11 +29,12 @@ public:
         id = record.at(i++).toInt();
         nuclide = record.at(i++).toString();
         creationDateTime = record.at(i++).toString();
-        measurementObject = record.at(i++).toString();
+        measurementObjectId = record.at(i++).toInt();
         description = record.at(i++).toString();
         linked = record.at(i++).toString();
         madeByUserId = record.at(i++).toInt();
         status = record.at(i++).toInt();
+        measurementProtocolId = record.at(i++).toInt();
         timestamp = record.at(i++).toString();
         userId = record.at(i++).toInt();
     }
@@ -42,7 +44,7 @@ public:
         ret << id
             << nuclide
             << creationDateTime
-            << measurementObject
+            << measurementObjectId
             << description
             << linked
             << madeByUserId
