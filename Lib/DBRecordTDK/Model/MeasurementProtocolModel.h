@@ -11,11 +11,11 @@ public:
     int voltageShiftB;
     int voltageShiftC;
     int focusingVoltage;
-    int resolvingTime;
-    int deadTime;
-    double thrA;
-    double thrB;
-    double thrC;
+    float resolvingTime;
+    float deadTime;
+    float thrA;
+    float thrB;
+    float thrC;
     QString description;
 
     IDatabaseModel* copy() {
@@ -37,11 +37,11 @@ public:
         voltageShiftB = record.at(i++).toInt();
         voltageShiftC = record.at(i++).toInt();
         focusingVoltage = record.at(i++).toInt();
-        resolvingTime = record.at(i++).toInt();
-        deadTime = record.at(i++).toInt();
-        thrA = record.at(i++).toDouble();
-        thrB = record.at(i++).toDouble();
-        thrC = record.at(i++).toDouble();
+        resolvingTime = record.at(i++).toFloat();
+        deadTime = record.at(i++).toFloat();
+        thrA = record.at(i++).toFloat();
+        thrB = record.at(i++).toFloat();
+        thrC = record.at(i++).toFloat();
         description = record.at(i++).toString();
         timestamp = record.at(i++).toString();
         userId = record.at(i++).toInt();

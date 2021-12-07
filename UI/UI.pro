@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    Lib \
-    UI
+    RecordTDK
+
+
 

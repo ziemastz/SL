@@ -45,6 +45,7 @@ public:
     void setRecord(const QVariantList &record) {
         int i = 0;
         id = record.at(i++).toInt();
+        tdkLogId = record.at(i++).toInt();
         startMeasurementDateTime = record.at(i++).toString();
         noSource = record.at(i++).toInt();
         pointTag = record.at(i++).toString();
