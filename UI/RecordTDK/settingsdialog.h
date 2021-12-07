@@ -43,14 +43,14 @@ private slots:
 private:
     Ui::SettingsDialog *ui;
 
-    SettingGeneralModel _general;
-    SettingConnectionModel _connection;
-    UserModel _user;
+    StarlingLab::SettingGeneralModel _general;
+    StarlingLab::SettingConnectionModel _connection;
+    StarlingLab::UserModel _user;
     int _userIdLogged;
 
     void loadGeneral();
     void loadConnection();
-    void loadUser(const UserModel &user);
+    void loadUser(const StarlingLab::UserModel &user);
     void loadUser(const int &userId);
 };
 

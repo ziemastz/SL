@@ -3,6 +3,12 @@
 #include "databasebase.h"
 #include "dbenginesqlite.h"
 #include "Model/SettingGeneralModel.h"
+#include "Model/SettingConnectionModel.h"
+#include "Model/TDKLogModel.h"
+#include "Model/MeasurementObjectModel.h"
+#include "Model/MeasurementProtocolModel.h"
+#include "Model/MeasurementRAWModel.h"
+
 namespace StarlingLab {
 
 class DBRecordTDK : public DatabaseBase

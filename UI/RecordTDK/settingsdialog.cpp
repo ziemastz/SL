@@ -53,11 +53,11 @@ void SettingsDialog::loadGeneral()
 void SettingsDialog::loadConnection()
 {
     ui->port_comboBox->clear();
-    ui->port_comboBox->addItems(Utils::availablePorts());
+    ui->port_comboBox->addItems(StarlingLab::Utils::availablePorts());
 
-    Database::DBRecordTDK db;
+    StarlingLab::DBRecordTDK db;
 
-    SettingConnectionModel con = db.getSettingConnection();
+    StarlingLab::SettingConnectionModel con = db.getSettingConnection();
     if(con.id != 0) {
         _connection = con;
         ui->port_comboBox->setCurrentText(con.port);
@@ -71,12 +71,12 @@ void SettingsDialog::loadConnection()
     }
 }
 
-void SettingsDialog::loadUser(const UserModel &user)
+void SettingsDialog::loadUser(const StarlingLab::UserModel &user)
 {
-    Database::DBRecordTDK db;
+    StarlingLab::DBRecordTDK db;
     ui->users_comboBox->blockSignals(true);
     ui->users_comboBox->clear();
-    ui->users_comboBox->addItems(db.usernames());
+    ui->users_comboBox->addItems(db.getUsernames());
     ui->users_comboBox->blockSignals(false);
 
     if(user.id != 0) {
