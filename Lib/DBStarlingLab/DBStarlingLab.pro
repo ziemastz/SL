@@ -18,7 +18,7 @@ HEADERS += \
 
 # Default rules for deployment.
 unix {
-    target.path = /usr/lib
+    target.path = $$[QT_INSTALL_PLUGINS]/generic
 }
 !isEmpty(target.path): INSTALLS += target
 

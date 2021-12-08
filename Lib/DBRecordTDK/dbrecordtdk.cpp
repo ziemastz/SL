@@ -2,7 +2,7 @@
 
 namespace StarlingLab {
 
-DBRecordTDK::DBRecordTDK():DatabaseBase()
+DBRecordTDK::DBRecordTDK() : DatabaseBase()
 {
     DBEngineSqlite *sqlite = new DBEngineSqlite();
     sqlite->setDatabaseName("recordTDK.db");

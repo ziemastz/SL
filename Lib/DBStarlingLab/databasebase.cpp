@@ -2,12 +2,12 @@
 
 namespace StarlingLab {
 
-IDatabaseEngine DatabaseBase::*_engine = nullptr;
-UserModel DatabaseBase::*_loggedUser = nullptr;
+IDatabaseEngine *DatabaseBase::_engine = 0;
+UserModel *DatabaseBase::_loggedUser = 0;
 
 DatabaseBase::DatabaseBase()
 {
-    if(_loggedUser == nullptr){
+    if(_loggedUser == 0){
         _loggedUser = new UserModel;
         _loggedUser->id = 0;
     }
@@ -16,15 +16,15 @@ DatabaseBase::DatabaseBase()
 
 DatabaseBase::~DatabaseBase()
 {
-    if(_engine != nullptr)
+    if(_engine != 0)
         delete _engine;
-    if(_loggedUser != nullptr)
+    if(_loggedUser != 0)
         delete _loggedUser;
 }
 
 void DatabaseBase::addEngine(IDatabaseEngine *engine)
 {
-    if(_engine != nullptr)
+    if(_engine != 0)
         delete _engine;
     _engine = engine;
 }
