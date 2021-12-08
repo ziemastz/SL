@@ -24,8 +24,8 @@ DatabaseBase::~DatabaseBase()
 
 void DatabaseBase::addEngine(IDatabaseEngine *engine)
 {
-    if(_engine != 0)
-        delete _engine;
+    //if(_engine != 0)
+     //   delete _engine;
     _engine = engine;
 }
 
