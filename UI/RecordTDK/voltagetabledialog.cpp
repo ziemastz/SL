@@ -21,11 +21,11 @@ void VoltageTableDialog::on_fillAnode_pushButton_clicked()
     }
 
     //clear table
-    Utils::clearTableWidget(ui->anode_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
 
     //create list
     for(double i = ui->fromAnode_doubleSpinBox->value(); i <= ui->toAnode_doubleSpinBox->value(); i+=ui->stepAnode_doubleSpinBox->value())
-        Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString::number(i));
+        StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString::number(i));
 }
 
 
@@ -37,11 +37,11 @@ void VoltageTableDialog::on_fillFocusing_pushButton_clicked()
     }
 
     //clear table
-    Utils::clearTableWidget(ui->focusing_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
 
     //create list
     for(double i = ui->fromFocusing_doubleSpinBox->value(); i <= ui->toFocusing_doubleSpinBox->value(); i+=ui->stepFocusing_doubleSpinBox->value())
-        Utils::addItemTableWidget(ui->focusing_tableWidget, QStringList() << QString::number(i));
+        StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget, QStringList() << QString::number(i));
 
 }
 
@@ -54,12 +54,12 @@ void VoltageTableDialog::on_cancel_pushButton_clicked()
 void VoltageTableDialog::on_clear_pushButton_clicked()
 {
     //clear table
-    Utils::clearTableWidget(ui->focusing_tableWidget);
-    Utils::clearTableWidget(ui->anode_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
 
     //add empty item
-    Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
-    Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString(""));
+    StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
+    StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString(""));
 
     ui->voltageShiftA_spinBox->setValue(0);
     ui->voltageShiftB_spinBox->setValue(0);
@@ -115,14 +115,14 @@ void VoltageTableDialog::on_focusing_tableWidget_cellChanged(int row, int column
 
 void VoltageTableDialog::on_clearAnode_pushButton_clicked()
 {
-    Utils::clearTableWidget(ui->anode_tableWidget);
-    Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString(""));
+    StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
+    StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString(""));
 }
 
 
 void VoltageTableDialog::on_clearFocusing_pushButton_clicked()
 {
-    Utils::clearTableWidget(ui->focusing_tableWidget);
-    Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
+    StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
+    StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
 }
 

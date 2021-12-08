@@ -61,8 +61,8 @@ private:
     QTimer *timer;
     QThread *threadN1470;
 
-    CounterLogModel log;
-    QVector<RAWModel> rawData;
+   // CounterLogModel log;
+   // QVector<RAWModel> rawData;
 
     Counter counter;
     void updateRecord();

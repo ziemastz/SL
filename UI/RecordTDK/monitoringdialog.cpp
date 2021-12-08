@@ -309,8 +309,8 @@ void MonitoringDialog::on_exit_pushButton_clicked()
 
 void MonitoringDialog::on_clearData_pushButton_clicked()
 {
-    Utils::clearTableWidget(ui->tag_tableWidget);
-    Utils::clearTableWidget(ui->counts_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->tag_tableWidget);
+    StarlingLab::Utils::clearTableWidget(ui->counts_tableWidget);
     ui->tag_tableWidget->insertRow(0);
     ui->tag_tableWidget->setItem(0,0,new QTableWidgetItem(QString("1")));
     ui->counts_tableWidget->insertRow(0);
@@ -321,17 +321,17 @@ void MonitoringDialog::on_clearData_pushButton_clicked()
 
 void MonitoringDialog::on_saveData_pushButton_clicked()
 {
-    CounterLogModel log;
+    StarlingLab::TDKLogModel log;
     log.id = 0;
     log.nuclide = ui->radionuclide_lineEdit->text();
     log.tag = Database::DBRecordTDK::Monitoring;
-    log.creationDate = QDate::currentDate().toString("yyyy-MM-dd");
+    log.creationDateTime = QDate::currentDate().toString("yyyy-MM-dd");
     log.solution = ui->solution_lineEdit->text();
     log.measurementObject = ui->measObject_lineEdit->text();
     log.desciption = ui->comment_textEdit->toPlainText();
     log.linked = ui->linked_lineEdit->text();
-    log.madeBy = _userLoggedId;
-    log.status = Database::DBRecordTDK::Finished;
+    log.madeByUserId = _userLoggedId;
+    log.status = StarlingLab::DBRecordTDK::Finished;
 
     Database::DBRecordTDK db;
     if(!db.insert(log)) {

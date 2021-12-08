@@ -16,6 +16,7 @@ class DBRecordTDK : public DatabaseBase
 public:
     DBRecordTDK();
     SettingGeneralModel getSettingGeneral();
+    SettingConnectionModel getSettingConnection();
 
 };
 

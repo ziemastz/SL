@@ -2,9 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMenu>
 #include "logindialog.h"
 #include "settingsdialog.h"
-#include "monitoringdialog.h"
+// #include "monitoringdialog.h"
 #include "Model/usermodel.h"
 
 QT_BEGIN_NAMESPACE
@@ -25,6 +26,8 @@ private slots:
     void on_settings_pushButton_clicked();
 
     void on_monitoring_pushButton_clicked();
+
+    void on_add_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

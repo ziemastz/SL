@@ -104,15 +104,15 @@ void SettingsDialog::loadUser(const StarlingLab::UserModel &user)
 
 void SettingsDialog::loadUser(const int &userId)
 {
-    Database::DBRecordTDK db;
+    StarlingLab::DBRecordTDK db;
     loadUser(db.getUser(userId));
 }
 
 void SettingsDialog::on_saveGeneral_pushButton_clicked()
 {
-    Database::DBRecordTDK db;
+    StarlingLab::DBRecordTDK db;
 
-    SettingGeneralModel newGeneral;
+    StarlingLab::SettingGeneralModel newGeneral;
     newGeneral.id = _general.id;
     newGeneral.blankTime = ui->blankTime_spinBox->value();
     newGeneral.sourceTime = ui->sourceTime_spinBox->value();
@@ -132,8 +132,7 @@ void SettingsDialog::on_saveGeneral_pushButton_clicked()
     newGeneral.userId = _general.userId;
 
     if(newGeneral.record() != _general.record()) {
-        newGeneral.timestamp = QDateTime::currentDateTime().toString(FORMAT_TIMESTAMP);
-        if(db.updateModel(&newGeneral)) {
+        if(db.update(&newGeneral)) {
             loadGeneral();
         }else {
             QMessageBox::warning(this,tr("Bład"),tr("Bład zapisu. Zmiany nie zostały zapisane."));
@@ -144,8 +143,8 @@ void SettingsDialog::on_saveGeneral_pushButton_clicked()
 
 void SettingsDialog::on_saveConnection_pushButton_clicked()
 {
-    Database::DBRecordTDK db;
-    SettingConnectionModel newConnection;
+    StarlingLab::DBRecordTDK db;
+    StarlingLab::SettingConnectionModel newConnection;
     newConnection.id = _connection.id;
 
     newConnection.port = ui->port_comboBox->currentText();
@@ -159,7 +158,7 @@ void SettingsDialog::on_saveConnection_pushButton_clicked()
     newConnection.userId = _connection.userId;
 
     if(newConnection.record() != _connection.record()) {
-        if(db.updateModel(&newConnection)) {
+        if(db.update(&newConnection)) {
             loadConnection();
         }else {
             QMessageBox::warning(this,tr("Błąd"),tr("Błąd zapisu. Zmiany nie zostały zapisane."));
@@ -171,8 +170,8 @@ void SettingsDialog::on_saveConnection_pushButton_clicked()
 
 void SettingsDialog::on_saveUser_pushButton_clicked()
 {
-    Database::DBRecordTDK db;
-    UserModel newUser;
+    StarlingLab::DBRecordTDK db;
+    StarlingLab::UserModel newUser;
 
     if(ui->users_comboBox->currentText() != _user.username) {
         //create new user
@@ -183,10 +182,8 @@ void SettingsDialog::on_saveUser_pushButton_clicked()
         newUser.firstName = ui->firstName_lineEdit->text();
         newUser.secondName = ui->secondName_lineEdit->text();
         newUser.lastName = ui->lastName_lineEdit->text();
-        newUser.timestamp = QDateTime::currentDateTime().toString(FORMAT_TIMESTAMP);
-        newUser.userId = 0;
 
-        if(db.createUser(&newUser)) {
+        if(db.insert(&newUser)) {
             loadUser(newUser);
             this->accept();
         }else {
@@ -205,8 +202,7 @@ void SettingsDialog::on_saveUser_pushButton_clicked()
         newUser.userId = _user.userId;
 
         if(newUser.record() != _user.record()) {
-            newUser.timestamp = QDateTime::currentDateTime().toString(FORMAT_TIMESTAMP);
-            if(db.updateModel(&newUser)) {
+            if(db.update(&newUser)) {
                 loadUser(newUser);
             }else {
                 QMessageBox::warning(this,tr("Bład"),tr("Bład zapisu. Zmiany nie zostały zapisane."));
@@ -219,8 +215,8 @@ void SettingsDialog::on_saveUser_pushButton_clicked()
 
 void SettingsDialog::on_users_comboBox_currentIndexChanged(const QString &arg1)
 {
-    Database::DBRecordTDK db;
-    UserModel selectUser = db.getUser(arg1);
+    StarlingLab::DBRecordTDK db;
+    StarlingLab::UserModel selectUser = db.getUser(arg1);
     loadUser(selectUser);
 }
 
@@ -235,8 +231,8 @@ void SettingsDialog::on_username_lineEdit_editingFinished()
 
     if(ui->username_lineEdit->text() != _user.username) {
         //check available username
-        Database::DBRecordTDK db;
-        if(db.usernames().contains(ui->username_lineEdit->text())){
+        StarlingLab::DBRecordTDK db;
+        if(db.getUsernames().contains(ui->username_lineEdit->text())){
             QMessageBox::warning(this,tr("Błąd"),tr("Nazwa użytkownika istnieje.\nPodaj inną nazwe użytkownika."));
             ui->username_lineEdit->setFocus();
             return;
@@ -251,8 +247,8 @@ void SettingsDialog::on_createUser_pushButton_clicked()
     if(newUsername.isEmpty())
         return;
 
-    Database::DBRecordTDK db;
-    if(db.usernames().contains(newUsername)){
+    StarlingLab::DBRecordTDK db;
+    if(db.getUsernames().contains(newUsername)){
         QMessageBox::warning(this,tr("Błąd"),tr("Nazwa użytkownika istnieje.\nPodaj inną nazwe użytkownika."));
         return;
     }

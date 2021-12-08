@@ -15,7 +15,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setUserIdLogged(const QString &username)
 {
-    Database::DBRecordTDK db;
+    StarlingLab::DBRecordTDK db;
     _userIdLogged = db.getUser(username).id;
 }
 
@@ -29,7 +29,19 @@ void MainWindow::on_settings_pushButton_clicked()
 
 void MainWindow::on_monitoring_pushButton_clicked()
 {
-    MonitoringDialog monitoring(_userIdLogged);
-    if(monitoring.init())
-        monitoring.exec();
+   // MonitoringDialog monitoring(_userIdLogged);
+    //if(monitoring.init())
+    //    monitoring.exec();
 }
+
+void MainWindow::on_add_pushButton_clicked()
+{
+    QMenu menuAdd;
+    menuAdd.addAction("Pomiar");
+    menuAdd.addAction("Pomiar zr. kontrolnego");
+    menuAdd.addAction("Charakterystyka");
+    menuAdd.addAction("Awaria");
+    menuAdd.addAction("Serwis");
+    menuAdd.exec();
+}
+

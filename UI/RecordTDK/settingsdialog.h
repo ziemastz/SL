@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QSerialPortInfo>
 
 #include "dbrecordtdk.h"
 #include "utils.h"
@@ -52,6 +53,8 @@ private:
     void loadConnection();
     void loadUser(const StarlingLab::UserModel &user);
     void loadUser(const int &userId);
+
+
 };
 
 #endif // SETTINGSDIALOG_H

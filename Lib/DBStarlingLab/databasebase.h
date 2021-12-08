@@ -14,7 +14,7 @@ public:
     const QString FORMAT_TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
     DatabaseBase();
     ~DatabaseBase();
-    static void addEngine(IDatabaseEngine *engine);
+    void addEngine(IDatabaseEngine *engine);
 
     bool insert(IDatabaseModel *model);
     bool update(IDatabaseModel *model);
@@ -27,6 +27,7 @@ public:
     bool loginUser(const QString& username, const QString& password);
     UserModel* getLoggeduser() const;
     UserModel getUser(const int& id);
+    UserModel getUser(const QString& username);
     QStringList getUsernames();
 
 private:

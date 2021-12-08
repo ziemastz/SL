@@ -14,7 +14,7 @@ SOURCES += \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    monitoringdialog.cpp \
+#    monitoringdialog.cpp \
     settingsdialog.cpp \
     voltagetabledialog.cpp
 
@@ -23,7 +23,7 @@ HEADERS += \
     counts.h \
     logindialog.h \
     mainwindow.h \
-    monitoringdialog.h \
+#    monitoringdialog.h \
     settingsdialog.h \
     voltagetabledialog.h
 
@@ -33,11 +33,6 @@ FORMS += \
     monitoringdialog.ui \
     settingsdialog.ui \
     voltagetabledialog.ui
-
-TRANSLATIONS += \
-    RecordTDK_pl_PL.ts
-CONFIG += lrelease
-CONFIG += embed_translations
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -136,3 +131,20 @@ win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../CAEN/
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/debug/libPowerSupplyN1470.a
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/release/PowerSupplyN1470.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/debug/PowerSupplyN1470.lib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Adept/MAC3Counter/release/ -lMAC3Counter
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Adept/MAC3Counter/debug/ -lMAC3Counter
+
+INCLUDEPATH += $$PWD/../../../Adept/MAC3Counter
+DEPENDPATH += $$PWD/../../../Adept/MAC3Counter
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/MAC3Counter/release/libMAC3Counter.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/MAC3Counter/debug/libMAC3Counter.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/MAC3Counter/release/MAC3Counter.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/MAC3Counter/debug/MAC3Counter.lib
+
+win32: LIBS += -L$$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib/ -ldmgr
+win32: LIBS += -L$$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib/ -ldepp
+
+INCLUDEPATH += $$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
+DEPENDPATH += $$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include

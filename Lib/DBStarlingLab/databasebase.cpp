@@ -96,6 +96,14 @@ UserModel DatabaseBase::getUser(const int &id)
     return ret;
 }
 
+UserModel DatabaseBase::getUser(const QString &username)
+{
+    UserModel ret;
+    ret.id = 0;
+    DBResults results = _engine->select(&ret,"username='"+username+"'");
+    return ret;
+}
+
 QStringList DatabaseBase::getUsernames()
 {
     DBResults results = _engine->select(new UserModel);

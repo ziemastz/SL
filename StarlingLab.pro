@@ -4,3 +4,4 @@ SUBDIRS += \
     Lib \
     UI
 
+UI.depends = Lib

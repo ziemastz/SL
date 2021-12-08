@@ -1,5 +1,6 @@
 QT -= gui
-
+QT += serialport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TEMPLATE = lib
 CONFIG += staticlib
 
