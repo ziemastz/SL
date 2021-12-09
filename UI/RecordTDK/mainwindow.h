@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMenu>
+#include <QAction>
+#include "addmeasurementdialog.h"
 #include "logindialog.h"
 #include "settingsdialog.h"
 // #include "monitoringdialog.h"
@@ -29,6 +31,7 @@ private slots:
 
     void on_add_pushButton_clicked();
 
+    void openMeasurement();
 private:
     Ui::MainWindow *ui;
     int _userIdLogged;

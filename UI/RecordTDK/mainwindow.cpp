@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 }
 
 MainWindow::~MainWindow()
@@ -37,11 +38,19 @@ void MainWindow::on_monitoring_pushButton_clicked()
 void MainWindow::on_add_pushButton_clicked()
 {
     QMenu menuAdd;
-    menuAdd.addAction("Pomiar");
-    menuAdd.addAction("Pomiar zr. kontrolnego");
-    menuAdd.addAction("Charakterystyka");
-    menuAdd.addAction("Awaria");
-    menuAdd.addAction("Serwis");
-    menuAdd.exec();
+
+    QAction *measurement = new QAction("Pomiar");
+    menuAdd.addAction(measurement);
+    connect(measurement,SIGNAL(triggered()),this,SLOT(openMeasurement()));
+
+
+    menuAdd.exec(QCursor::pos());
+    delete measurement;
+}
+
+void MainWindow::openMeasurement()
+{
+    AddMeasurementDialog addMeasurement;
+    addMeasurement.exec();
 }
 

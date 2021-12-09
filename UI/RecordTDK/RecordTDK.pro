@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addmeasurementdialog.cpp \
     counter.cpp \
     counts.cpp \
     logindialog.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     voltagetabledialog.cpp
 
 HEADERS += \
+    addmeasurementdialog.h \
     counter.h \
     counts.h \
     logindialog.h \
@@ -28,6 +30,7 @@ HEADERS += \
     voltagetabledialog.h
 
 FORMS += \
+    addmeasurementdialog.ui \
     logindialog.ui \
     mainwindow.ui \
     monitoringdialog.ui \
