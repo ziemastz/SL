@@ -6,7 +6,7 @@
 #include "Model/SettingConnectionModel.h"
 #include "Model/TDKLogModel.h"
 #include "Model/MeasurementObjectModel.h"
-#include "Model/MeasurementProtocolModel.h"
+#include "Model/ProtocolModel.h"
 #include "Model/MeasurementRAWModel.h"
 
 namespace StarlingLab {

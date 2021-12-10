@@ -15,7 +15,7 @@ VoltageTableDialog::~VoltageTableDialog()
 
 void VoltageTableDialog::on_fillAnode_pushButton_clicked()
 {
-    if(ui->fromAnode_doubleSpinBox->value() > ui->toAnode_doubleSpinBox->value()) {
+    if(ui->fromAnode_spinBox->value() > ui->toAnode_spinBox->value()) {
         QMessageBox::warning(this,tr("Zakres"),tr("Niepowazny czy co?\nPopraw zakres!"));
         return;
     }
@@ -24,14 +24,14 @@ void VoltageTableDialog::on_fillAnode_pushButton_clicked()
     StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
 
     //create list
-    for(double i = ui->fromAnode_doubleSpinBox->value(); i <= ui->toAnode_doubleSpinBox->value(); i+=ui->stepAnode_doubleSpinBox->value())
+    for(double i = ui->fromAnode_spinBox->value(); i <= ui->toAnode_spinBox->value(); i+=ui->stepAnode_spinBox->value())
         StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString::number(i));
 }
 
 
 void VoltageTableDialog::on_fillFocusing_pushButton_clicked()
 {
-    if(ui->fromFocusing_doubleSpinBox->value() > ui->toFocusing_doubleSpinBox->value()) {
+    if(ui->fromFocusing_spinBox->value() > ui->toFocusing_spinBox->value()) {
         QMessageBox::warning(this,tr("Zakres"),tr("Niepowazny czy co?\nPopraw zakres!"));
         return;
     }
@@ -40,7 +40,7 @@ void VoltageTableDialog::on_fillFocusing_pushButton_clicked()
     StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
 
     //create list
-    for(double i = ui->fromFocusing_doubleSpinBox->value(); i <= ui->toFocusing_doubleSpinBox->value(); i+=ui->stepFocusing_doubleSpinBox->value())
+    for(double i = ui->fromFocusing_spinBox->value(); i <= ui->toFocusing_spinBox->value(); i+=ui->stepFocusing_spinBox->value())
         StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget, QStringList() << QString::number(i));
 
 }
@@ -61,9 +61,6 @@ void VoltageTableDialog::on_clear_pushButton_clicked()
     StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
     StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString(""));
 
-    ui->voltageShiftA_spinBox->setValue(0);
-    ui->voltageShiftB_spinBox->setValue(0);
-    ui->voltageShiftC_spinBox->setValue(0);
 }
 
 

@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
 #    monitoringdialog.cpp \
+    protocoldialog.cpp \
     settingsdialog.cpp \
     voltagetabledialog.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     logindialog.h \
     mainwindow.h \
 #    monitoringdialog.h \
+    protocoldialog.h \
     settingsdialog.h \
     voltagetabledialog.h
 
@@ -34,6 +36,7 @@ FORMS += \
     logindialog.ui \
     mainwindow.ui \
     monitoringdialog.ui \
+    protocoldialog.ui \
     settingsdialog.ui \
     voltagetabledialog.ui
 
