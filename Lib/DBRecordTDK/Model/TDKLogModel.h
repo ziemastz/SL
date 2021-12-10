@@ -25,7 +25,7 @@ public:
     }
 
     QString tableName() const {
-        return QString("tdklog");
+        return QString("tdkLog");
     }
 
     void setRecord(const QVariantList& record) {

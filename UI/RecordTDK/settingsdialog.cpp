@@ -36,15 +36,6 @@ void SettingsDialog::loadGeneral()
 
         ui->voltageMax_spinBox->setValue(general.voltageMax);
         ui->amperMax_spinBox->setValue(general.amperMax);
-        ui->voltageShiftA_spinBox->setValue(general.voltageShiftA);
-        ui->voltageShiftB_spinBox->setValue(general.voltageShiftB);
-        ui->voltageShiftC_spinBox->setValue(general.voltageShiftC);
-
-        ui->resolvingTime_spinBox->setValue(general.resolvingTime);
-        ui->deadTime_spinBox->setValue(general.deadTime);
-        ui->thrA_doubleSpinBox->setValue(general.thrA);
-        ui->thrB_doubleSpinBox->setValue(general.thrB);
-        ui->thrC_doubleSpinBox->setValue(general.thrC);
 
         ui->lastModificationDateTimeGeneral_label->setText(general.timestamp+", "+db.getUser(general.userId).signatureShort());
     }
@@ -120,14 +111,6 @@ void SettingsDialog::on_saveGeneral_pushButton_clicked()
     newGeneral.delayedStart = ui->delayedStart_spinBox->value();
     newGeneral.voltageMax = ui->voltageMax_spinBox->value();
     newGeneral.amperMax = ui->voltageMax_spinBox->value();
-    newGeneral.voltageShiftA = ui->voltageShiftA_spinBox->value();
-    newGeneral.voltageShiftB = ui->voltageShiftB_spinBox->value();
-    newGeneral.voltageShiftC = ui->voltageShiftC_spinBox->value();
-    newGeneral.resolvingTime = ui->repeated_spinBox->value();
-    newGeneral.deadTime = ui->deadTime_spinBox->value();
-    newGeneral.thrA = ui->thrA_doubleSpinBox->value();
-    newGeneral.thrB = ui->thrB_doubleSpinBox->value();
-    newGeneral.thrC = ui->thrC_doubleSpinBox->value();
     newGeneral.timestamp = _general.timestamp;
     newGeneral.userId = _general.userId;
 

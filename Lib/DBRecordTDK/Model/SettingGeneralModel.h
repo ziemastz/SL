@@ -12,14 +12,7 @@ public:
     int delayedStart;
     int voltageMax;
     int amperMax;
-    int voltageShiftA;
-    int voltageShiftB;
-    int voltageShiftC;
-    int resolvingTime;
-    int deadTime;
-    double thrA;
-    double thrB;
-    double thrC;
+
     //QString timestamp;
     //int userId;
 
@@ -41,14 +34,6 @@ public:
         delayedStart = record.at(i++).toInt();
         voltageMax = record.at(i++).toInt();
         amperMax = record.at(i++).toInt();
-        voltageShiftA = record.at(i++).toInt();
-        voltageShiftB = record.at(i++).toInt();
-        voltageShiftC = record.at(i++).toInt();
-        resolvingTime = record.at(i++).toInt();
-        deadTime = record.at(i++).toInt();
-        thrA = record.at(i++).toDouble();
-        thrB = record.at(i++).toDouble();
-        thrC = record.at(i++).toDouble();
         timestamp = record.at(i++).toString();
         userId = record.at(i++).toInt();
     }
@@ -61,14 +46,6 @@ public:
             << delayedStart
             << voltageMax
             << amperMax
-            << voltageShiftA
-            << voltageShiftB
-            << voltageShiftC
-            << resolvingTime
-            << deadTime
-            << thrA
-            << thrB
-            << thrC
             << timestamp
             << userId;
         return ret;
