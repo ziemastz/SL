@@ -5,7 +5,6 @@
 #include "Model/SettingGeneralModel.h"
 #include "Model/SettingConnectionModel.h"
 #include "Model/TDKLogModel.h"
-#include "Model/MeasurementObjectModel.h"
 #include "Model/ProtocolModel.h"
 #include "Model/MeasurementRAWModel.h"
 

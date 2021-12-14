@@ -15,7 +15,6 @@ SOURCES += \
     dbrecordtdk.cpp
 
 HEADERS += \
-    Model/MeasurementObjectModel.h \
     Model/MeasurementRAWModel.h \
     Model/ProtocolModel.h \
     Model/SettingConnectionModel.h \
