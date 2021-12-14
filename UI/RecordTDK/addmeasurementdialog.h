@@ -1,6 +1,6 @@
 #ifndef ADDMEASUREMENTDIALOG_H
 #define ADDMEASUREMENTDIALOG_H
-
+#include "dbrecordtdk.h"
 #include <QDialog>
 
 namespace Ui {
