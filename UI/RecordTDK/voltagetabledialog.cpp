@@ -24,7 +24,7 @@ void VoltageTableDialog::on_fillAnode_pushButton_clicked()
     StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
 
     //create list
-    for(double i = ui->fromAnode_spinBox->value(); i <= ui->toAnode_spinBox->value(); i+=ui->stepAnode_spinBox->value())
+    for(int i = ui->fromAnode_spinBox->value(); i <= ui->toAnode_spinBox->value(); i+=ui->stepAnode_spinBox->value())
         StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget,QStringList() << QString::number(i));
 }
 
@@ -40,7 +40,7 @@ void VoltageTableDialog::on_fillFocusing_pushButton_clicked()
     StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
 
     //create list
-    for(double i = ui->fromFocusing_spinBox->value(); i <= ui->toFocusing_spinBox->value(); i+=ui->stepFocusing_spinBox->value())
+    for(int i = ui->fromFocusing_spinBox->value(); i <= ui->toFocusing_spinBox->value(); i+=ui->stepFocusing_spinBox->value())
         StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget, QStringList() << QString::number(i));
 
 }
@@ -121,5 +121,37 @@ void VoltageTableDialog::on_clearFocusing_pushButton_clicked()
 {
     StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
     StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList() << QString(""));
+}
+
+void VoltageTableDialog::setFocusingTab(const QVector<int> &newFocusingTab)
+{
+    focusingTab = newFocusingTab;
+    //clear table
+    StarlingLab::Utils::clearTableWidget(ui->focusing_tableWidget);
+
+    //create list
+    foreach(double value, focusingTab)
+        StarlingLab::Utils::addItemTableWidget(ui->focusing_tableWidget, QStringList() << QString::number(value));
+}
+
+void VoltageTableDialog::setAnodeTab(const QVector<int> &newAnodeTab)
+{
+    anodeTab = newAnodeTab;
+    //clear table
+    StarlingLab::Utils::clearTableWidget(ui->anode_tableWidget);
+
+    //create list
+    foreach(double value, anodeTab)
+        StarlingLab::Utils::addItemTableWidget(ui->anode_tableWidget, QStringList() << QString::number(value));
+}
+
+const QVector<int> &VoltageTableDialog::getFocusingTab() const
+{
+    return focusingTab;
+}
+
+const QVector<int> &VoltageTableDialog::getAnodeTab() const
+{
+    return anodeTab;
 }
 

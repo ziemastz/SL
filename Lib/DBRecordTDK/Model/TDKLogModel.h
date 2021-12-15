@@ -5,6 +5,11 @@ namespace StarlingLab {
 class TDKLogModel : public IDatabaseModel
 {
 public:
+    struct MeasurementTime {
+        int blank;
+        int source;
+        int repeating;
+    }time;
     QString creationDateTime;
     QString nuclide;
     QString solution;

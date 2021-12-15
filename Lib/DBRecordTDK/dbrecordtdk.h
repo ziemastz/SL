@@ -13,9 +13,17 @@ namespace StarlingLab {
 class DBRecordTDK : public DatabaseBase
 {
 public:
+    enum STATUS_LOG {
+        Deleted = -1,
+        Insert = 0,
+        Finished = 1,
+
+    };
     DBRecordTDK();
     SettingGeneralModel getSettingGeneral();
     SettingConnectionModel getSettingConnection();
+    ProtocolModel getProtocol(const QString& name);
+    QStringList getProtocolNames();
 
 };
 

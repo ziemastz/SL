@@ -37,7 +37,14 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="name_lineEdit"/>
+      <widget class="QLineEdit" name="name_lineEdit">
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="0" column="3">
       <spacer name="horizontalSpacer_3">
@@ -614,7 +621,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>name_lineEdit</tabstop>
   <tabstop>anodeVoltage_spinBox</tabstop>
   <tabstop>focusingVoltage_spinBox</tabstop>
   <tabstop>tabVoltage_checkBox</tabstop>
@@ -630,9 +636,7 @@
   <tabstop>description_lineEdit</tabstop>
   <tabstop>save_pushButton</tabstop>
   <tabstop>cancel_pushButton</tabstop>
-  <tabstop>voltageShiftA_doubleSpinBox_3</tabstop>
-  <tabstop>voltageShiftC_doubleSpinBox_3</tabstop>
-  <tabstop>voltageShiftB_doubleSpinBox_3</tabstop>
+  <tabstop>name_lineEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>

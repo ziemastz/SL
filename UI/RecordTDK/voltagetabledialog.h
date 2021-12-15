@@ -18,6 +18,14 @@ public:
     explicit VoltageTableDialog(QWidget *parent = nullptr);
     ~VoltageTableDialog();
 
+    const QVector<int> &getAnodeTab() const;
+
+    const QVector<int> &getFocusingTab() const;
+
+    void setAnodeTab(const QVector<int> &newAnodeTab);
+
+    void setFocusingTab(const QVector<int> &newFocusingTab);
+
 private slots:
     void on_fillAnode_pushButton_clicked();
 
@@ -39,8 +47,8 @@ private slots:
 
 private:
     Ui::VoltageTableDialog *ui;
-    QVector<double> anodeTab;
-    QVector<double> focusingTab;
+    QVector<int> anodeTab;
+    QVector<int> focusingTab;
 };
 
 #endif // VOLTAGETABLEDIALOG_H

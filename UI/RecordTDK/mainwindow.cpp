@@ -51,6 +51,8 @@ void MainWindow::on_add_pushButton_clicked()
 void MainWindow::openMeasurement()
 {
     AddMeasurementDialog addMeasurement;
-    addMeasurement.exec();
+    if(addMeasurement.exec() == QDialog::Accepted) {
+
+    }
 }
 

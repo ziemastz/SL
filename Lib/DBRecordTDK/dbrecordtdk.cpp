@@ -31,4 +31,27 @@ SettingConnectionModel DBRecordTDK::getSettingConnection()
     return ret;
 }
 
+ProtocolModel DBRecordTDK::getProtocol(const QString &name)
+{
+    ProtocolModel ret;
+    ret.id = 0;
+    DBResults result = engine()->select(&ret,"name='"+name+"'");
+    if(result.count() == 1) {
+        ret.setRecord(result.at(0)->record());
+    };
+    return ret;
+}
+
+QStringList DBRecordTDK::getProtocolNames()
+{
+    QStringList ret;
+    ProtocolModel model;
+    DBResults results = engine()->select(&model);
+    for(int i=0; i<results.count() ; i++) {
+        model.setRecord(results.at(i)->record());
+        ret << model.name;
+    }
+    return ret;
+}
+
 } // namespace StarlingLab
