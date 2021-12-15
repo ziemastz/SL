@@ -6,6 +6,7 @@ AddMeasurementDialog::AddMeasurementDialog(QWidget *parent) :
     ui(new Ui::AddMeasurementDialog)
 {
     ui->setupUi(this);
+    ui->sourcePreparation_dateEdit->setDate(QDate::currentDate());
     StarlingLab::DBRecordTDK db;
     ui->protocols_listWidget->addItems(db.getProtocolNames());
 }
@@ -20,7 +21,6 @@ void AddMeasurementDialog::on_cancel_pushButton_clicked()
     close();
 }
 
-
 void AddMeasurementDialog::on_start_pushButton_clicked()
 {
     StarlingLab::DBRecordTDK db;
@@ -34,8 +34,10 @@ void AddMeasurementDialog::on_start_pushButton_clicked()
     log.linked = ui->linked_lineEdit->text();
     log.status = StarlingLab::DBRecordTDK::Insert;
     log.category = ui->category_comboBox->currentIndex();
-    log.measurementProtocolId = db.getProtocol(ui->protocols_listWidget->currentItem()->text()).id;
-    if(log.measurementProtocolId == 0) {
+    QList<QListWidgetItem*> selected = ui->protocols_listWidget->selectedItems();
+    if(!selected.isEmpty()) {
+        log.measurementProtocolId = db.getProtocol(selected.first()->text()).id;
+    }else {
         QMessageBox::warning(this,tr("Błąd"),tr("Brak protokołu pomiarowe!\nZaznacz protokoł lub dodaj nowy."));
         return;
     }
@@ -44,7 +46,6 @@ void AddMeasurementDialog::on_start_pushButton_clicked()
     log.time.repeating = ui->repeating_spinBox->value();
     accept();
 }
-
 
 void AddMeasurementDialog::on_addProtocol_pushButton_clicked()
 {
@@ -76,10 +77,13 @@ void AddMeasurementDialog::on_addProtocol_pushButton_clicked()
     }
 }
 
-
 void AddMeasurementDialog::on_editProtocol_pushButton_clicked()
 {
-    QString name = ui->protocols_listWidget->currentItem()->text();
+    QList<QListWidgetItem*> selected = ui->protocols_listWidget->selectedItems();
+    if(selected.count() != 1) {
+        return;
+    }
+    QString name = selected.at(0)->text();
     StarlingLab::DBRecordTDK db;
     StarlingLab::ProtocolModel model;
     model = db.getProtocol(name);
@@ -110,4 +114,3 @@ void AddMeasurementDialog::setLog(const StarlingLab::TDKLogModel &newLog)
 {
     log = newLog;
 }
-

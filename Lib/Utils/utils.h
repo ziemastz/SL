@@ -16,6 +16,7 @@ public:
     };
     Utils();
     static QStringList toStringList(const QVariantList& values);
+
     static QString toString(const QVariant& value);
     static QStringList availablePorts();
     //widget

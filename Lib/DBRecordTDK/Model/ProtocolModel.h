@@ -2,21 +2,22 @@
 #define PROTOCOLMODEL_H
 #include "idatabasemodel.h"
 namespace StarlingLab {
-QVector<int> toVectorInt(const QString& str) {
-    QVector<int> ret;
-    QStringList list = str.split("|");
-    foreach(QString val, list)
-        ret << val.toInt();
-    return ret;
-}
-QStringList toStringList(const QVector<int>& tab) {
-    QStringList ret;
-    foreach(int val,tab)
-        ret << QString::number(val);
-    return ret;
-}
 class ProtocolModel : public IDatabaseModel
 {
+private:
+    QVector<int> toVectorInt(const QString& str) const {
+        QVector<int> ret;
+        QStringList list = str.split("|");
+        foreach(QString val, list)
+            ret << val.toInt();
+        return ret;
+    }
+    QStringList toStringList(const QVector<int>& tab) const {
+        QStringList ret;
+        foreach(int val,tab)
+            ret << QString::number(val);
+        return ret;
+    }
 public:
     QString name;
     QVector<int> anodaVoltage;

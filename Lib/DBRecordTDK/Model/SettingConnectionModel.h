@@ -9,6 +9,7 @@ public:
     QString port;
     QString braudRate;
     int lBusAddress;
+
     QString deviceName;
     bool isExtClk;
     //QString timestamp;

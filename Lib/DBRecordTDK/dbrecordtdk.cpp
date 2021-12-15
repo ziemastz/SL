@@ -42,6 +42,17 @@ ProtocolModel DBRecordTDK::getProtocol(const QString &name)
     return ret;
 }
 
+ProtocolModel DBRecordTDK::getProtocol(const int &id)
+{
+    ProtocolModel ret;
+    ret.id = 0;
+    DBResults result = engine()->select(&ret,"id="+QString::number(id));
+    if(result.count() == 1) {
+        ret.setRecord(result.at(0)->record());
+    };
+    return ret;
+}
+
 QStringList DBRecordTDK::getProtocolNames()
 {
     QStringList ret;

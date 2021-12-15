@@ -71,6 +71,24 @@ public:
             << userId;
         return ret;
     }
+    QString measurementObject() const {
+        QString ret;
+        if(!solution.isEmpty())
+            ret.append(solution);
+        if(!sourceId.isEmpty()) {
+            if(!ret.isEmpty())
+                ret.append(" ");
+            ret.append(sourceId);
+        }
+        if(!sourcePreparationDate.isEmpty()) {
+            if(!ret.isEmpty())
+                ret.append(" ");
+            ret.append("z dn. "+sourcePreparationDate);
+        }
+
+
+        return ret;
+    }
 };
 }
 #endif // TDKLOGMODEL_H

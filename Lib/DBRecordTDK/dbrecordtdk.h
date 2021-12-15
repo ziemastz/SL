@@ -23,6 +23,7 @@ public:
     SettingGeneralModel getSettingGeneral();
     SettingConnectionModel getSettingConnection();
     ProtocolModel getProtocol(const QString& name);
+    ProtocolModel getProtocol(const int& id);
     QStringList getProtocolNames();
 
 };
