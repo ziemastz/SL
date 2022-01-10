@@ -125,10 +125,13 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../L
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Lib/Utils/release/Utils.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Lib/Utils/debug/Utils.lib
 
-win32: LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/ -lCAENHVWrapper
+win32: LIBS += -$$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/ -lCAENHVWrapper
 
-INCLUDEPATH += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
+INCLUDEPATH += $$PWD/../../../CAEN/PowerSupplyN1470CAENHVWrapper/include
 DEPENDPATH += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/CAENHVWrapper.lib
+#else:win32-g++: PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/libCAENHVWrapper.a
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/release/ -lPowerSupplyN1470
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/debug/ -lPowerSupplyN1470
