@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "dbrecordtdk.h"
-#include "powersupplyn1470.h"
+#include "CAEN/powersupplyn1470.h"
 #include "mac3counter.h"
 
 namespace Ui {

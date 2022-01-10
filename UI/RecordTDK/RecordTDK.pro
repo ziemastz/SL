@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    CAEN/powersupplyn1470.cpp \
     addmeasurementdialog.cpp \
     counter.cpp \
     counts.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
     voltagetabledialog.cpp
 
 HEADERS += \
+    CAEN/powersupplyn1470.h \
     addmeasurementdialog.h \
     counter.h \
     counts.h \
@@ -125,13 +127,10 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../L
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Lib/Utils/release/Utils.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Lib/Utils/debug/Utils.lib
 
-win32: LIBS += -$$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/ -lCAENHVWrapper
+#win32: LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/ -lCAENHVWrapper
 
-INCLUDEPATH += $$PWD/../../../CAEN/PowerSupplyN1470CAENHVWrapper/include
-DEPENDPATH += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/CAENHVWrapper.lib
-#else:win32-g++: PRE_TARGETDEPS += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86/libCAENHVWrapper.a
+#INCLUDEPATH += $$PWD/../../../CAEN/PowerSupplyN1470CAENHVWrapper/include
+#DEPENDPATH += $$PWD/../../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/release/ -lPowerSupplyN1470
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../CAEN/PowerSupplyN1470/debug/ -lPowerSupplyN1470
@@ -160,3 +159,8 @@ win32: LIBS += -L$$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib/
 
 INCLUDEPATH += $$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
 DEPENDPATH += $$PWD/../../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
+
+win32: LIBS += -L$$PWD/CAEN/CAENHVWrapper/lib/x86/ -lCAENHVWrapper
+
+INCLUDEPATH += $$PWD/CAEN/CAENHVWrapper/include
+DEPENDPATH += $$PWD/CAEN/CAENHVWrapper/include
