@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QTimer>
 #include "dbrecordtdk.h"
 #include "CAEN/powersupplyn1470.h"
 #include "mac3counter.h"
@@ -26,9 +27,11 @@ private:
 
     PowerSupplyN1470 *n1470;
     MAC3Counter *mac3;
+    QTimer *timer;
 
     void loadData();
     bool initConnection();
+    void initMeasurement();
 };
 
 #endif // MEASUREMENTDIALOG_H
