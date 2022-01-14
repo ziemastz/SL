@@ -52,7 +52,8 @@ void MainWindow::openMeasurement()
 {
     AddMeasurementDialog addMeasurement;
     if(addMeasurement.exec() == QDialog::Accepted) {
-
+        MeasurementDialog measDialog(addMeasurement.getLog());
+        measDialog.exec();
     }
 }
 

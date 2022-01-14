@@ -10,7 +10,11 @@ MeasurementDialog::MeasurementDialog(const StarlingLab::TDKLogModel& log, QWidge
     StarlingLab::DBRecordTDK db;
     _protocol = db.getProtocol(_log.measurementProtocolId);
     loadData();
-    initConnection();
+    if(!initConnection()) {
+        QMessageBox::warning(this,tr("Błąd połaczenia"),tr("Błąd połaczenia z urzędzeniami.\nSprawdz czy urzędzenia są podłączone i przetestuj połaczenia w Ustawieniach."));
+    }else {
+        initMeasurement();
+    }
 }
 
 MeasurementDialog::~MeasurementDialog()
@@ -48,7 +52,7 @@ void MeasurementDialog::loadData()
     ui->time_progressBar->setValue(0);
 }
 
-void MeasurementDialog::initConnection()
+bool MeasurementDialog::initConnection()
 {
     StarlingLab::DBRecordTDK db;
     StarlingLab::SettingConnectionModel connection = db.getSettingConnection();
@@ -67,6 +71,8 @@ void MeasurementDialog::initConnection()
         n1470->setTurnOn(PowerSupplyN1470::CH1);
         n1470->setTurnOn(PowerSupplyN1470::CH2);
         n1470->setTurnOn(PowerSupplyN1470::CH3);
+    }else {
+        return false;
     }
 
     mac3 = new MAC3Counter();
@@ -75,7 +81,17 @@ void MeasurementDialog::initConnection()
         mac3->setEnable(false);
         mac3->setReset(true);
         mac3->setExtClk(connection.isExtClk);
+    }else {
+        return false;
     }
 
+    return true;
+}
+
+void MeasurementDialog::initMeasurement()
+{
+    timer = new QTimer(0);
+    connect(timer,SIGNAL(timeout()),this,SLOT(runMeasurement()),Qt::QueuedConnection);
+    timer->start(500);
 
 }

@@ -2,6 +2,7 @@
 #define MEASUREMENTDIALOG_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "dbrecordtdk.h"
 #include "CAEN/powersupplyn1470.h"
 #include "mac3counter.h"
@@ -27,7 +28,7 @@ private:
     MAC3Counter *mac3;
 
     void loadData();
-    void initConnection();
+    bool initConnection();
 };
 
 #endif // MEASUREMENTDIALOG_H

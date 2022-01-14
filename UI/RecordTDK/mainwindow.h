@@ -5,6 +5,7 @@
 #include <QMenu>
 #include <QAction>
 #include "addmeasurementdialog.h"
+#include "measurementdialog.h"
 #include "logindialog.h"
 #include "settingsdialog.h"
 // #include "monitoringdialog.h"
