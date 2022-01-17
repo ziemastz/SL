@@ -8,7 +8,7 @@
 class Counter
 {
 public:
-    Counter();
+    Counter(MAC3Counter *pMAC3);
     ~Counter();
     bool isConnect() const;
     QString lastError();
@@ -45,7 +45,7 @@ private:
     bool _isConnect;
     QDateTime _startDateTime;
 
-    MAC3Counter mac3;
+    MAC3Counter *mac3;
 
     Counts counts;
     double cps(const unsigned int& port);
