@@ -1,63 +1,63 @@
 #include "counter.h"
 
-Counter::Counter()
+Counter::Counter(MAC3Counter *pMAC3)
 {
-    _isConnect = mac3.connect();
+    mac3 = pMAC3;
 }
 
 Counter::~Counter()
 {
-    mac3.disconnect();
+    mac3->disconnect();
 }
 
 bool Counter::isConnect() const
 {
-    return _isConnect;
+    return mac3->connect();
 }
 
 QString Counter::lastError()
 {
-    return QString::fromStdString(mac3.lastError());
+    return QString::fromStdString(mac3->lastError());
 }
 
 void Counter::start()
 {
-    if(mac3.enable() != MAC3Counter::ACTIVE) {
+    if(mac3->enable() != MAC3Counter::ACTIVE) {
         _startDateTime = QDateTime::currentDateTime();
     }
-    mac3.setEnable(true);
-    mac3.setReset(false);
+    mac3->setEnable(true);
+    mac3->setReset(false);
 }
 
 void Counter::stop()
 {
-    mac3.setEnable(false);
-    mac3.setReset(false);   
+    mac3->setEnable(false);
+    mac3->setReset(false);
 }
 
 void Counter::reset()
 {
-    mac3.setEnable(false);
-    mac3.setReset(true);
+    mac3->setEnable(false);
+    mac3->setReset(true);
 }
 
 void Counter::readData()
 {
-    counts.A = mac3.getPortCount(MAC3Counter::PORT_A);
-    counts.B = mac3.getPortCount(MAC3Counter::PORT_B);
-    counts.C = mac3.getPortCount(MAC3Counter::PORT_C);
+    counts.A = mac3->getPortCount(MAC3Counter::PORT_A);
+    counts.B = mac3->getPortCount(MAC3Counter::PORT_B);
+    counts.C = mac3->getPortCount(MAC3Counter::PORT_C);
 
-    counts.S = mac3.getPortCount(MAC3Counter::PORT_S);
+    counts.S = mac3->getPortCount(MAC3Counter::PORT_S);
 
-    counts.AB = mac3.getPortCount(MAC3Counter::PORT_AB);
-    counts.BC = mac3.getPortCount(MAC3Counter::PORT_BC);
-    counts.AC = mac3.getPortCount(MAC3Counter::PORT_AC);
+    counts.AB = mac3->getPortCount(MAC3Counter::PORT_AB);
+    counts.BC = mac3->getPortCount(MAC3Counter::PORT_BC);
+    counts.AC = mac3->getPortCount(MAC3Counter::PORT_AC);
 
-    counts.T = mac3.getPortCount(MAC3Counter::PORT_T);
-    counts.D = mac3.getPortCount(MAC3Counter::PORT_D);
+    counts.T = mac3->getPortCount(MAC3Counter::PORT_T);
+    counts.D = mac3->getPortCount(MAC3Counter::PORT_D);
 
-    counts.LT = mac3.getPortCount(MAC3Counter::PORT_LT);
-    counts.CLK_IN = mac3.getPortCount(MAC3Counter::PORT_CLK_IN);
+    counts.LT = mac3->getPortCount(MAC3Counter::PORT_LT);
+    counts.CLK_IN = mac3->getPortCount(MAC3Counter::PORT_CLK_IN);
 }
 
 double Counter::cpsA()

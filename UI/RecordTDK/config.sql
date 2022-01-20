@@ -28,14 +28,14 @@ CREATE TRIGGER IF NOT EXISTS usersUpdate AFTER UPDATE ON users
 	BEGIN
 		INSERT INTO auditLog VALUES(NULL, 'users', old.id, 0, CURRENT_TIMESTAMP,
 			iif(new.id<>lod.id,new.id,'')||'|'||
-			iff(new.username<>old.username,new.username,'')||'|'||
-			iff(new.password<>old.password,new.password,'')||'|'||
-			iff(new.isActive<>old.isActive,new.isActive,'')||'|'||
-			iff(new.firstName<>old.firstName,new.firstName,'')||'|'||
-			iff(new.secondName<>old.secondName,new.secondName,'')||'|'||
-			iff(new.lastName<>old.lastName,new.lastName,'')||'|'||
-			iff(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
-			iff(new.userId<>old.userId,new.userId,''));
+			iif(new.username<>old.username,new.username,'')||'|'||
+			iif(new.password<>old.password,new.password,'')||'|'||
+			iif(new.isActive<>old.isActive,new.isActive,'')||'|'||
+			iif(new.firstName<>old.firstName,new.firstName,'')||'|'||
+			iif(new.secondName<>old.secondName,new.secondName,'')||'|'||
+			iif(new.lastName<>old.lastName,new.lastName,'')||'|'||
+			iif(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
+			iif(new.userId<>old.userId,new.userId,''));
 	END;
 CREATE TRIGGER IF NOT EXISTS usersDelete AFTER DELETE ON users
 	BEGIN
@@ -58,14 +58,14 @@ CREATE TRIGGER IF NOT EXISTS settingGeneralUpdate AFTER UPDATE ON settingGeneral
 	BEGIN
 		INSERT INTO auditLog VALUES(NULL, 'settingGeneral', old.id, 0, CURRENT_TIMESTAMP,
 			iif(new.id<>lod.id,new.id,'')||'|'||
-			iff(new.blankTime<>old.blankTime,new.blankTime,'')||'|'||
-			iff(new.sourceTime<>old.sourceTime,new.sourceTime,'')||'|'||
-			iff(new.repeated<>old.repeated,new.repeated,'')||'|'||
-			iff(new.delayedStart<>old.delayedStart,new.delayedStart,'')||'|'||
-			iff(new.voltageMax<>old.voltageMax,new.voltageMax,'')||'|'||
-			iff(new.amperMax<>old.amperMax,new.amperMax,'')||'|'||
-			iff(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
-			iff(new.userId<>old.userId,new.userId,''));
+			iif(new.blankTime<>old.blankTime,new.blankTime,'')||'|'||
+			iif(new.sourceTime<>old.sourceTime,new.sourceTime,'')||'|'||
+			iif(new.repeated<>old.repeated,new.repeated,'')||'|'||
+			iif(new.delayedStart<>old.delayedStart,new.delayedStart,'')||'|'||
+			iif(new.voltageMax<>old.voltageMax,new.voltageMax,'')||'|'||
+			iif(new.amperMax<>old.amperMax,new.amperMax,'')||'|'||
+			iif(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
+			iif(new.userId<>old.userId,new.userId,''));
 	END;
 CREATE TABLE IF NOT EXISTS settingConnection (
 	id	INTEGER,
@@ -82,14 +82,14 @@ INSERT OR IGNORE INTO settingConnection(id) VALUES (1);
 CREATE TRIGGER IF NOT EXISTS settingConnectionUpdate AFTER UPDATE ON settingConnection
 	BEGIN
 		INSERT INTO auditLog VALUES(NULL, 'settingConnection', old.id, 0, CURRENT_TIMESTAMP,
-			iif(new.id<>lod.id,new.id,'')||'|'||
-			iff(new.port<>old.port,new.port,'')||'|'||
-			iff(new.baudRate<>old.baudRate,new.baudRate,'')||'|'||
-			iff(new.lBusAddress<>old.lBusAddress,new.lBusAddress,'')||'|'||
-			iff(new.deviceName<>old.deviceName,new.deviceName,'')||'|'||
-			iff(new.isExtClk<>old.isExtClk,new.isExtClk,'')||'|'||
-			iff(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
-			iff(new.userId<>old.userId,new.userId,''));
+			iif(new.id<>old.id,new.id,'')||'|'||
+			iif(new.port<>old.port,new.port,'')||'|'||
+			iif(new.baudRate<>old.baudRate,new.baudRate,'')||'|'||
+			iif(new.lBusAddress<>old.lBusAddress,new.lBusAddress,'')||'|'||
+			iif(new.deviceName<>old.deviceName,new.deviceName,'')||'|'||
+			iif(new.isExtClk<>old.isExtClk,new.isExtClk,'')||'|'||
+			iif(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
+			iif(new.userId<>old.userId,new.userId,''));
 	END;
 CREATE TABLE IF NOT EXISTS tdkLog (
 	id	INTEGER,
@@ -116,21 +116,21 @@ CREATE TRIGGER IF NOT EXISTS tdkLogInsert AFTER INSERT ON tdkLog
 CREATE TRIGGER IF NOT EXISTS tdkLogUpdate AFTER UPDATE ON tdkLog
 	BEGIN
 		INSERT INTO auditLog VALUES(NULL, 'tdkLog', old.id, 0, CURRENT_TIMESTAMP,
-			iif(new.id<>lod.id,new.id,'')||'|'||
-			iff(new.creationDateTime<>old.creationDateTime,new.creationDateTime,'')||'|'||
-			iff(new.nuclide<>old.nuclide,new.nuclide,'')||'|'||
-			iff(new.solution<>old.solution,new.solution,'')||'|'||
-			iff(new.noSources<>old.noSources,new.noSources,'')||'|'||
-			iff(new.sourceId<>old.sourceId,new.sourceId,'')||'|'||
-			iff(new.sourcePreparationDate<>old.sourcePreparationDate,new.sourcePreparationDate,'')||'|'||
-			iff(new.description<>old.description,new.description,'')||'|'||
-			iff(new.linked<>old.linked,new.linked,'')||'|'||
-			iff(new.madeByUserId<>old.madeByUserId,new.madeByUserId,'')||'|'||
-			iff(new.status<>old.status,new.status,'')||'|'||
-			iff(new.category<>old.category,new.category,'')||'|'||
-			iff(new.protocolId<>old.protocolId,new.protocolId,'')||'|'||
-			iff(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
-			iff(new.userId<>old.userId,new.userId,''));
+			iif(new.id<>old.id,new.id,'')||'|'||
+			iif(new.creationDateTime<>old.creationDateTime,new.creationDateTime,'')||'|'||
+			iif(new.nuclide<>old.nuclide,new.nuclide,'')||'|'||
+			iif(new.solution<>old.solution,new.solution,'')||'|'||
+			iif(new.noSources<>old.noSources,new.noSources,'')||'|'||
+			iif(new.sourceId<>old.sourceId,new.sourceId,'')||'|'||
+			iif(new.sourcePreparationDate<>old.sourcePreparationDate,new.sourcePreparationDate,'')||'|'||
+			iif(new.description<>old.description,new.description,'')||'|'||
+			iif(new.linked<>old.linked,new.linked,'')||'|'||
+			iif(new.madeByUserId<>old.madeByUserId,new.madeByUserId,'')||'|'||
+			iif(new.status<>old.status,new.status,'')||'|'||
+			iif(new.category<>old.category,new.category,'')||'|'||
+			iif(new.protocolId<>old.protocolId,new.protocolId,'')||'|'||
+			iif(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
+			iif(new.userId<>old.userId,new.userId,''));
 	END;
 CREATE TRIGGER IF NOT EXISTS tdkLogDelete AFTER DELETE ON tdkLog
 	BEGIN
@@ -161,20 +161,20 @@ CREATE TRIGGER IF NOT EXISTS protocolInsert AFTER INSERT ON protocol
 CREATE TRIGGER IF NOT EXISTS protocolUpdate AFTER UPDATE ON protocol
 	BEGIN
 		INSERT INTO auditLog VALUES(NULL, 'protocol', old.id, 0, CURRENT_TIMESTAMP,
-			iif(new.id<>lod.id,new.id,'')||'|'||
-			iff(new.name<>old.name,new.name,'')||'|'||
-			iff(new.anodaVoltage<>old.anodaVoltage,new.anodaVoltage,'')||'|'||
-			iff(new.shiftA<>old.shiftA,new.shiftA,'')||'|'||
-			iff(new.shiftB<>old.shiftB,new.shiftB,'')||'|'||
-			iff(new.shiftC<>old.shiftC,new.shiftC,'')||'|'||
-			iff(new.focusingVoltage<>old.focusingVoltage,new.focusingVoltage,'')||'|'||
-			iff(new.resolvingTime<>old.resolvingTime,new.resolvingTime,'')||'|'||
-			iff(new.deadTime<>old.deadTime,new.deadTime,'')||'|'||
-			iff(new.thrA<>old.thrA,new.thrA,'')||'|'||
-			iff(new.thrB<>old.thrB,new.thrB,'')||'|'||
-			iff(new.thrC<>old.thrC,new.thrC,'')||'|'||
-			iff(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
-			iff(new.userId<>old.userId,new.userId,''));
+			iif(new.id<>old.id,new.id,'')||'|'||
+			iif(new.name<>old.name,new.name,'')||'|'||
+			iif(new.anodaVoltage<>old.anodaVoltage,new.anodaVoltage,'')||'|'||
+			iif(new.shiftA<>old.shiftA,new.shiftA,'')||'|'||
+			iif(new.shiftB<>old.shiftB,new.shiftB,'')||'|'||
+			iif(new.shiftC<>old.shiftC,new.shiftC,'')||'|'||
+			iif(new.focusingVoltage<>old.focusingVoltage,new.focusingVoltage,'')||'|'||
+			iif(new.resolvingTime<>old.resolvingTime,new.resolvingTime,'')||'|'||
+			iif(new.deadTime<>old.deadTime,new.deadTime,'')||'|'||
+			iif(new.thrA<>old.thrA,new.thrA,'')||'|'||
+			iif(new.thrB<>old.thrB,new.thrB,'')||'|'||
+			iif(new.thrC<>old.thrC,new.thrC,'')||'|'||
+			iif(new.timestamp<>old.timestamp,new.timestamp,'')||'|'||
+			iif(new.userId<>old.userId,new.userId,''));
 	END;
 CREATE TRIGGER IF NOT EXISTS protocolDelete AFTER DELETE ON protocol
 	BEGIN
