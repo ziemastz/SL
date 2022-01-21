@@ -81,6 +81,45 @@ void MeasurementDialog::runMeasurement()
     timer->start(500);
 }
 
+void MeasurementDialog::process()
+{
+    switch (currentStatus) {
+    case MeasurementDialog::Init:
+        currentAnodeVoltage = 0;
+        currentFocusingVoltage = 0;
+        currentSource = 0;
+        currentRepeat = 0;
+        if(_log.time.blank > 0) {
+            currentStatus = InitBlank;
+        }else {
+            currentStatus = InitSource;
+        }
+        break;
+    case MeasurementDialog::InitBlank:
+
+        break;
+    case MeasurementDialog::MeasureBlank:
+        break;
+    case MeasurementDialog::NextRepeatBlank:
+        break;
+    case MeasurementDialog::NextPointBlank:
+        break;
+    case MeasurementDialog::InitSource:
+        break;
+    case MeasurementDialog::MeasureSource:
+        break;
+    case MeasurementDialog::NextRepeatSource:
+        break;
+    case MeasurementDialog::NextPointSource:
+        break;
+    case MeasurementDialog::NextSource:
+        break;
+    case MeasurementDialog::Finished:
+        break;
+
+    }
+}
+
 void MeasurementDialog::loadData()
 {
     ui->nuclide_lineEdit->setText(_log.nuclide);

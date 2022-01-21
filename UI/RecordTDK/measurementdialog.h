@@ -18,22 +18,26 @@ class MeasurementDialog : public QDialog
     Q_OBJECT
 
 public:
-    enum MEAS_STATUS {
+    enum MEASUREMENT_PROCESS {
         Init = 0,
-        RunBlank,
-        BlankNextPoint,
-        BlankNextRepeat,
-        RunSource,
+        InitBlank,
+        MeasureBlank,
+        NextRepeatBlank,
+        NextPointBlank,
+        InitSource,
+        MeasureSource,
+        NextRepeatSource,
+        NextPointSource,
         NextSource,
-        NextPoint,
-        NextRepeat,
         Finished
-    }statusMeasurement = Init;
+    }currentStatus = Init;
+
     explicit MeasurementDialog(const StarlingLab::TDKLogModel& log, QWidget *parent = nullptr);
     ~MeasurementDialog();
 
 private slots:
     void runMeasurement();
+    void process();
 
 private:
     Ui::MeasurementDialog *ui;
