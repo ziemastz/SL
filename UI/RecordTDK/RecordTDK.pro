@@ -18,6 +18,7 @@ SOURCES += \
     mainwindow.cpp \
 #    monitoringdialog.cpp \
     measurementdialog.cpp \
+    measurementprocess.cpp \
     protocoldialog.cpp \
     settingsdialog.cpp \
     voltagetabledialog.cpp
@@ -31,6 +32,7 @@ HEADERS += \
     mainwindow.h \
 #    monitoringdialog.h \
     measurementdialog.h \
+    measurementprocess.h \
     protocoldialog.h \
     settingsdialog.h \
     voltagetabledialog.h

@@ -96,7 +96,7 @@ void MeasurementDialog::process()
         }
         break;
     case MeasurementDialog::InitBlank:
-
+        //message
         break;
     case MeasurementDialog::MeasureBlank:
         break;
