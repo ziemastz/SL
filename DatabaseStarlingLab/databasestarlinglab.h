@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QCoreApplication>
 #include <QFile>
+#include <QDebug>
+#include <QDateTime>
 
 #include <QSqlDatabase>
 #include <QSqlError>

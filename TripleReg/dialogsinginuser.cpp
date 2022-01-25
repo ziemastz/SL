@@ -34,7 +34,7 @@ void DialogSingInUser::on_signUp_pushButton_clicked()
 
 void DialogSingInUser::on_signIn_pushButton_clicked()
 {
-    int idUser = db.singInUser(ui->username_lineEdit->text(),ui->password_lineEdit);
+    int idUser ;// db.singInUser(ui->username_lineEdit->text(),ui->password_lineEdit);
     if(idUser > 0) {
 
         accept();
