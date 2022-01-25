@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>logo_tripleReg.ico</file>
+        <file>logo_tripleReg.png</file>
+    </qresource>
+</RCC>

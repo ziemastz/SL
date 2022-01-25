@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>323</width>
-    <height>305</height>
+    <width>351</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,22 +15,53 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0" colspan="3">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0" rowspan="2">
       <widget class="QLabel" name="logo_label">
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
        <property name="text">
-        <string>LOGO</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>:/logo_tripleReg.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="4" rowspan="2">
+      <widget class="QPushButton" name="exit_pushButton">
+       <property name="text">
+        <string>EXIT</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" rowspan="2" colspan="2">
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>26</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="text">
         <string>TripleReg</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="3" rowspan="2">
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -42,16 +73,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="exit_pushButton">
-       <property name="text">
-        <string>EXIT</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>

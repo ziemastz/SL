@@ -9,6 +9,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QApplication::setApplicationName("TripleReg");
+    QApplication::setApplicationVersion("1.0.0");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
