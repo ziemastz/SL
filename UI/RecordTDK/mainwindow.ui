@@ -53,6 +53,11 @@
       </attribute>
       <column>
        <property name="text">
+        <string>Nr pomiaru</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Data</string>
        </property>
       </column>

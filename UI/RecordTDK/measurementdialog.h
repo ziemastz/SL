@@ -8,6 +8,7 @@
 #include "CAEN/powersupplyn1470.h"
 #include "counter.h"
 #include "mac3counter.h"
+#include "measurementprocess.h"
 
 namespace Ui {
 class MeasurementDialog;
@@ -49,6 +50,7 @@ private:
     Counter *counter;
     MAC3Counter *mac3;
     QTimer *timer;
+
 
     void loadData();
     bool initConnection();

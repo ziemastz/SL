@@ -10,6 +10,7 @@ MeasurementDialog::MeasurementDialog(const StarlingLab::TDKLogModel& log, QWidge
     StarlingLab::DBRecordTDK db;
     _protocol = db.getProtocol(_log.measurementProtocolId);
     _general = db.getSettingGeneral();
+
     loadData();
     if(!initConnection()) {
         QMessageBox::warning(this,tr("Błąd połaczenia"),tr("Błąd połaczenia z urzędzeniami.\nSprawdz czy urzędzenia są podłączone i przetestuj połaczenia w Ustawieniach."));
