@@ -34,12 +34,18 @@ void DialogSingInUser::on_signUp_pushButton_clicked()
 
 void DialogSingInUser::on_signIn_pushButton_clicked()
 {
-    int idUser ;// db.singInUser(ui->username_lineEdit->text(),ui->password_lineEdit);
-    if(idUser > 0) {
-
+    DatabaseStarlingLab db;
+    int _loggedUserId = db.singInUser(ui->username_lineEdit->text(),ui->password_lineEdit);
+    if(_loggedUserId > 0) {
+        Setting::setLoggeduserId(_loggedUserId);
         accept();
     }else {
-        reject();
+        QMessageBox::warning(this,tr("Login error"),tr("The username or password is incorrect.\nPlease check and try again."));
     }
+}
+
+int DialogSingInUser::loggedUserId() const
+{
+    return _loggedUserId;
 }
 

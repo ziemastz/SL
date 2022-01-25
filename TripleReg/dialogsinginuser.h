@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include "settings.h"
+#include "databasestarlinglab.h"
 
 namespace Ui {
 class DialogSingInUser;
@@ -15,6 +17,8 @@ class DialogSingInUser : public QDialog
 public:
     explicit DialogSingInUser(QWidget *parent = nullptr);
     ~DialogSingInUser();
+
+    int loggedUserId() const;
 
 private slots:
     void on_exit_pushButton_clicked();

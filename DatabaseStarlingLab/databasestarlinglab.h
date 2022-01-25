@@ -18,7 +18,7 @@ public:
 
 private:
     QString _driver;
-    QString _connectionName;
+    QString _databaseName;
     QSqlQuery _query;
 
     bool exce(const QString &statement) const;

@@ -30,3 +30,25 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../DatabaseStarlingLab/release/ -lDatabaseStarlingLab
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../DatabaseStarlingLab/debug/ -lDatabaseStarlingLab
+
+INCLUDEPATH += $$PWD/../DatabaseStarlingLab
+DEPENDPATH += $$PWD/../DatabaseStarlingLab
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../DatabaseStarlingLab/release/libDatabaseStarlingLab.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../DatabaseStarlingLab/debug/libDatabaseStarlingLab.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../DatabaseStarlingLab/release/DatabaseStarlingLab.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../DatabaseStarlingLab/debug/DatabaseStarlingLab.lib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Settings/release/ -lSettings
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Settings/debug/ -lSettings
+
+INCLUDEPATH += $$PWD/../Settings
+DEPENDPATH += $$PWD/../Settings
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Settings/release/libSettings.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Settings/debug/libSettings.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Settings/release/Settings.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Settings/debug/Settings.lib
