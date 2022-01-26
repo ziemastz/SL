@@ -5,26 +5,29 @@
 #include <QFile>
 #include <QDebug>
 #include <QDateTime>
+#include <QVariantList>
+#include <QVector>
 
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
 
 class DatabaseStarlingLab : public QObject
 {
 public:
     DatabaseStarlingLab();
-    int signInUser(const QString &username, const QString &password) const;
+    int signInUser(const QString &username, const QString &password);
 
 private:
     QString _driver;
     QString _databaseName;
-    QSqlQuery _query;
+    QVector<QVariantList> _records;
 
-    bool exce(const QString &statement) const;
-    QVariantList record() const;
+    bool exec(const QString &statement);
+    QVector<QVariantList> records() const;
 
-    void createDatabase() const;
+    void createDatabase();
 };
 
 #endif // DATABASESTARLINGLAB_H

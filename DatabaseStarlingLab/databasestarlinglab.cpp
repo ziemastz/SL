@@ -9,42 +9,57 @@ DatabaseStarlingLab::DatabaseStarlingLab()
     }
 }
 
-int DatabaseStarlingLab::signInUser(const QString &username, const QString &password) const
+int DatabaseStarlingLab::signInUser(const QString &username, const QString &password)
 {
     int ret = 0;
     if(exec("SELECT id FROM user WHERE username='"+username+"' AND password='"+password+"' AND isActive=1")) {
-        if(record().count() == 1) {
-            ret = record().at(0).at(0).toInt();
+        if(records().count() == 1) {
+            ret = records().at(0).at(0).toInt();
         }
     }
     return ret;
 }
 
-bool DatabaseStarlingLab::exce(const QString &statement) const
+bool DatabaseStarlingLab::exec(const QString &statement)
 {
     QString connectionName;
     {
         QSqlDatabase db = QSqlDatabase::addDatabase(_driver,QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz"));
         db.setDatabaseName(_databaseName);
         if(!db.open()) {
-            qWarnig() << db.lastError().text();
+            qWarning() << db.lastError().text();
             return false;
         }
-        connectName = db.connectionName();
-        _query = QSqlQuery(db);
-        if(!_query.exec(statement)) {
-            qWarnig() << _query.lastError().text();
+        connectionName = db.connectionName();
+        QSqlQuery query(db);
+
+        if(!query.exec(statement)) {
+            qWarning() << query.lastError().text();
             return false;
         }
-        db.close()
+        _records.clear();
+        if(query.isSelect()) {
+            while(query.next()) {
+                _records << QVariantList();
+                for(int i=0; i<query.record().count(); i++) {
+                    _records.last() << query.value(i);
+                }
+            }
+        };
+        db.close();
     }
     QSqlDatabase::removeDatabase(connectionName);
     return true;
 }
 
-void DatabaseStarlingLab::createDatabase() const
+QVector<QVariantList> DatabaseStarlingLab::records() const
 {
-    QFile file(_connectionName);
+    return _records;
+}
+
+void DatabaseStarlingLab::createDatabase()
+{
+    QFile file(_databaseName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
@@ -53,7 +68,8 @@ void DatabaseStarlingLab::createDatabase() const
 
     foreach(QString statement, sqlStatements) {
         if(!exec(statement)){
-            qWarnig() << _query.lastError().text();
+            qWarning() << "Error creation database!";
+            return;
         }
     }
 }
