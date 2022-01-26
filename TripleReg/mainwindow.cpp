@@ -104,6 +104,7 @@ void MainWindow::on_saveGeneralSettings_pushButton_clicked()
         QMessageBox::warning(this,tr("Database"),tr("Updating error from database!\nPlease contact the administrator."));
         return;
     }
+    QMessageBox::information(this,tr("User data"),tr("Changes have been saved."));
 }
 
 
@@ -119,6 +120,7 @@ void MainWindow::on_saveUserDatapushButton_clicked()
         QMessageBox::warning(this,tr("Database"),tr("Updating error from database!\nPlease contact the administrator."));
         return;
     }
+    QMessageBox::information(this,tr("User data"),tr("Changes have been saved."));
 }
 
 
@@ -155,5 +157,11 @@ void MainWindow::on_passwordChange_pushButton_clicked()
             }
         }
     }
+}
+
+
+void MainWindow::on_cancelSettings_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }
 

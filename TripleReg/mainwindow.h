@@ -36,6 +36,8 @@ private slots:
 
     void on_passwordChange_pushButton_clicked();
 
+    void on_cancelSettings_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     UserModel user;
