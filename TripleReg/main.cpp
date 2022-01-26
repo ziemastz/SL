@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    DialogSignInUser signIn;
+    DialogSingInUser signIn;
     if(signIn.exec() != QDialog::Accepted) {
         return 0;
     }

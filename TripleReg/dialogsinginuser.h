@@ -18,8 +18,6 @@ public:
     explicit DialogSingInUser(QWidget *parent = nullptr);
     ~DialogSingInUser();
 
-    int loggedUserId() const;
-
 private slots:
     void on_exit_pushButton_clicked();
 

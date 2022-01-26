@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
-    <height>361</height>
+    <width>348</width>
+    <height>336</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/logo_tripleReg.png</pixmap>
+        <pixmap resource="resources.qrc">:/logo_tripleReg.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -50,6 +50,7 @@
        <property name="font">
         <font>
          <pointsize>26</pointsize>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -204,6 +205,8 @@
   <tabstop>forgotPassword_pushButton</tabstop>
   <tabstop>signUp_pushButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
