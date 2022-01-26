@@ -165,3 +165,18 @@ void MainWindow::on_cancelSettings_pushButton_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
+
+void MainWindow::on_connectionTestN1470_pushButton_clicked()
+{
+    PowerSupplyN1470::setPort(ui->port_comboBox->currentText());
+    PowerSupplyN1470::setBaudRate(ui->baudRate_comboBox->currentText());
+    PowerSupplyN1470::setLBusAddress(QString::number(ui->lBusAddress_spinBox->value()));
+
+    PowerSupplyN1470 hv;
+    if(hv.isConnect()) {
+       QMessageBox::information(this,tr("Connection test"),tr("Connected properly to the CAEN N1470 power supply."));
+    }else{
+       QMessageBox::warning(this,tr("Connection test"),tr("Communication error with the CAEN N1470 power supply.\nPlease check the connectivity parameters."));
+    }
+}
+

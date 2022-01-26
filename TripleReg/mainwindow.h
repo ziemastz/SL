@@ -9,6 +9,8 @@
 #include "settings.h"
 #include "databasestarlinglab.h"
 
+#include "powersupplyn1470.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -37,6 +39,8 @@ private slots:
     void on_passwordChange_pushButton_clicked();
 
     void on_cancelSettings_pushButton_clicked();
+
+    void on_connectionTestN1470_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
