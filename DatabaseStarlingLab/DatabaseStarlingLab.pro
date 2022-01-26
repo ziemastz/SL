@@ -1,5 +1,5 @@
 QT -= gui
-QT += sql
+QT += sql serialport
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -14,6 +14,9 @@ SOURCES += \
     databasestarlinglab.cpp
 
 HEADERS += \
+    Model/baseModel.h \
+    Model/tripleRegSettingsModel.h \
+    Model/userModel.h \
     databasestarlinglab.h
 
 # Default rules for deployment.
@@ -21,3 +24,14 @@ unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
 }
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Utils/release/ -lUtils
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Utils/debug/ -lUtils
+
+INCLUDEPATH += $$PWD/../Utils
+DEPENDPATH += $$PWD/../Utils
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/release/libUtils.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/debug/libUtils.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/release/Utils.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/debug/Utils.lib

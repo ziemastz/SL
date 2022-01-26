@@ -2,7 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QInputDialog>
+
+#include "utils.h"
 #include "settings.h"
+#include "databasestarlinglab.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,8 +21,24 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_exit_pushButton_clicked();
+
+    void on_newMeasurement_pushButton_clicked();
+
+    void on_cancelNewMeasurement_pushButton_clicked();
+
+    void on_settings_pushButton_clicked();
+
+    void on_saveGeneralSettings_pushButton_clicked();
+
+    void on_saveUserDatapushButton_clicked();
+
+    void on_passwordChange_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    UserModel user;
 
 };
 #endif // MAINWINDOW_H

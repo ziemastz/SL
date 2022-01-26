@@ -6,6 +6,9 @@ DialogSingInUser::DialogSingInUser(QWidget *parent) :
     ui(new Ui::DialogSingInUser)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    this->setFocus();
+    ui->username_lineEdit->setFocus();
 }
 
 DialogSingInUser::~DialogSingInUser()

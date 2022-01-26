@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,18 +10,15 @@ CONFIG += c++11
 
 SOURCES += \
     dialogsinginuser.cpp \
-    formnewmeasurement.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     dialogsinginuser.h \
-    formnewmeasurement.h \
     mainwindow.h
 
 FORMS += \
     dialogsinginuser.ui \
-    formnewmeasurement.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
@@ -58,3 +55,14 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 
 RESOURCES += \
     resources.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Utils/release/ -lUtils
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Utils/debug/ -lUtils
+
+INCLUDEPATH += $$PWD/../Utils
+DEPENDPATH += $$PWD/../Utils
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/release/libUtils.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/debug/libUtils.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/release/Utils.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Utils/debug/Utils.lib

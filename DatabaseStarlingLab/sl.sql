@@ -13,5 +13,5 @@ CREATE TABLE IF NOT EXISTS user (
 	lastModification	TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
-)
-INSERT OR IGNORE INTO users VALUES(NULL, 'admin', 'metro', 'metrologia@polatom.pl', NULL, 'Admin', NULL, 'StarlingLab', 1, NULL, CURRENT_TIMESTAMP, 1);
+);
+INSERT OR IGNORE INTO user VALUES(NULL, 'admin', 'metro', 'metrologia@polatom.pl', NULL, 'Admin', NULL, 'StarlingLab', 1, NULL, CURRENT_TIMESTAMP, 1);
