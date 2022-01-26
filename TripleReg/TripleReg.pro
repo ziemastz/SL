@@ -80,5 +80,22 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../.
 
 win32: LIBS += -L$$PWD/../../CAEN/PowerSupplyN1470/CAENHVWrapper/lib/x86_64/ -lCAENHVWrapper
 
-INCLUDEPATH += $$PWD/../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
-DEPENDPATH += $$PWD/../../CAEN/PowerSupplyN1470/CAENHVWrapper/include
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/release/ -lMAC3Counter
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/debug/ -lMAC3Counter
+
+INCLUDEPATH += $$PWD/../../Adept/MAC3Counter
+DEPENDPATH += $$PWD/../../Adept/MAC3Counter
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/release/libMAC3Counter.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/debug/libMAC3Counter.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/release/MAC3Counter.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/debug/MAC3Counter.lib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
+
+INCLUDEPATH += $$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
+DEPENDPATH += $$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include

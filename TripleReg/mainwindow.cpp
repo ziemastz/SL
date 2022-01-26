@@ -180,3 +180,16 @@ void MainWindow::on_connectionTestN1470_pushButton_clicked()
     }
 }
 
+
+void MainWindow::on_connectionTestMAC3Counter_pushButton_clicked()
+{
+    MAC3Counter mac3;
+    mac3.setDeviceName(ui->deviceName_lineEdit->text().toStdString());
+    if(mac3.connect()) {
+        mac3.disconnect();
+        QMessageBox::information(this,tr("Connection test"),tr("Connected properly to the MAC3 counter."));
+    }else {
+        QMessageBox::warning(this,tr("Connection test"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
+    }
+}
+

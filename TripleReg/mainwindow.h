@@ -10,6 +10,7 @@
 #include "databasestarlinglab.h"
 
 #include "powersupplyn1470.h"
+#include "mac3counter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +42,8 @@ private slots:
     void on_cancelSettings_pushButton_clicked();
 
     void on_connectionTestN1470_pushButton_clicked();
+
+    void on_connectionTestMAC3Counter_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
