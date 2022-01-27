@@ -22,6 +22,7 @@ private:
     DialogVoltageTable voltageTable;
     TripleRegProtocolModel protocol;
 
+    void readProtocolName();
     void load();
 };
 

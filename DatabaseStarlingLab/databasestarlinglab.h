@@ -28,12 +28,12 @@ public:
     void createDatabase(const QString &configFile);
 
     int signInUser(const QString &username, const QString &password);
-
     int isAvailableUsername(const QString &username);
+
     int isAvailableProtocolName(const QString &protocolName);
 
     bool select(const int &id, BaseModel *model);
-    DatabaseResults select(BaseModel *model, const QString &filter);
+    DatabaseResults select(BaseModel *model, const QString &filter = QString(), const int &limit = 0, const int &offset = 0);
     bool update(BaseModel *model);
     bool insert(BaseModel *model);
 

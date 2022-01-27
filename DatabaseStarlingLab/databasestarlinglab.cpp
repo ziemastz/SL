@@ -54,10 +54,17 @@ bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
     return false;
 }
 
-DatabaseResults DatabaseStarlingLab::select(BaseModel *model, const QString &filter)
+DatabaseResults DatabaseStarlingLab::select(BaseModel *model, const QString &filter, const int &limit, const int &offset)
 {
     DatabaseResults ret;
-    if(exec("SELECT * FROM "+model->tableName()+" WHERE "+filter)) {
+    QString statement = "SELECT * FROM "+model->tableName();
+    if(!filter.isEmpty())
+        statement.append(" WHERE "+filter);
+
+    if(limit !=0)
+        statement.append(" LIMIT "+QString::number(limit)+" OFFSET "+QString::number(offset));
+
+    if(exec(statement)) {
         for(int i=0; i<_records.count(); i++) {
             BaseModel* next = model->copy();
             next->setRecord(_records.at(i));

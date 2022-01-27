@@ -8,7 +8,8 @@ DialogProtocol::DialogProtocol(const QString &protocolName, QWidget *parent) :
     ui->setupUi(this);
     protocol.id = 0;
     protocol.name = protocolName;
-
+    readProtocolName();
+    load(protocolName);
 }
 
 DialogProtocol::~DialogProtocol()
@@ -16,8 +17,19 @@ DialogProtocol::~DialogProtocol()
     delete ui;
 }
 
-void DialogProtocol::load()
+void DialogProtocol::readProtocolName()
 {
     DatabaseStarlingLab db;
-    db.select(&protocol,"name='"+protocol.name);
+    TripleRegProtocolModel protocol;
+    DatabaseResult result = db.select(&protocol);
+    for(int i=0; i<result.count(); i++){
+        protocol.setRecord(result.at(i).record());
+        ui->protocolName_comboBox->addItem(protocol.name);
+    }
+}
+
+void DialogProtocol::load(const QString &protocolName)
+{
+    DatabaseStarlingLab db;
+    DatabaseResult result = db.select(&protocol,"name='"+protocolName+"'");
 }
