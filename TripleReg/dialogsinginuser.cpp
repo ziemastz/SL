@@ -31,7 +31,10 @@ void DialogSingInUser::on_forgotPassword_pushButton_clicked()
 
 void DialogSingInUser::on_signUp_pushButton_clicked()
 {
-    QMessageBox::information(this,tr("Forgot password"),tr("Please contact the TripleReg administrator."));
+    DialogCreateAnAccount createAnAccount;
+    if(createAnAccount.exec() == QDialog::Accepted) {
+        QMessageBox::information(this,tr("Account"),tr("Congratulations, the new user has been successfully created.\nPlease sing in now with your username and password."));
+    }
 }
 
 

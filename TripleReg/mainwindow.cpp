@@ -98,6 +98,7 @@ void MainWindow::on_saveGeneralSettings_pushButton_clicked()
     settings.lBusAddress = ui->lBusAddress_spinBox->value();
     settings.deviceName = ui->deviceName_lineEdit->text();
     settings.isExtClk = ui->extClk_checkBox->isChecked();
+    settings.userId = Settings::loggedUserId();
 
     DatabaseStarlingLab db;
     if(!db.update(&settings)) {

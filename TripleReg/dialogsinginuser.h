@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "settings.h"
 #include "databasestarlinglab.h"
+#include "dialogcreateanaccount.h"
 
 namespace Ui {
 class DialogSingInUser;

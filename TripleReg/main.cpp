@@ -5,6 +5,7 @@
 #include <QTranslator>
 
 #include "dialogsinginuser.h"
+#include "databasestarlinglab.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +22,9 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    DatabaseStarlingLab db;
+    db.createDatabase("sl.sql");
+
     DialogSingInUser signIn;
     if(signIn.exec() != QDialog::Accepted) {
         return 0;

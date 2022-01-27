@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS user (
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
 );
-INSERT OR IGNORE INTO user VALUES(NULL, 'admin', 'metro', 'metrologia@polatom.pl', NULL, 'Admin', NULL, 'StarlingLab', NULL, 1, NULL, CURRENT_TIMESTAMP, 1);
+INSERT OR IGNORE INTO user VALUES(1, 'admin', 'metro', 'metrologia@polatom.pl', NULL, 'Admin', NULL, 'StarlingLab', NULL, 1, NULL, CURRENT_TIMESTAMP, 1);
 CREATE TABLE IF NOT EXISTS tripleRegSettings (
 	id	INTEGER,
 	blank	INTEGER NOT NULL DEFAULT 60,

@@ -23,21 +23,29 @@ class DatabaseStarlingLab : public QObject
 {
 public:
     DatabaseStarlingLab();
+    void createDatabase(const QString &configFile);
+
     int signInUser(const QString &username, const QString &password);
+    int isAvailableUsername(const QString &username);
+
     bool select(const int &id, BaseModel *model);
     bool update(BaseModel *model);
+    bool insert(BaseModel *model);
+
+    int lastInsertId() const;
+
 
 private:
     QString _driver;
     QString _databaseName;
     QVector<QVariantList> _records;
+    int _lastInsertId;
 
     QStringList fieldName(BaseModel *model) const;
 
     bool exec(const QString &statement);
     QVector<QVariantList> records() const;
 
-    void createDatabase();
 };
 
 #endif // DATABASESTARLINGLAB_H

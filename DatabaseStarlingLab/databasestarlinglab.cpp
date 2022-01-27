@@ -4,9 +4,6 @@ DatabaseStarlingLab::DatabaseStarlingLab()
 {
     _driver = "QSQLITE";
     _databaseName = "sl.db";
-    //if(!QFile::exists(_databaseName)) {
-        createDatabase();
-    //}
 }
 
 int DatabaseStarlingLab::signInUser(const QString &username, const QString &password)
@@ -18,6 +15,19 @@ int DatabaseStarlingLab::signInUser(const QString &username, const QString &pass
         }
     }
     return ret;
+}
+
+int DatabaseStarlingLab::isAvailableUsername(const QString &username)
+{
+    exec("SELECT COUNT(*) FROM user WHERE username='"+username+"'");
+    if(_records.count() == 1) {
+        if(_records.at(0).at(0).toInt() == 0) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+    return -1;
 }
 
 bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
@@ -58,6 +68,23 @@ bool DatabaseStarlingLab::update(BaseModel *model)
     return ret;
 }
 
+bool DatabaseStarlingLab::insert(BaseModel *model)
+{
+    model->id = 0;
+    QStringList values = Utils::toStringList(model->record());
+    if(!values.isEmpty() && values.first().toInt() == 0) {
+        values[0] = "NULL";
+    }
+    bool ret = exec("INSERT INTO "+model->tableName()+" VALUES("+values.join(", ")+")");
+    model->id = lastInsertId();
+    return ret;
+}
+
+int DatabaseStarlingLab::lastInsertId() const
+{
+    return _lastInsertId;
+}
+
 bool DatabaseStarlingLab::exec(const QString &statement)
 {
     QString connectionName;
@@ -83,7 +110,12 @@ bool DatabaseStarlingLab::exec(const QString &statement)
                     _records.last() << query.value(i);
                 }
             }
-        };
+        }else {
+            if(query.lastInsertId().isValid())
+                _lastInsertId = query.lastInsertId().toInt();
+            else
+                _lastInsertId = 0;
+        }
         db.close();
     }
     QSqlDatabase::removeDatabase(connectionName);
@@ -95,9 +127,9 @@ QVector<QVariantList> DatabaseStarlingLab::records() const
     return _records;
 }
 
-void DatabaseStarlingLab::createDatabase()
+void DatabaseStarlingLab::createDatabase(const QString &configFile)
 {
-    QFile file("sl.sql");
+    QFile file(configFile);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
