@@ -1,7 +1,7 @@
-#ifndef PROTOCOLMODEL_H
-#define PROTOCOLMODEL_H
+#ifndef TRIPLEREGPROTOCOLMODEL_H
+#define TRIPLEREGPROTOCOLMODEL_H
 #include "baseModel.h"
-class ProtocolModel : public BaseModel
+class TripleRegProtocolModel : public BaseModel
 {
 private:
     QVector<int> toVectorInt(const QString& str) const {
@@ -32,7 +32,7 @@ public:
     QString notes;
 
     BaseModel* copy() {
-        BaseModel* ret = new ProtocolModel;
+        BaseModel* ret = new TripleRegProtocolModel;
         ret->setRecord(this->record());
         return ret;
     }
@@ -81,4 +81,4 @@ public:
     }
 };
 
-#endif // PROTOCOLMODEL_H
+#endif // TRIPLEREGPROTOCOLMODEL_H

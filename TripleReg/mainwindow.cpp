@@ -14,12 +14,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_exit_pushButton_clicked()
 {
     close();
 }
-
 
 void MainWindow::on_newMeasurement_pushButton_clicked()
 {
@@ -31,17 +29,12 @@ void MainWindow::on_newMeasurement_pushButton_clicked()
     ui->sourceID_lineEdit->clear();
     ui->sourceNo_spinBox->setValue(1);
     ui->isBlank_checkBox->setChecked(true);
-
-
-
-
 }
 
 void MainWindow::on_cancelNewMeasurement_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
-
 
 void MainWindow::on_settings_pushButton_clicked()
 {
@@ -83,7 +76,6 @@ void MainWindow::on_settings_pushButton_clicked()
     ui->tabWidget->setCurrentIndex(0);
 }
 
-
 void MainWindow::on_saveGeneralSettings_pushButton_clicked()
 {
     TripleRegSettingsModel settings;
@@ -108,7 +100,6 @@ void MainWindow::on_saveGeneralSettings_pushButton_clicked()
     QMessageBox::information(this,tr("User data"),tr("Changes have been saved."));
 }
 
-
 void MainWindow::on_saveUserDatapushButton_clicked()
 {
     user.degree = ui->degree_lineEdit->text();
@@ -123,7 +114,6 @@ void MainWindow::on_saveUserDatapushButton_clicked()
     }
     QMessageBox::information(this,tr("User data"),tr("Changes have been saved."));
 }
-
 
 void MainWindow::on_passwordChange_pushButton_clicked()
 {
@@ -160,12 +150,10 @@ void MainWindow::on_passwordChange_pushButton_clicked()
     }
 }
 
-
 void MainWindow::on_cancelSettings_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
-
 
 void MainWindow::on_connectionTestN1470_pushButton_clicked()
 {
@@ -181,7 +169,6 @@ void MainWindow::on_connectionTestN1470_pushButton_clicked()
     }
 }
 
-
 void MainWindow::on_connectionTestMAC3Counter_pushButton_clicked()
 {
     MAC3Counter mac3;
@@ -191,6 +178,21 @@ void MainWindow::on_connectionTestMAC3Counter_pushButton_clicked()
         QMessageBox::information(this,tr("Connection test"),tr("Connected properly to the MAC3 counter."));
     }else {
         QMessageBox::warning(this,tr("Connection test"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
+    }
+}
+
+void MainWindow::on_addProtocol_pushButton_clicked()
+{
+    bool ok;
+    QString protocolName = QInputDialog::getText(this,tr("New protocol"),tr("New protocol name"),QLineEdit::Normal,QString(),&ok);
+    if(ok && !protocolName.isEmpty()) {
+        DatabaseStarlingLab db;
+        if(!db.isAvailableProtocolName(protocolName)) {
+            QMessageBox::warning(this,tr("New protocol"),tr("Nor available the new protocol name.\nPlease try again?"));
+            return;
+        }
+        DialogProtocol protocolDialog(protocolName);
+
     }
 }
 

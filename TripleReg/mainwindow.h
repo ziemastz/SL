@@ -12,6 +12,8 @@
 #include "powersupplyn1470.h"
 #include "mac3counter.h"
 
+#include "dialogprotocol.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -44,6 +46,8 @@ private slots:
     void on_connectionTestN1470_pushButton_clicked();
 
     void on_connectionTestMAC3Counter_pushButton_clicked();
+
+    void on_addProtocol_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

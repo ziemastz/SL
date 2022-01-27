@@ -1,5 +1,6 @@
 QT -= gui
 QT += sql serialport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -14,8 +15,9 @@ SOURCES += \
     databasestarlinglab.cpp
 
 HEADERS += \
+    DatabaseResults.h \
     Model/baseModel.h \
-    Model/protocolModel.h \
+    Model/tripleRegProtocolModel.h \
     Model/tripleRegSettingsModel.h \
     Model/userModel.h \
     databasestarlinglab.h

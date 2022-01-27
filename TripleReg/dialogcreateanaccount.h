@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include "databasestarlinglab.h"
 

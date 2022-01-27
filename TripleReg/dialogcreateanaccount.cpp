@@ -68,23 +68,38 @@ void DialogCreateAnAccount::on_singUp_pushButton_clicked()
         QMessageBox::warning(this,tr("Error"),tr("No first name or last name.\nPlease give your first name and  last name."));
         return;
     }
+    bool ok;
 
-    UserModel newUser;
-    newUser.id = 0;
-    newUser.username = ui->username_lineEdit->text();
-    newUser.password = ui->password_lineEdit->text();
-    newUser.degree = ui->degree_lineEdit->text();
-    newUser.firstName = ui->firstName_lineEdit->text();
-    newUser.secondName = ui->secondName_lineEdit->text();
-    newUser.lastName = ui->lastName_lineEdit->text();
-    newUser.isActive = 1;
+    QString username = QInputDialog::getText(this,tr("Authorization"),tr("Approving username"),QLineEdit::Normal,QString(),&ok);
+    if(ok && !username.isEmpty()) {
+        QString password = QInputDialog::getText(this,tr("Authorization"),tr("Password"),QLineEdit::Password,QString(),&ok);
+        if(ok && !password.isEmpty()) {
+            DatabaseStarlingLab db;
+            int approvingUserId = db.signInUser(username,password);
+            if(approvingUserId > 0) {
+                UserModel newUser;
+                newUser.id = 0;
+                newUser.username = ui->username_lineEdit->text();
+                newUser.password = ui->password_lineEdit->text();
+                newUser.degree = ui->degree_lineEdit->text();
+                newUser.firstName = ui->firstName_lineEdit->text();
+                newUser.secondName = ui->secondName_lineEdit->text();
+                newUser.lastName = ui->lastName_lineEdit->text();
+                newUser.isActive = 1;
+                newUser.userId = approvingUserId;
 
-    DatabaseStarlingLab db;
-    if(db.insert(&newUser)){
-        accept();
-    }else {
-        QMessageBox::warning(this,tr("Database"),tr("Inserting error from database!\nPlease contact the administrator."));
-        return;
+                if(db.insert(&newUser)){
+                    accept();
+                }else {
+                    QMessageBox::warning(this,tr("Database"),tr("Inserting error from database!\nPlease contact the administrator."));
+                    return;
+                }
+            }else {
+                QMessageBox::warning(this,tr("Authorization"),tr("Authorization error!\nPlease try again?"));
+                return;
+            }
+
+        }
     }
 }
 

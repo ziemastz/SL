@@ -30,6 +30,19 @@ int DatabaseStarlingLab::isAvailableUsername(const QString &username)
     return -1;
 }
 
+int DatabaseStarlingLab::isAvailableProtocolName(const QString &protocolName)
+{
+    exec("SELECT COUNT(*) FROM tripleRegProtocol WHERE name='"+protocolName+"'");
+    if(_records.count() == 1) {
+        if(_records.at(0).at(0).toInt() == 0) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+    return -1;
+}
+
 bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
 {
     if(exec("SELECT * FROM "+model->tableName()+" WHERE id="+QString::number(id))) {
@@ -39,6 +52,19 @@ bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
         }
     }
     return false;
+}
+
+DatabaseResults DatabaseStarlingLab::select(BaseModel *model, const QString &filter)
+{
+    DatabaseResults ret;
+    if(exec("SELECT * FROM "+model->tableName()+" WHERE "+filter)) {
+        for(int i=0; i<_records.count(); i++) {
+            BaseModel* next = model->copy();
+            next->setRecord(_records.at(i));
+            ret.add(next);
+        }
+    }
+    return ret;
 }
 
 bool DatabaseStarlingLab::update(BaseModel *model)
@@ -71,6 +97,8 @@ bool DatabaseStarlingLab::update(BaseModel *model)
 bool DatabaseStarlingLab::insert(BaseModel *model)
 {
     model->id = 0;
+    model->lastModification = Utils::toString(QDateTime::currentDateTime());
+
     QStringList values = Utils::toStringList(model->record());
     if(!values.isEmpty() && values.first().toInt() == 0) {
         values[0] = "NULL";

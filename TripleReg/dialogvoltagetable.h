@@ -18,6 +18,12 @@ public:
     explicit DialogVoltageTable(QWidget *parent = nullptr);
     ~DialogVoltageTable();
 
+    const QVector<int> &getAnodeTab() const;
+    void setAnodeTab(const QVector<int> &newAnodeTab);
+
+    const QVector<int> &getFocusingTab() const;
+    void setFocusingTab(const QVector<int> &newFocusingTab);
+
 private slots:
     void on_anodeFrom_spinBox_editingFinished();
 
@@ -38,6 +44,8 @@ private slots:
     void on_focusing_tableWidget_cellChanged(int row, int column);
 
     void on_clearFocusing_pushButton_clicked();
+
+    void on_set_pushButton_clicked();
 
 private:
     Ui::DialogVoltageTable *ui;
