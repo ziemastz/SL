@@ -23,7 +23,10 @@ private:
     TripleRegProtocolModel protocol;
 
     void readProtocolName();
-    void load();
+    void setParameter();
+    void load(const QString &protocolName);
+    void copyParameter(const QString &protocolName);
+
 };
 
 #endif // DIALOGPROTOCOL_H
