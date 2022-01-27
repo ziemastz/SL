@@ -15,6 +15,7 @@ SOURCES += \
 
 HEADERS += \
     Model/baseModel.h \
+    Model/protocolModel.h \
     Model/tripleRegSettingsModel.h \
     Model/userModel.h \
     databasestarlinglab.h

@@ -33,7 +33,7 @@
           <string notr="true">border-color: rgb(0, 170, 0);</string>
          </property>
          <property name="currentIndex">
-          <number>5</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">

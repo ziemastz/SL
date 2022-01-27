@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+	background-color: rgb(255, 255, 255);
+}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0" colspan="3">
     <layout class="QGridLayout" name="gridLayout_4">
@@ -53,11 +58,9 @@
        <property name="font">
         <font>
          <pointsize>26</pointsize>
+         <weight>75</weight>
          <bold>true</bold>
         </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>TripleReg</string>

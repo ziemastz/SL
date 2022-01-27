@@ -1,6 +1,7 @@
 #ifndef BASEMODEL_H
 #define BASEMODEL_H
 #include <QString>
+#include <QVector>
 #include <QVariantList>
 class BaseModel
 {

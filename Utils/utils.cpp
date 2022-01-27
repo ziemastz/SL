@@ -49,3 +49,24 @@ QStringList Utils::toStringList(const QVariantList &values)
     }
     return ret;
 }
+
+void Utils::clearTableWidget(QTableWidget *table)
+{
+    int rows = table->rowCount();
+    for(int i=0;i<rows;i++)
+        table->removeRow(0);
+}
+
+void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
+{
+    if(record.count() != table->columnCount())
+        return;
+    int rows = table->rowCount();
+    int columns = table->columnCount();
+    table->insertRow(rows);
+    table->blockSignals(true);
+    for(int j=0;j<columns;j++) {
+        table->setItem(rows,j,new QTableWidgetItem(record.at(j)));
+    }
+    table->blockSignals(false);
+}

@@ -10,18 +10,24 @@ CONFIG += c++11
 
 SOURCES += \
     dialogcreateanaccount.cpp \
+    dialogprotocol.cpp \
     dialogsinginuser.cpp \
+    dialogvoltagetable.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     dialogcreateanaccount.h \
+    dialogprotocol.h \
     dialogsinginuser.h \
+    dialogvoltagetable.h \
     mainwindow.h
 
 FORMS += \
     dialogcreateanaccount.ui \
+    dialogprotocol.ui \
     dialogsinginuser.ui \
+    dialogvoltagetable.ui \
     mainwindow.ui
 
 TRANSLATIONS += \
