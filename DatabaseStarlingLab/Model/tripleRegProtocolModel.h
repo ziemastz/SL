@@ -11,11 +11,24 @@ private:
             ret << val.toInt();
         return ret;
     }
+    QVector<int> toVectorInt(const QStringList& list) const {
+        QVector<int> ret;
+        //QStringList list = str.split("|");
+        foreach(QString val, list)
+            ret << val.toInt();
+        return ret;
+    }
     QStringList toStringList(const QVector<int>& tab) const {
         QStringList ret;
         foreach(int val,tab)
             ret << QString::number(val);
         return ret;
+    }
+    QString toString(const QVector<int>& tab) const {
+        QStringList ret;
+        foreach(int val,tab)
+            ret << QString::number(val);
+        return ret.join("|");
     }
 public:
     QString name;
@@ -64,11 +77,11 @@ public:
         QVariantList ret;
         ret << id
             << name
-            << toStringList(anodaVoltage)
+            << toString(anodaVoltage)
             << voltageShiftA
             << voltageShiftB
             << voltageShiftC
-            << toStringList(focusingVoltage)
+            << toString(focusingVoltage)
             << resolvingTime
             << deadTime
             << thrA
