@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
+    loadProtocolName();
 }
 
 MainWindow::~MainWindow()
@@ -22,6 +24,7 @@ void MainWindow::on_exit_pushButton_clicked()
 void MainWindow::on_newMeasurement_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    DatabaseStarlingLab db;
     //clear & load
     // first clear
     ui->nuclide_lineEdit->clear();
@@ -29,6 +32,25 @@ void MainWindow::on_newMeasurement_pushButton_clicked()
     ui->sourceID_lineEdit->clear();
     ui->sourceNo_spinBox->setValue(1);
     ui->isBlank_checkBox->setChecked(true);
+
+    TripleRegSettingsModel settings;
+    db.select(1,&settings);
+    ui->blankTime_spinBox->setValue(settings.blankTime);
+    ui->sourceTime_spinBox->setValue(settings.sourceTime);
+    ui->repeat_spinBox->setValue(settings.repeat);
+
+    TripleRegProtocolModel protocol;
+    DatabaseResults result = db.select(&protocol);
+    ui->protocol_comboBox->clear();
+    for(int i=0; i<result.count(); i++){
+        protocol.setRecord(result.at(i)->record());
+        ui->protocol_comboBox->addItem(protocol.name);
+    }
+
+    ui->linked_lineEdit->clear();
+    ui->category_comboBox->setCurrentIndex(0);
+    ui->comment_plainTextEdit->clear();
+
 }
 
 void MainWindow::on_cancelNewMeasurement_pushButton_clicked()
@@ -192,7 +214,115 @@ void MainWindow::on_addProtocol_pushButton_clicked()
             return;
         }
         DialogProtocol protocolDialog(protocolName);
+        if(protocolDialog.exec() == QDialog::Accepted) {
+            ui->protocol_comboBox->addItem(protocolName);
+            ui->protocol_comboBox->setCurrentText(protocolName);
+        }
 
     }
+}
+
+void MainWindow::on_removeProtocol_pushButton_clicked()
+{
+    if(QMessageBox::question(this,tr("Remove protocol"),tr("Are you sure to delete the protocol permanently?")) == QMessageBox::Yes) {
+        DatabaseStarlingLab db;
+        TripleRegProtocolModel protocol;
+        DatabaseResults results = db.select(&protocol,"name='"+ui->protocol_comboBox->currentText()+"'");
+        if(results.count() != 1) {
+            QMessageBox::warning(this,tr("Database"),tr("Reading error from database!\nPlease contact the administrator."));
+            QMessageBox::warning(this,tr("Remove protocol"),tr("The protocol has not been deleted."));
+            return;
+        }
+        protocol.setRecord(results.at(0)->record());
+        protocol.userId = Settings::loggedUserId();
+        if(!db.update(&protocol)) {
+            QMessageBox::warning(this,tr("Database"),tr("Updating error from database!\nPlease contact the administrator."));
+            QMessageBox::warning(this,tr("Remove protocol"),tr("The protocol has not been deleted."));
+            return;
+        }
+        if(!db.remove(&protocol)) {
+            QMessageBox::warning(this,tr("Database"),tr("Removing error from database!\nPlease contact the administrator."));
+            QMessageBox::warning(this,tr("Remove protocol"),tr("The protocol has not been deleted."));
+            return;
+        }
+        QMessageBox::information(this,tr("Remove protocol"),tr("The protocol was successfully deleted."));
+        ui->protocol_comboBox->removeItem(ui->protocol_comboBox->findText(protocol.name));
+    }
+}
+
+void MainWindow::on_editProtocol_pushButton_clicked()
+{
+    DialogProtocol protocolDialog(ui->protocol_comboBox->currentText());
+    protocolDialog.exec();
+}
+
+void MainWindow::loadProtocolName()
+{
+    DatabaseStarlingLab db;
+    TripleRegProtocolModel protocol;
+    DatabaseResults result = db.select(&protocol);
+    for(int i=0; i<result.count(); i++){
+        protocol.setRecord(result.at(i)->record());
+        ui->protocol_comboBox->addItem(protocol.name);
+    }
+}
+
+
+void MainWindow::on_startNewMeasurement_pushButton_clicked()
+{
+    //check data
+    if(ui->nuclide_lineEdit->text().isEmpty() ||
+       ui->sourceID_lineEdit->text().isEmpty()) {
+        QMessageBox::warning(this,tr("New measurement"),tr("Please provide nuclide and source ID."));
+        return;
+    }
+    if(ui->sourceNo_spinBox->value() == 0 ||
+       !ui->isBlank_checkBox->isChecked()) {
+        QMessageBox::warning(this,tr("New measurement"),tr("There are no measurement objects.\nEnter the measurement objects (e.g. blank, source)."));
+        return;
+    }
+    TripleRegMeasurementRegisterModel reg;
+    TripleRegMeasurementProtocolModel protocol;
+    DatabaseStarlingLab db;
+    int id = db.countMeasurementFrom(QDateTime::currentDateTime().toString("yyyy")+"-01-01");
+    if(id == -1){
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    id++;
+    reg.id = 0;
+    reg.measurementId = QDateTime::currentDateTime().toString("yy")+"."+QString::number(id);
+    reg.measurementDate = QDateTime::currentDateTime().toString("yyyy-MM-dd");
+    reg.nuclide = ui->nuclide_lineEdit->text();
+    reg.solutionId = ui->solutionID_lineEdit->text();
+    reg.sourceId = ui->sourceID_lineEdit->text();
+    reg.sourceNo = ui->sourceNo_spinBox->value();
+    reg.isBlank = ui->isBlank_checkBox->isChecked();
+    reg.blankTime = ui->blankTime_spinBox->value();
+    reg.sourceTime = ui->sourceTime_spinBox->value();
+    reg.repeat = ui->repeat_spinBox->value();
+    //copy protocol
+    DatabaseResults result = db.select(new TripleRegProtocolModel,"name='"+ui->protocol_comboBox->currentText()+"'");
+    if(result.count() != 1) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    protocol.setRecord(result.at(0)->record());
+    protocol.id = 0;
+    protocol.userId = Settings::loggedUserId();
+    if(!db.insert(&protocol)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }//end copy
+    reg.protocolId = protocol.id;
+    reg.linked = ui->linked_lineEdit->text();
+    reg.category = ui->category_comboBox->currentText();
+    reg.comments = ui->comment_plainTextEdit->toPlainText();
+    reg.userId = Settings::loggedUserId();
+    if(!db.insert(&reg)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    QMessageBox::information(this,tr("New measurement"),tr("Succes!"));
 }
 

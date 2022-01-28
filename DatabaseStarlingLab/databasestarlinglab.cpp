@@ -43,6 +43,16 @@ int DatabaseStarlingLab::isAvailableProtocolName(const QString &protocolName)
     return -1;
 }
 
+int DatabaseStarlingLab::countMeasurementFrom(const QString &date)
+{
+    exec("SELECT COUNT(*) FROM tripleRegMeasurementRegister WHERE measurementDate > '"+date+"'");
+    if(_records.count() == 1) {
+        return _records.at(0).at(0).toInt();
+    }else {
+        return -1;
+    }
+}
+
 bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
 {
     if(exec("SELECT * FROM "+model->tableName()+" WHERE id="+QString::number(id))) {
@@ -104,7 +114,7 @@ bool DatabaseStarlingLab::update(BaseModel *model)
 bool DatabaseStarlingLab::insert(BaseModel *model)
 {
     model->id = 0;
-    model->lastModification = Utils::toString(QDateTime::currentDateTime());
+    model->lastModification = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
 
     QStringList values = Utils::toStringList(model->record());
     if(!values.isEmpty() && values.first().toInt() == 0) {
@@ -113,6 +123,11 @@ bool DatabaseStarlingLab::insert(BaseModel *model)
     bool ret = exec("INSERT INTO "+model->tableName()+" VALUES("+values.join(", ")+")");
     model->id = lastInsertId();
     return ret;
+}
+
+bool DatabaseStarlingLab::remove(BaseModel *model)
+{
+    return exec("DELETE FROM "+model->tableName()+" WHERE id="+QString::number(model->id));
 }
 
 int DatabaseStarlingLab::lastInsertId() const

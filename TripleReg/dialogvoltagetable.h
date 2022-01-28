@@ -47,6 +47,8 @@ private slots:
 
     void on_set_pushButton_clicked();
 
+    void on_cancel_pushButton_clicked();
+
 private:
     Ui::DialogVoltageTable *ui;
 

@@ -121,13 +121,25 @@ void DialogVoltageTable::on_set_pushButton_clicked()
 {
     anodeTab.clear();
     int rows = ui->anode_tableWidget->rowCount();
-    for(int i=0;i<rows;i++)
-        anodeTab << ui->anode_tableWidget->item(i,0)->text().toDouble();
+    for(int i=0;i<rows;i++){
+        QTableWidgetItem *item = ui->anode_tableWidget->item(i,0);
+        if(item != 0){
+            if(!item->text().isEmpty()) {
+                anodeTab << item->text().toInt();
+            }
+        }
+    }
 
     focusingTab.clear();
     rows = ui->focusing_tableWidget->rowCount();
-    for(int i=0;i<rows;i++)
-        focusingTab << ui->focusing_tableWidget->item(i,0)->text().toDouble();
+    for(int i=0;i<rows;i++) {
+        QTableWidgetItem *item = ui->focusing_tableWidget->item(i,0);
+        if(item != 0){
+            if(!item->text().isEmpty()) {
+                focusingTab << item->text().toInt();
+            }
+        }
+    }
 
     this->accept();
 }
@@ -140,6 +152,10 @@ const QVector<int> &DialogVoltageTable::getFocusingTab() const
 void DialogVoltageTable::setFocusingTab(const QVector<int> &newFocusingTab)
 {
     focusingTab = newFocusingTab;
+    Utils::clearTableWidget(ui->focusing_tableWidget);
+    QStringList list = Utils::toStringList(focusingTab);
+    foreach(QString value, list)
+        Utils::addItemTableWidget(ui->focusing_tableWidget,QStringList()<<value);
 }
 
 const QVector<int> &DialogVoltageTable::getAnodeTab() const
@@ -150,5 +166,15 @@ const QVector<int> &DialogVoltageTable::getAnodeTab() const
 void DialogVoltageTable::setAnodeTab(const QVector<int> &newAnodeTab)
 {
     anodeTab = newAnodeTab;
+    Utils::clearTableWidget(ui->anode_tableWidget);
+    QStringList list = Utils::toStringList(anodeTab);
+    foreach(QString value, list)
+        Utils::addItemTableWidget(ui->anode_tableWidget,QStringList()<<value);
+}
+
+
+void DialogVoltageTable::on_cancel_pushButton_clicked()
+{
+    close();
 }
 

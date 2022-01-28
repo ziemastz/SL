@@ -955,6 +955,11 @@
                 </item>
                 <item>
                  <property name="text">
+                  <string>Research</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
                   <string>Unqualified</string>
                  </property>
                 </item>

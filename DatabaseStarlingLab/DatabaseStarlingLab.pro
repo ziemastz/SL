@@ -17,6 +17,8 @@ SOURCES += \
 HEADERS += \
     DatabaseResults.h \
     Model/baseModel.h \
+    Model/tripleRegMeasurementProtocolModel.h \
+    Model/tripleRegMeasurementRegisterModel.h \
     Model/tripleRegProtocolModel.h \
     Model/tripleRegSettingsModel.h \
     Model/userModel.h \

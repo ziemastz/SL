@@ -70,3 +70,18 @@ void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
     }
     table->blockSignals(false);
 }
+
+QVector<int> Utils::toVectorInt(const QString &str) {
+    QVector<int> ret;
+    QStringList list = str.split("|");
+    foreach(QString val, list)
+        ret << val.toInt();
+    return ret;
+}
+
+QStringList Utils::toStringList(const QVector<int> &tab) {
+    QStringList ret;
+    foreach(int val,tab)
+        ret << QString::number(val);
+    return ret;
+}

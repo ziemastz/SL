@@ -49,9 +49,16 @@ private slots:
 
     void on_addProtocol_pushButton_clicked();
 
+    void on_removeProtocol_pushButton_clicked();
+
+    void on_editProtocol_pushButton_clicked();
+
+    void on_startNewMeasurement_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     UserModel user;
 
+    void loadProtocolName();
 };
 #endif // MAINWINDOW_H

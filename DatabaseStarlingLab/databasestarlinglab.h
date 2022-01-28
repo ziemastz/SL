@@ -20,6 +20,8 @@
 #include "Model/userModel.h"
 #include "Model/tripleRegSettingsModel.h"
 #include "Model/tripleRegProtocolModel.h"
+#include "Model/tripleRegMeasurementProtocolModel.h"
+#include "Model/tripleRegMeasurementRegisterModel.h"
 
 class DatabaseStarlingLab : public QObject
 {
@@ -32,10 +34,13 @@ public:
 
     int isAvailableProtocolName(const QString &protocolName);
 
+    int countMeasurementFrom(const QString &date);
+
     bool select(const int &id, BaseModel *model);
     DatabaseResults select(BaseModel *model, const QString &filter = QString(), const int &limit = 0, const int &offset = 0);
     bool update(BaseModel *model);
     bool insert(BaseModel *model);
+    bool remove(BaseModel *model);
 
     int lastInsertId() const;
 

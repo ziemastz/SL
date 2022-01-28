@@ -13,6 +13,8 @@ public:
 
     static QString toString(const QVariant& value);
     static QStringList toStringList(const QVariantList& values);
+    static QVector<int> toVectorInt(const QString& str);
+    static QStringList toStringList(const QVector<int>& tab);
 
     static void clearTableWidget(QTableWidget *table);
     static void addItemTableWidget(QTableWidget *table, const QStringList& record);
