@@ -22,6 +22,7 @@ public:
 
     static void clearTableWidget(QTableWidget *table);
     static void addItemTableWidget(QTableWidget *table, const QStringList& record);
+    static void updateLastItemTableWidget(QTableWidget *table, const QStringList& record);
 };
 
 #endif // UTILS_H

@@ -76,6 +76,20 @@ void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
     table->blockSignals(false);
 }
 
+void Utils::updateLastItemTableWidget(QTableWidget *table, const QStringList &record)
+{
+    if(record.count() != table->columnCount())
+        return;
+    int rows = table->rowCount();
+    int columns = table->columnCount();
+    table->blockSignals(true);
+    for(int j=0;j<columns;j++) {
+        table->item(rows-1,j)->setText(record.at(j));
+        //table->setItem(rows-1,j,new QTableWidgetItem(record.at(j)));
+    }
+    table->blockSignals(false);
+}
+
 QVector<int> Utils::toVectorInt(const QString &str) {
     QVector<int> ret;
     QStringList list = str.split("|");

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Measurement process - TripleReg</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_7">
    <item row="0" column="0">
@@ -63,7 +63,7 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="nuclide_lineEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -113,7 +113,7 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="solutionId_lineEdit">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -151,7 +151,7 @@
          </widget>
         </item>
         <item row="1" column="1" colspan="3">
-         <widget class="QLineEdit" name="lineEdit_3">
+         <widget class="QLineEdit" name="sourceId_lineEdit">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -178,7 +178,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="2" column="2">
-         <widget class="QProgressBar" name="progressBar_4">
+         <widget class="QProgressBar" name="currTime_progressBar">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -233,7 +233,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="currSource_label">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
@@ -265,7 +265,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="maxSource_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -311,7 +311,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="currRepeat_label">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
@@ -343,7 +343,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_12">
+           <widget class="QLabel" name="maxRepeat_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -389,7 +389,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="currPoint_label">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -421,7 +421,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="maxPoint_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -469,7 +469,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_16">
+           <widget class="QLabel" name="endTime_label">
             <property name="text">
              <string>12:22 2022-12-21</string>
             </property>
@@ -501,7 +501,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_14">
+           <widget class="QLabel" name="timeLeft_label">
             <property name="font">
              <font>
               <pointsize>13</pointsize>
@@ -551,7 +551,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="stop_pushButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -594,9 +594,12 @@
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="1" column="1">
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="showMore1_checkBox">
             <property name="text">
              <string>Show more</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -614,7 +617,7 @@
            </spacer>
           </item>
           <item row="0" column="0" colspan="2">
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QTableWidget" name="short_tableWidget">
             <column>
              <property name="text">
               <string>Source No</string>
@@ -671,8 +674,8 @@
         </widget>
         <widget class="QWidget" name="page_2">
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QTableWidget" name="tableWidget_2">
+          <item row="0" column="0" colspan="2">
+           <widget class="QTableWidget" name="full_tableWidget">
             <column>
              <property name="text">
               <string>Start</string>
@@ -758,6 +761,35 @@
               <string>Rel. 2</string>
              </property>
             </column>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>1015</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="showMore2_checkBox">
+            <property name="text">
+             <string>Show more</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
          </layout>

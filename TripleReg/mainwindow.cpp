@@ -309,7 +309,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     reg.sourceTime = ui->sourceTime_spinBox->value();
     reg.repeat = ui->repeat_spinBox->value();
     //copy protocol
-    DatabaseResults result = db.select(new TripleRegProtocolModel,"name='"+ui->protocol_comboBox->currentText()+"'");
+    result = db.select(new TripleRegProtocolModel,"name='"+ui->protocol_comboBox->currentText()+"'");
     if(result.count() != 1) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
         return;
