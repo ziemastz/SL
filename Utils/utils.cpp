@@ -9,6 +9,11 @@ QStringList Utils::availablePorts()
     return ret;
 }
 
+QString Utils::currentDate()
+{
+    return QDateTime::currentDateTime().toString("yyyy-MM-dd");
+}
+
 QString Utils::toString(const QVariant &value)
 {
     QString ret;
@@ -84,4 +89,10 @@ QStringList Utils::toStringList(const QVector<int> &tab) {
     foreach(int val,tab)
         ret << QString::number(val);
     return ret;
+}
+
+QString Utils::generatorMeasurementId(const int &systemId, const int &id)
+{
+    QString yy = QDateTime::currentDateTime().toString("yy");
+    return QString("S%1-%2-%3").arg(systemId,2,10,QLatin1Char('0')).arg(yy).arg(id,3,10,QLatin1Char('0'));
 }

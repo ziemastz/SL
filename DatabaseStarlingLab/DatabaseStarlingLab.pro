@@ -19,6 +19,7 @@ HEADERS += \
     Model/baseModel.h \
     Model/tripleRegMeasurementProtocolModel.h \
     Model/tripleRegMeasurementRegisterModel.h \
+    Model/tripleRegMeasuringSystemModel.h \
     Model/tripleRegProtocolModel.h \
     Model/tripleRegSettingsModel.h \
     Model/userModel.h \

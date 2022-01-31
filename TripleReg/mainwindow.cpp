@@ -283,6 +283,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     }
     TripleRegMeasurementRegisterModel reg;
     TripleRegMeasurementProtocolModel protocol;
+    TripleRegMeasuringSystemModel system;
     DatabaseStarlingLab db;
     int id = db.countMeasurementFrom(QDateTime::currentDateTime().toString("yyyy")+"-01-01");
     if(id == -1){
@@ -290,9 +291,15 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         return;
     }
     id++;
+    DatabaseResults result = db.select(&system,"isDefault=1");
+    if(result.count() !=1 ) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    system.setRecord(result.at(0)->record());
     reg.id = 0;
-    reg.measurementId = QDateTime::currentDateTime().toString("yy")+"."+QString::number(id);
-    reg.measurementDate = QDateTime::currentDateTime().toString("yyyy-MM-dd");
+    reg.measurementId = Utils::generatorMeasurementId(system.id,id);
+    reg.measurementDate = Utils::currentDate();
     reg.nuclide = ui->nuclide_lineEdit->text();
     reg.solutionId = ui->solutionID_lineEdit->text();
     reg.sourceId = ui->sourceID_lineEdit->text();

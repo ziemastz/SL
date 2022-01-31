@@ -88,4 +88,17 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegister (
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
-)
+);
+CREATE TABLE IF NOT EXISTS tripleRegMeasuringSystem (
+	id INTEGER,
+	name TEXT NOT NULL,
+	fullName TEXT NOT NULL,
+	measuremntProcedureName TEXT,
+	location TEXT,
+	isDefault INTEGER NOT NULL,
+	notes TEXT,
+	lastModification TEXT NOT NULL,
+	userId	INTEGER NOT NULL,
+	PRIMARY KEY(id AUTOINCREMENT)
+);
+INSERT OR IGNORE INTO tripleRegMeasuringSystem VALUES(1, 'TDK', 'Układ potrójno–podwójnych koincydencji TDK', 'BW-PP-1: Pomiar aktywności promieniotwórczej radionuklidów metodą potrójno-podwójnych koincydencji TDK. Wyd. 7 z dn. 02.10.2019', '4C', 1, NULL, CURRENT_TIMESTAMP, 1);

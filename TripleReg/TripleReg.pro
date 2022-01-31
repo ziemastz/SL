@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     dialogcreateanaccount.cpp \
+    dialogmeasurementprocess.cpp \
     dialogprotocol.cpp \
     dialogsinginuser.cpp \
     dialogvoltagetable.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     dialogcreateanaccount.h \
+    dialogmeasurementprocess.h \
     dialogprotocol.h \
     dialogsinginuser.h \
     dialogvoltagetable.h \
@@ -25,6 +27,7 @@ HEADERS += \
 
 FORMS += \
     dialogcreateanaccount.ui \
+    dialogmeasurementprocess.ui \
     dialogprotocol.ui \
     dialogsinginuser.ui \
     dialogvoltagetable.ui \

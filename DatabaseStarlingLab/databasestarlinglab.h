@@ -22,6 +22,7 @@
 #include "Model/tripleRegProtocolModel.h"
 #include "Model/tripleRegMeasurementProtocolModel.h"
 #include "Model/tripleRegMeasurementRegisterModel.h"
+#include "Model/tripleRegMeasuringSystemModel.h"
 
 class DatabaseStarlingLab : public QObject
 {
