@@ -8,6 +8,8 @@ DialogMeasurementProcess::DialogMeasurementProcess(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     ui->showMore1_checkBox->setChecked(false);
+
+    connect(&powerSupplyProcessBox,SIGNAL(rejected()),this,SIGNAL(abortedPowerSupplyProcessBox()));
 }
 
 DialogMeasurementProcess::~DialogMeasurementProcess()
@@ -33,6 +35,18 @@ void DialogMeasurementProcess::setParameter(const int &maxSourceNo, const int &m
     ui->currPoint_label->setText("0");
     ui->currRepeat_label->setText("0");
     ui->currTime_progressBar->setValue(0);
+    ui->timeLeft_label->setText(Utils::generatorTimeDHMSString(0));
+    ui->endTime_label->setText(Utils::currentDateTime());
+}
+
+void DialogMeasurementProcess::setTimeLeft(const int &timeLeft)
+{
+    ui->timeLeft_label->setText(Utils::generatorTimeDHMSString(timeLeft));
+}
+
+void DialogMeasurementProcess::setEndTime(const QString &endTime)
+{
+    ui->endTime_label->setText(endTime);
 }
 
 void DialogMeasurementProcess::addRecord(const QStringList &record, const QStringList &fullRecord)
@@ -45,6 +59,45 @@ void DialogMeasurementProcess::updateLastRecord(const QStringList &record, const
 {
     Utils::updateLastItemTableWidget(ui->short_tableWidget,record);
     Utils::updateLastItemTableWidget(ui->full_tableWidget,fullRecord);
+}
+
+void DialogMeasurementProcess::showMessageBox(const QString &title, const QString &text)
+{
+    QMessageBox box;
+    box.setWindowTitle(title);
+    box.setText(text);
+    box.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    box.setDefaultButton(QMessageBox::Ok);
+    if(box.exec() == QMessageBox::Ok) {
+        emit acceptedMessageBox();
+    }else {
+        emit rejectedMessageBox();
+    }
+}
+
+void DialogMeasurementProcess::showPowerSupplyProcessBox()
+{
+    powerSupplyProcessBox.show();
+}
+
+void DialogMeasurementProcess::hidePowerSupplyProcessBox()
+{
+    powerSupplyProcessBox.hide();
+}
+
+void DialogMeasurementProcess::setSetupHVPowerSupplyProcess(const int &maxVoltage)
+{
+    powerSupplyProcessBox.setSetupHV(maxVoltage);
+}
+
+void DialogMeasurementProcess::setStabilizationPowerSupplyProcess(const int &startDelay)
+{
+    powerSupplyProcessBox.setStabilization(startDelay);
+}
+
+void DialogMeasurementProcess::setCurrentStatusPowerSupplyProcess(const int &val)
+{
+    powerSupplyProcessBox.setCurrentState(val);
 }
 
 void DialogMeasurementProcess::on_showMore1_checkBox_stateChanged(int arg1)

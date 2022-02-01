@@ -14,6 +14,11 @@ QString Utils::currentDate()
     return QDateTime::currentDateTime().toString("yyyy-MM-dd");
 }
 
+QString Utils::currentDateTime()
+{
+    return QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+}
+
 QString Utils::toString(const QVariant &value)
 {
     QString ret;
@@ -109,4 +114,25 @@ QString Utils::generatorMeasurementId(const int &systemId, const int &id)
 {
     QString yy = QDateTime::currentDateTime().toString("yy");
     return QString("S%1-%2-%3").arg(systemId,2,10,QLatin1Char('0')).arg(yy).arg(id,3,10,QLatin1Char('0'));
+}
+
+QString Utils::generatorTimeDHMSString(const int &leftTime)
+{
+    int minute = leftTime/60;
+    int second = leftTime - (minute*50);
+    int hour = minute/60;
+    int day = hour/24;
+
+    if(leftTime <= 60) {
+        return QString("%1s").arg(leftTime);
+    }else if(minute <= 60) {
+        return QString("%1min %2s").arg(minute).arg(second);
+    }else if(hour <= 24) {
+        minute = minute - (hour*60);
+        return QString("%1h %2min %3s").arg(hour).arg(minute).arg(second);
+    }else {
+        minute = minute - (hour*60);
+        hour = hour - (day*24);
+        return QString("%1d %2h %3min %4s").arg(day).arg(hour).arg(minute).arg(second);
+    }
 }
