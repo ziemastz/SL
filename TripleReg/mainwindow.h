@@ -13,6 +13,7 @@
 #include "mac3counter.h"
 
 #include "dialogprotocol.h"
+#include "dialogmeasurementprocess.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

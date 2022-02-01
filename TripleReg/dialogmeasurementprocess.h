@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QMessageBox>
 
+#include "databasestarlinglab.h"
+
 #include "dialogpowersupplyprocess.h"
 #include "utils.h"
 
@@ -16,7 +18,7 @@ class DialogMeasurementProcess : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogMeasurementProcess(QWidget *parent = nullptr);
+    explicit DialogMeasurementProcess(const TripleRegMeasurementRegisterModel &measurementRegister, QWidget *parent = nullptr);
     ~DialogMeasurementProcess();
 signals:
     void acceptedMessageBox();

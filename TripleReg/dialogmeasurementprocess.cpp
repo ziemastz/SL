@@ -1,7 +1,7 @@
 #include "dialogmeasurementprocess.h"
 #include "ui_dialogmeasurementprocess.h"
 
-DialogMeasurementProcess::DialogMeasurementProcess(QWidget *parent) :
+DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementRegisterModel &measurementRegister, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogMeasurementProcess)
 {
@@ -10,6 +10,8 @@ DialogMeasurementProcess::DialogMeasurementProcess(QWidget *parent) :
     ui->showMore1_checkBox->setChecked(false);
 
     connect(&powerSupplyProcessBox,SIGNAL(rejected()),this,SIGNAL(abortedPowerSupplyProcessBox()));
+    //configure process
+
 }
 
 DialogMeasurementProcess::~DialogMeasurementProcess()
