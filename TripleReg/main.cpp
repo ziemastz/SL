@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         }
     }
     DatabaseStarlingLab db;
-    db.createDatabase("sl.sql");
+    db.createDatabase(":/db/sl.sql");
 
     DialogSingInUser signIn;
     if(signIn.exec() != QDialog::Accepted) {

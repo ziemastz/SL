@@ -3,4 +3,7 @@
         <file>logo_tripleReg.ico</file>
         <file>logo_tripleReg.png</file>
     </qresource>
+    <qresource prefix="/db">
+        <file>sl.sql</file>
+    </qresource>
 </RCC>

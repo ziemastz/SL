@@ -11,7 +11,41 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
 
     connect(&powerSupplyProcessBox,SIGNAL(rejected()),this,SIGNAL(abortedPowerSupplyProcessBox()));
     //configure process
+    QThread *thread = new QThread();
+    WorkerMeasurementProcess *workerProcess = new WorkerMeasurementProcess(measurementRegister);
 
+    workerProcess->moveToThread(thread);
+    //init
+    connect(thread, SIGNAL(started()), workerProcess, SLOT(init()));
+    connect(workerProcess, SIGNAL(finished), thread, SLOT(quit()));
+
+    //connection worker with dialog
+    connect(workerProcess, SIGNAL(setMeasurementObject(QString,QString,QString)), this, SLOT(setMeasurementObject(QString,QString,QString)));
+    connect(workerProcess, SIGNAL(setParameter(int,int,int,int)), this, SLOT(setParameter(int,int,int,int)));
+
+    connect(workerProcess, SIGNAL(setEndTime(QString)), this, SLOT(setEndTime(QString)));
+    connect(workerProcess, SIGNAL(setTimeLeft(int)), this, SLOT(setTimeLeft(int)));
+
+    connect(workerProcess, SIGNAL(setCurrentSource(int)), this, SLOT(setCurrentSource(int)));
+    connect(workerProcess, SIGNAL(setCurrentPoint(int)), this, SLOT(setCurrentPoint(int)));
+    connect(workerProcess, SIGNAL(setCurrentRepeat(int)), this, SLOT(setCurrentRepeat(int)));
+    connect(workerProcess, SIGNAL(setCurrentTime(int)), this, SLOT(setCurrentTime(int)));
+
+    connect(workerProcess, SIGNAL(showPowerSupplyProcessBox()), this, SLOT(showPowerSupplyProcessBox()));
+    connect(workerProcess, SIGNAL(hidePowerSupplyProcessBox()), this, SLOT(hidePowerSupplyProcessBox()));
+    connect(workerProcess, SIGNAL(setSetupHVPowerSupplyProcess(int)), this, SLOT(setSetupHVPowerSupplyProcess(int)));
+    connect(workerProcess, SIGNAL(setStabilizationPowerSupplyProcess(int)), this, SLOT(setStabilizationPowerSupplyProcess(int)));
+    connect(workerProcess, SIGNAL(setCurrentStatusPowerSupplyProcess(int)), this, SLOT(setCurrentStatusPowerSupplyProcess(int)));
+
+    connect(workerProcess, SIGNAL(showMessageBox(QString,QString)), this, SLOT(showMessageBox(QString,QString)));
+
+    connect(workerProcess, SIGNAL(addRecord(QStringList,QStringList)), this, SLOT(addRecord(QStringList,QStringList)));
+    connect(workerProcess, SIGNAL(updateLastRecord(QStringList,QStringList)), this, SLOT(updateLastRecord(QStringList,QStringList)));
+
+    //delete
+    connect(workerProcess, SIGNAL(finished()), workerProcess, SLOT(deleteLater()));
+    connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    thread->start();
 }
 
 DialogMeasurementProcess::~DialogMeasurementProcess()

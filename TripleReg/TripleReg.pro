@@ -9,6 +9,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    counter.cpp \
+    counts.cpp \
     dialogcreateanaccount.cpp \
     dialogmeasurementprocess.cpp \
     dialogpowersupplyprocess.cpp \
@@ -16,16 +18,20 @@ SOURCES += \
     dialogsinginuser.cpp \
     dialogvoltagetable.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    workermeasurementprocess.cpp
 
 HEADERS += \
+    counter.h \
+    counts.h \
     dialogcreateanaccount.h \
     dialogmeasurementprocess.h \
     dialogpowersupplyprocess.h \
     dialogprotocol.h \
     dialogsinginuser.h \
     dialogvoltagetable.h \
-    mainwindow.h
+    mainwindow.h \
+    workermeasurementprocess.h
 
 FORMS += \
     dialogcreateanaccount.ui \

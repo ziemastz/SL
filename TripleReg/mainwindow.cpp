@@ -298,7 +298,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     }
     system.setRecord(result.at(0)->record());
     reg.id = 0;
-    reg.measurementId = Utils::generatorMeasurementId(system.id,id);
+    reg.measurementId = Utils::generatorMeasurementId(system.number,id);
     reg.measurementDate = Utils::currentDate();
     reg.nuclide = ui->nuclide_lineEdit->text();
     reg.solutionId = ui->solutionID_lineEdit->text();

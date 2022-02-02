@@ -4,6 +4,7 @@
 class TripleRegMeasuringSystemModel : public BaseModel
 {
 public:
+    int number;
     QString name;
     QString fullName;
     QString measuremntProcedureName;
@@ -24,6 +25,7 @@ public:
     void setRecord(const QVariantList& record) {
         int i=0;
         id = record.at(i++).toInt();
+        number = record.at(i++).toInt();
         name = record.at(i++).toString();
         fullName = record.at(i++).toString();
         measuremntProcedureName = record.at(i++).toString();
@@ -36,6 +38,7 @@ public:
     QVariantList record()const {
         QVariantList ret;
         ret << id
+            << number
             << name
             << fullName
             << measuremntProcedureName

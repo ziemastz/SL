@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegister (
 );
 CREATE TABLE IF NOT EXISTS tripleRegMeasuringSystem (
 	id INTEGER,
+	number INTEGER NOT NULL UNIQUE,
 	name TEXT NOT NULL,
 	fullName TEXT NOT NULL,
 	measuremntProcedureName TEXT,
@@ -101,4 +102,30 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasuringSystem (
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
 );
-INSERT OR IGNORE INTO tripleRegMeasuringSystem VALUES(1, 'TDK', 'Układ potrójno–podwójnych koincydencji TDK', 'BW-PP-1: Pomiar aktywności promieniotwórczej radionuklidów metodą potrójno-podwójnych koincydencji TDK. Wyd. 7 z dn. 02.10.2019', '4C', 1, NULL, CURRENT_TIMESTAMP, 1);
+INSERT OR IGNORE INTO tripleRegMeasuringSystem VALUES(1, 1, 'TDK', 'Układ potrójno–podwójnych koincydencji TDK', 'BW-PP-1: Pomiar aktywności promieniotwórczej radionuklidów metodą potrójno-podwójnych koincydencji TDK. Wyd. 7 z dn. 02.10.2019', '4C', 1, NULL, CURRENT_TIMESTAMP, 1);
+CREATE TABLE IF NOT EXISTS tripleRegMeasurementRAW (
+	id INTEGER,
+	measurementId INTEGER NOT NULL,
+	startMeasurementDateTime TEXT NOT NULL,
+	sourceNo INTEGER NOT NULL,,
+	pointTag TEXT NOT NULL,
+	repeat INTEGER NOT NULL,
+	A INTEGER NOT NULL,
+	B INTEGER NOT NULL,
+	C INTEGER NOT NULL,
+	S INTEGER NOT NULL,
+	AB INTEGER NOT NULL,
+	BC INTEGER NOT NULL,
+	AC INTEGER NOT NULL,
+	T INTEGER NOT NULL,
+	D INTEGER NOT NULL,
+	LT INTEGER NOT NULL,
+	CLK_IN INTEGER NOT NULL,
+	voltageCh0 REAL NOT NULL,
+	voltageCh1 REAL NOT NULL,
+	voltageCh2 REAL NOT NULL,
+	voltageCh3 REAL NOT NULL,
+	lastModification TEXT NOT NULL,
+	userId	INTEGER NOT NULL,
+	PRIMARY KEY(id AUTOINCREMENT)
+)

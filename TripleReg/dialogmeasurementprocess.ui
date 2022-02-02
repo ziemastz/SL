@@ -761,6 +761,46 @@
               <string>Rel. 2</string>
              </property>
             </column>
+            <column>
+             <property name="text">
+              <string>Voltage Ch0</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status Ch0</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Voltage Ch1</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status Ch1</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Voltage Ch2</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status Ch2</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Voltage Ch3</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status Ch3</string>
+             </property>
+            </column>
            </widget>
           </item>
           <item row="1" column="0">

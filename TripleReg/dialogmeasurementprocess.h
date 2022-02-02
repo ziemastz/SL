@@ -3,9 +3,11 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QThread>
 
 #include "databasestarlinglab.h"
 
+#include "workermeasurementprocess.h"
 #include "dialogpowersupplyprocess.h"
 #include "utils.h"
 

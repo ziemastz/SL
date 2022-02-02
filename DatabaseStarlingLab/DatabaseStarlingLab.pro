@@ -18,6 +18,7 @@ HEADERS += \
     DatabaseResults.h \
     Model/baseModel.h \
     Model/tripleRegMeasurementProtocolModel.h \
+    Model/tripleRegMeasurementRAWModel.h \
     Model/tripleRegMeasurementRegisterModel.h \
     Model/tripleRegMeasuringSystemModel.h \
     Model/tripleRegProtocolModel.h \
