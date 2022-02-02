@@ -53,6 +53,8 @@ public slots:
 private slots:
     void on_showMore1_checkBox_stateChanged(int arg1);
 
+    void on_stop_pushButton_clicked();
+    void finished();
 private:
     Ui::DialogMeasurementProcess *ui;
     DialogPowerSupplyProcess powerSupplyProcessBox;

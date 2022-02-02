@@ -16,6 +16,7 @@ class WorkerMeasurementProcess : public QObject
     Q_OBJECT
 public:
     explicit WorkerMeasurementProcess(const TripleRegMeasurementRegisterModel &measurementRegister, QObject *parent = nullptr);
+    ~WorkerMeasurementProcess();
 
 signals:
     void finished();

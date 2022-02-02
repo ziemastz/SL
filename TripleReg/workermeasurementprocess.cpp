@@ -4,6 +4,7 @@ WorkerMeasurementProcess::WorkerMeasurementProcess(const TripleRegMeasurementReg
 {
     n1470 = nullptr;
     counter = nullptr;
+    timer = nullptr;
     _measurement = measurementRegister;
     currSource = 0;
     currPoint = 0;
@@ -13,6 +14,21 @@ WorkerMeasurementProcess::WorkerMeasurementProcess(const TripleRegMeasurementReg
     currTime = 0;
     startDelay = 0;
     isAbort = false;
+}
+
+WorkerMeasurementProcess::~WorkerMeasurementProcess()
+{
+    if(timer != nullptr) {
+        timer->stop();
+        delete timer;
+    }
+    if(n1470 != nullptr) {
+        delete n1470;
+    }
+    if(counter != nullptr) {
+        delete counter;
+    }
+
 }
 
 void WorkerMeasurementProcess::init()
@@ -46,7 +62,7 @@ void WorkerMeasurementProcess::init()
 
     timer = new QTimer(0);
     connect(timer, SIGNAL(timeout()), this, SLOT(process()));
-    connect(this, SIGNAL(finished()), timer, SLOT(deleteLater()));
+    connect(this, SIGNAL(finished()), timer, SLOT(stop()));
     timer->start(500);
 }
 
@@ -67,6 +83,8 @@ void WorkerMeasurementProcess::abortedPowerSupplyProcessBox()
 
 void WorkerMeasurementProcess::process()
 {
+    timer->stop();
+
     if(!refreshN1470()) {
         emit finished();
         return;
@@ -176,6 +194,7 @@ void WorkerMeasurementProcess::process()
     }
     emit setEndTime(generatorEndTime());
     emit setTimeLeft(timeLeft());
+    timer->start(500);
 }
 
 bool WorkerMeasurementProcess::refreshN1470()
@@ -185,7 +204,7 @@ bool WorkerMeasurementProcess::refreshN1470()
         DatabaseStarlingLab db;
         TripleRegSettingsModel settings;
         if(!db.select(1,&settings)) {
-            QMessageBox::warning(nullptr,tr("Database"),tr("Reading error from database!\nPlease contact the administrator."));
+            //QMessageBox::warning(new QWidget(),tr("Database"),tr("Reading error from database!\nPlease contact the administrator."));
             return false;
         }
         PowerSupplyN1470::setPort(settings.port);
@@ -194,7 +213,9 @@ bool WorkerMeasurementProcess::refreshN1470()
         startDelay = settings.startDelay;
         n1470 = new PowerSupplyN1470();
         if(!n1470->isConnect()) {
-            QMessageBox::warning(nullptr,tr("Power Supply"),tr("Communication error with the CAEN N1470 power supply.\nPlease check the connectivity parameters."));
+            delete n1470;
+            n1470 = nullptr;
+            //QMessageBox::warning(new QWidget(),tr("Power Supply"),tr("Communication error with the CAEN N1470 power supply.\nPlease check the connectivity parameters."));
             return false;
         }
     }else {
@@ -217,6 +238,8 @@ bool WorkerMeasurementProcess::refreshMAC3()
         mac3->setDeviceName(settings.deviceName.toStdString());
         counter = new Counter(mac3);
         if(!counter->isConnect()) {
+            delete counter;
+            counter = nullptr;
             QMessageBox::warning(nullptr,tr("Counter"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
             return false;
         }

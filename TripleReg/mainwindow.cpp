@@ -309,12 +309,12 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     reg.sourceTime = ui->sourceTime_spinBox->value();
     reg.repeat = ui->repeat_spinBox->value();
     //copy protocol
-    result = db.select(new TripleRegProtocolModel,"name='"+ui->protocol_comboBox->currentText()+"'");
-    if(result.count() != 1) {
+    DatabaseResults result2 = db.select(new TripleRegProtocolModel,"name='"+ui->protocol_comboBox->currentText()+"'");
+    if(result2.count() != 1) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
         return;
     }
-    protocol.setRecord(result.at(0)->record());
+    protocol.setRecord(result2.at(0)->record());
     protocol.id = 0;
     protocol.userId = Settings::loggedUserId();
     if(!db.insert(&protocol)) {

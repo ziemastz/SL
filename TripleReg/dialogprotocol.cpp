@@ -120,8 +120,8 @@ void DialogProtocol::on_save_pushButton_clicked()
     }
 
     protocol.voltageShiftA = ui->shiftA_spinBox->value();
-    protocol.voltageShiftA = ui->shiftA_spinBox->value();
-    protocol.voltageShiftA = ui->shiftA_spinBox->value();
+    protocol.voltageShiftB = ui->shiftB_spinBox->value();
+    protocol.voltageShiftC = ui->shiftC_spinBox->value();
 
     protocol.resolvingTime = ui->resolvingTime_spinBox->value();
     protocol.deadTime = ui->deadTime_spinBox->value();

@@ -17,7 +17,7 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
     workerProcess->moveToThread(thread);
     //init
     connect(thread, SIGNAL(started()), workerProcess, SLOT(init()));
-    connect(workerProcess, SIGNAL(finished), thread, SLOT(quit()));
+    connect(workerProcess, SIGNAL(finished()), thread, SLOT(quit()));
 
     //connection worker with dialog
     connect(workerProcess, SIGNAL(setMeasurementObject(QString,QString,QString)), this, SLOT(setMeasurementObject(QString,QString,QString)));
@@ -38,12 +38,16 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
     connect(workerProcess, SIGNAL(setCurrentStatusPowerSupplyProcess(int)), this, SLOT(setCurrentStatusPowerSupplyProcess(int)));
 
     connect(workerProcess, SIGNAL(showMessageBox(QString,QString)), this, SLOT(showMessageBox(QString,QString)));
+    connect(this, SIGNAL(acceptedMessageBox()), workerProcess, SLOT(acceptedMessageBox()));
+    connect(this, SIGNAL(rejectedMessageBox()), workerProcess, SLOT(rejectedMessageBox()));
+    connect(this, SIGNAL(abortedPowerSupplyProcessBox()), workerProcess, SLOT(abortedPowerSupplyProcessBox()));
 
     connect(workerProcess, SIGNAL(addRecord(QStringList,QStringList)), this, SLOT(addRecord(QStringList,QStringList)));
     connect(workerProcess, SIGNAL(updateLastRecord(QStringList,QStringList)), this, SLOT(updateLastRecord(QStringList,QStringList)));
 
     //delete
     connect(workerProcess, SIGNAL(finished()), workerProcess, SLOT(deleteLater()));
+    connect(workerProcess, SIGNAL(finished()), this, SLOT(finished()));
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     thread->start();
 }
@@ -165,5 +169,17 @@ void DialogMeasurementProcess::on_showMore1_checkBox_stateChanged(int arg1)
     case Qt::Checked:
         ui->stackedWidget->setCurrentIndex(1);
     }
+}
+
+
+void DialogMeasurementProcess::on_stop_pushButton_clicked()
+{
+
+}
+
+void DialogMeasurementProcess::finished()
+{
+    QMessageBox::information(this,tr("Finished"),tr("Finished"));
+    close();
 }
 

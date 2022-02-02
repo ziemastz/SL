@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS tripleRegProtocol (
 INSERT OR IGNORE INTO tripleRegProtocol(id) VALUES (1);
 CREATE TABLE IF NOT EXISTS tripleRegMeasurementProtocol (
 	id	INTEGER,
-	name	TEXT NOT NULL UNIQUE DEFAULT 'Default',
+	name	TEXT NOT NULL DEFAULT 'Default',
 	anodeVoltage	TEXT NOT NULL DEFAULT 2000,
 	voltageShiftA	INTEGER NOT NULL DEFAULT 0,
 	voltageShiftB	INTEGER NOT NULL DEFAULT 0,
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRAW (
 	id INTEGER,
 	measurementId INTEGER NOT NULL,
 	startMeasurementDateTime TEXT NOT NULL,
-	sourceNo INTEGER NOT NULL,,
+	sourceNo INTEGER NOT NULL,
 	pointTag TEXT NOT NULL,
 	repeat INTEGER NOT NULL,
 	A INTEGER NOT NULL,
