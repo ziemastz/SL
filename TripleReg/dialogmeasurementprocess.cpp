@@ -85,6 +85,26 @@ void DialogMeasurementProcess::setEndTime(const QString &endTime)
     ui->endTime_label->setText(endTime);
 }
 
+void DialogMeasurementProcess::setCurrentSource(const int &val)
+{
+    ui->currSource_label->setText(QString::number(val));
+}
+
+void DialogMeasurementProcess::setCurrentPoint(const int &val)
+{
+    ui->currPoint_label->setText(QString::number(val));
+}
+
+void DialogMeasurementProcess::setCurrentRepeat(const int &val)
+{
+    ui->currRepeat_label->setText(QString::number(val));
+}
+
+void DialogMeasurementProcess::setCurrentTime(const int &val)
+{
+    ui->currTime_progressBar->setValue(val);
+}
+
 void DialogMeasurementProcess::addRecord(const QStringList &record, const QStringList &fullRecord)
 {
     Utils::addItemTableWidget(ui->short_tableWidget,record);
