@@ -9,7 +9,8 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
     ui->stackedWidget->setCurrentIndex(0);
     ui->showMore1_checkBox->setChecked(false);
 
-    connect(&powerSupplyProcessBox,SIGNAL(rejected()),this,SIGNAL(abortedPowerSupplyProcessBox()));
+
+
     //configure process
     QThread *thread = new QThread();
     WorkerMeasurementProcess *workerProcess = new WorkerMeasurementProcess(measurementRegister);
@@ -137,27 +138,31 @@ void DialogMeasurementProcess::showMessageBox(const QString &title, const QStrin
 
 void DialogMeasurementProcess::showPowerSupplyProcessBox()
 {
-    powerSupplyProcessBox.show();
+    powerSupplyProcessBox = new DialogPowerSupplyProcess(this);
+    connect(powerSupplyProcessBox,SIGNAL(abortPowerSupplyProcess()),this,SIGNAL(abortedPowerSupplyProcessBox()));
+    powerSupplyProcessBox->show();
+    powerSupplyProcessBox->setFocus();
 }
 
 void DialogMeasurementProcess::hidePowerSupplyProcessBox()
 {
-    powerSupplyProcessBox.hide();
+    powerSupplyProcessBox->close();
+    delete powerSupplyProcessBox;
 }
 
 void DialogMeasurementProcess::setSetupHVPowerSupplyProcess(const int &maxVoltage)
 {
-    powerSupplyProcessBox.setSetupHV(maxVoltage);
+    powerSupplyProcessBox->setSetupHV(maxVoltage);
 }
 
 void DialogMeasurementProcess::setStabilizationPowerSupplyProcess(const int &startDelay)
 {
-    powerSupplyProcessBox.setStabilization(startDelay);
+    powerSupplyProcessBox->setStabilization(startDelay);
 }
 
 void DialogMeasurementProcess::setCurrentStatusPowerSupplyProcess(const int &val)
 {
-    powerSupplyProcessBox.setCurrentState(val);
+    powerSupplyProcessBox->setCurrentState(val);
 }
 
 void DialogMeasurementProcess::on_showMore1_checkBox_stateChanged(int arg1)

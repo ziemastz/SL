@@ -2,9 +2,11 @@
 #define WORKERMEASUREMENTPROCESS_H
 
 #include <QObject>
+#include <QtGlobal>
 #include <QApplication>
 #include <QMessageBox>
 #include <QTimer>
+#include <QElapsedTimer>
 
 #include "settings.h"
 #include "databasestarlinglab.h"

@@ -14,6 +14,9 @@ class DialogPowerSupplyProcess : public QDialog
 public:
     explicit DialogPowerSupplyProcess(QWidget *parent = nullptr);
     ~DialogPowerSupplyProcess();
+signals:
+    void abortPowerSupplyProcess();
+
 public slots:
     void setSetupHV(const int &maxVoltage);
     void setStabilization(const int &startDelay);

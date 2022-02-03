@@ -252,8 +252,8 @@ bool WorkerMeasurementProcess::refreshMAC3()
 bool WorkerMeasurementProcess::turnOffPowerSupply()
 {
     int maxValue = (int)n1470->monVoltCh0() + (int)n1470->monVoltCh1() + (int)n1470->monVoltCh2() + (int)n1470->monVoltCh3();
-    emit setSetupHVPowerSupplyProcess(maxValue);
     emit showPowerSupplyProcessBox();
+    emit setSetupHVPowerSupplyProcess(maxValue);
     //turn off n1470
     n1470->setTurnCh0(false);
     n1470->setTurnCh1(false);
@@ -272,7 +272,7 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
             return false;
         }
 
-        int currValue = (int)n1470->monVoltCh0() + (int)n1470->monVoltCh1() + (int)n1470->monVoltCh2() + (int)n1470->monVoltCh3();
+        int currValue = qRound(n1470->monVoltCh0()) + qRound(n1470->monVoltCh1()) + qRound(n1470->monVoltCh2()) + qRound(n1470->monVoltCh3());
         if(currValue == 0) {
             break;
         }
@@ -291,8 +291,8 @@ bool WorkerMeasurementProcess::turnOnPowerSupply()
     int ch3 = _protocol.focusingVoltage.at(currFocusing-1);
 
     int maxValue = ch0 + ch1 + ch2 + ch3;
-    emit setSetupHVPowerSupplyProcess(maxValue);
     emit showPowerSupplyProcessBox();
+    emit setSetupHVPowerSupplyProcess(maxValue);
     n1470->setTurnCh0(true);
     n1470->setTurnCh1(true);
     n1470->setTurnCh2(true);
@@ -314,7 +314,7 @@ bool WorkerMeasurementProcess::turnOnPowerSupply()
             return false;
         }
 
-        int currValue = (int)n1470->monVoltCh0() + (int)n1470->monVoltCh1() + (int)n1470->monVoltCh2() + (int)n1470->monVoltCh3();
+        int currValue = qRound(n1470->monVoltCh0()) + qRound(n1470->monVoltCh1()) + qRound(n1470->monVoltCh2()) + qRound(n1470->monVoltCh3());
         if(currValue == maxValue) {
             break;
         }
@@ -327,20 +327,21 @@ bool WorkerMeasurementProcess::turnOnPowerSupply()
 
 bool WorkerMeasurementProcess::stabilizationPowerSupply()
 {
-    emit setSetupHVPowerSupplyProcess(startDelay);
     emit showPowerSupplyProcessBox();
-    QTimer timer;
-    timer.start(1000*startDelay);
+    emit setStabilizationPowerSupplyProcess(startDelay);
+    QElapsedTimer time;
+    time.start();
     while(1) {
         QApplication::processEvents();
         if(isAbort) {
             emit hidePowerSupplyProcessBox();
             return false;
         }
-        if(!timer.isActive())
-            break;
-        int curr = (int)((float)((1000*startDelay)-timer.remainingTime())/1000);
+
+        int curr = qRound((float)time.elapsed()/1000);
         emit setCurrentStatusPowerSupplyProcess(curr);
+        if(curr >= startDelay)
+            break;
     }
     emit hidePowerSupplyProcessBox();
     return true;

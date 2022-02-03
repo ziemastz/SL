@@ -57,7 +57,7 @@ private slots:
     void finished();
 private:
     Ui::DialogMeasurementProcess *ui;
-    DialogPowerSupplyProcess powerSupplyProcessBox;
+    DialogPowerSupplyProcess *powerSupplyProcessBox;
 
 
 };

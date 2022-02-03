@@ -34,6 +34,6 @@ void DialogPowerSupplyProcess::setCurrentState(const int &val)
 
 void DialogPowerSupplyProcess::on_abort_pushButton_clicked()
 {
-    reject();
+    emit abortPowerSupplyProcess();
 }
 
