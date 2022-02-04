@@ -56,6 +56,8 @@ private slots:
 
     void on_startNewMeasurement_pushButton_clicked();
 
+    void on_saveSystemInfo_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     UserModel user;

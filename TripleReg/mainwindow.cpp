@@ -96,6 +96,19 @@ void MainWindow::on_settings_pushButton_clicked()
 
     ui->stackedWidget->setCurrentIndex(5);
     ui->tabWidget->setCurrentIndex(0);
+
+    //system info
+    TripleRegMeasuringSystemModel system;
+    if(!db.select(1,&system)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    ui->number_spinBox->setValue(system.number);
+    ui->name_lineEdit->setText(system.name);
+    ui->fullName_plainTextEdit->setPlainText(system.fullName);
+    ui->measurementProcedureName_plainTextEdit->setPlainText(system.measuremntProcedureName);
+    ui->location_lineEdit->setText(system.location);
+    ui->notes_plainTextEdit->setPlainText(system.notes);
 }
 
 void MainWindow::on_saveGeneralSettings_pushButton_clicked()
@@ -336,5 +349,27 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     this->show();
     this->setFocus();
 
+}
+
+
+void MainWindow::on_saveSystemInfo_pushButton_clicked()
+{
+    DatabaseStarlingLab db;
+    TripleRegMeasuringSystemModel system;
+    if(!db.select(1,&system)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    system.number = ui->number_spinBox->value();
+    system.name = ui->name_lineEdit->text();
+    system.fullName = ui->fullName_plainTextEdit->toPlainText();
+    system.measuremntProcedureName = ui->measurementProcedureName_plainTextEdit->toPlainText();
+    system.location = ui->location_lineEdit->text();
+    system.notes = ui->notes_plainTextEdit->toPlainText();
+    system.userId = Settings::loggedUserId();
+    if(!db.update(&system)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
 }
 
