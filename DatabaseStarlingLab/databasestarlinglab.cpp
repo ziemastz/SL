@@ -90,7 +90,7 @@ bool DatabaseStarlingLab::update(BaseModel *model)
     bool ret = true;
     QVariantList newValues = model->record();
     BaseModel *oldModel = model->copy();
-    if(!select(1,oldModel))
+    if(!select(oldModel->id,oldModel))
         return false;
 
     QVariantList oldValues = oldModel->record();
@@ -100,9 +100,9 @@ bool DatabaseStarlingLab::update(BaseModel *model)
         if(oldValues.at(i) != newValues.at(i))
             setNewValues << columnNames.at(i)+"="+Utils::toString(newValues.at(i));
     }
-    if(oldValues.last() != newValues.last())
-        setNewValues << "userId="+Utils::toString(newValues.last());
     if(setNewValues.count() > 0) {
+        if(oldValues.last() != newValues.last())
+            setNewValues << "userId="+Utils::toString(newValues.last());
         setNewValues << "lastModification="+Utils::toString(QDateTime::currentDateTime());
         if(!exec("UPDATE "+model->tableName()+" SET "+setNewValues.join(", ")+" WHERE id="+QString::number(model->id)))
             ret = false;

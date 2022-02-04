@@ -31,6 +31,17 @@ public:
     {
         return record().count();
     }
+
+    bool operator==(const BaseModel &other) const
+    {
+        QVariantList recOther = other.record();
+        QVariantList rec = this->record();
+        for(int i=0; i<rec.count(); i++){
+            if(recOther.at(i) != rec.at(i))
+                return false;
+        }
+        return true;
+    }
 };
 
 #endif // BASEMODEL_H

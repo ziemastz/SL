@@ -18,6 +18,7 @@ public:
     QString linked;
     QString category;
     QString comments;
+    int authorId;
 
     BaseModel* copy() {
         BaseModel* ret = new TripleRegMeasurementRegisterModel;
@@ -45,6 +46,7 @@ public:
         linked = record.at(i++).toString();
         category = record.at(i++).toString();
         comments = record.at(i++).toString();
+        authorId = record.at(i++).toInt();
         lastModification = record.at(i++).toString();
         userId = record.at(i++).toInt();
     }
@@ -65,6 +67,7 @@ public:
             << linked
             << category
             << comments
+            << authorId
             << lastModification
             << userId;
         return ret;

@@ -338,6 +338,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     reg.linked = ui->linked_lineEdit->text();
     reg.category = ui->category_comboBox->currentText();
     reg.comments = ui->comment_plainTextEdit->toPlainText();
+    reg.authorId = Settings::loggedUserId();
     reg.userId = Settings::loggedUserId();
     if(!db.insert(&reg)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));

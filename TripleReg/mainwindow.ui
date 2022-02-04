@@ -1155,7 +1155,7 @@
              </column>
              <column>
               <property name="text">
-               <string>Autor</string>
+               <string>Author</string>
               </property>
              </column>
             </widget>
@@ -2071,7 +2071,10 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="logbook_pushButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Logbook</string>
               </property>
@@ -2138,7 +2141,7 @@
   <tabstop>exit_pushButton</tabstop>
   <tabstop>newMeasurement_pushButton</tabstop>
   <tabstop>measReg_pushButton</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>logbook_pushButton</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>

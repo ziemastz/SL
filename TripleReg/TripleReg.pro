@@ -13,6 +13,7 @@ SOURCES += \
     counts.cpp \
     dialogcreateanaccount.cpp \
     dialogmeasurementprocess.cpp \
+    dialogmeasurementreport.cpp \
     dialogpowersupplyprocess.cpp \
     dialogprotocol.cpp \
     dialogsinginuser.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     counts.h \
     dialogcreateanaccount.h \
     dialogmeasurementprocess.h \
+    dialogmeasurementreport.h \
     dialogpowersupplyprocess.h \
     dialogprotocol.h \
     dialogsinginuser.h \
@@ -36,6 +38,7 @@ HEADERS += \
 FORMS += \
     dialogcreateanaccount.ui \
     dialogmeasurementprocess.ui \
+    dialogmeasurementreport.ui \
     dialogpowersupplyprocess.ui \
     dialogprotocol.ui \
     dialogsinginuser.ui \
