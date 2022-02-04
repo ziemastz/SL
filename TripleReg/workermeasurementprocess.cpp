@@ -86,20 +86,18 @@ void WorkerMeasurementProcess::process()
     timer->stop();
 
     if(!refreshN1470()) {
-        emit finished();
-        return;
+        stateProcess = WorkerMeasurementProcess::Finished;
     }
 
     if(!refreshMAC3()) {
-        emit finished();
-        return;
+        stateProcess = WorkerMeasurementProcess::Finished;
     }
 
     switch(stateProcess) {
     case WorkerMeasurementProcess::Blank: {
         if(!turnOffPowerSupply()) {
-            emit finished();
-            return;
+            stateProcess = WorkerMeasurementProcess::Finished;
+            break;
         }
         emit showMessageBox(tr("Blank measurement"),tr("Please put the blank vial for measurement."));
         stateProcess = PlacingVial;
@@ -111,8 +109,8 @@ void WorkerMeasurementProcess::process()
         currSource++;
         if(currSource<=maxSource) {
             if(!turnOffPowerSupply()) {
-                emit finished();
-                return;
+                stateProcess = WorkerMeasurementProcess::Finished;
+                break;
             }
             emit showMessageBox(tr("Source measurement"),tr("Please put the source vial for measurement.\nSource No: ")+QString::number(currSource));
             stateProcess = WorkerMeasurementProcess::PlacingVial;
@@ -135,12 +133,12 @@ void WorkerMeasurementProcess::process()
         }else {
             emit setCurrentPoint(currPoint);
             if(!turnOnPowerSupply()) {
-                emit finished();
-                return;
+                stateProcess = WorkerMeasurementProcess::Finished;
+                break;
             }
             if(!stabilizationPowerSupply()) {
-                emit finished();
-                return;
+                stateProcess = WorkerMeasurementProcess::Finished;
+                break;
             }
 
             stateProcess = WorkerMeasurementProcess::Start;
@@ -161,6 +159,7 @@ void WorkerMeasurementProcess::process()
     }
     case WorkerMeasurementProcess::Measurement: {
         currTime = (int)counter->realTime();
+        emit setCurrentTime(currTime);
         if(currTime >= maxTime) {
             counter->stop();
             counter->readData();
@@ -175,7 +174,8 @@ void WorkerMeasurementProcess::process()
         setRAW(&raw);
         raw.userId = Settings::loggedUserId();
         if(!db.insert(&raw)) {
-
+            stateProcess = WorkerMeasurementProcess::Finished;
+            break;
         }
         currRepeat++;
         if(currRepeat>maxRepeat) {
@@ -251,7 +251,7 @@ bool WorkerMeasurementProcess::refreshMAC3()
 
 bool WorkerMeasurementProcess::turnOffPowerSupply()
 {
-    int maxValue = (int)n1470->monVoltCh0() + (int)n1470->monVoltCh1() + (int)n1470->monVoltCh2() + (int)n1470->monVoltCh3();
+    int maxValue = qRound(n1470->monVoltCh0() + n1470->monVoltCh1() + n1470->monVoltCh2() + n1470->monVoltCh3());
     emit showPowerSupplyProcessBox();
     emit setSetupHVPowerSupplyProcess(maxValue);
     //turn off n1470
@@ -272,11 +272,11 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
             return false;
         }
 
-        int currValue = qRound(n1470->monVoltCh0()) + qRound(n1470->monVoltCh1()) + qRound(n1470->monVoltCh2()) + qRound(n1470->monVoltCh3());
-        if(currValue == 0) {
+        int currValue = qRound(n1470->monVoltCh0() + n1470->monVoltCh1() + n1470->monVoltCh2() + n1470->monVoltCh3());
+        emit setCurrentStatusPowerSupplyProcess(maxValue - currValue);
+        if(currValue <= 2) {
             break;
         }
-        emit setCurrentStatusPowerSupplyProcess(maxValue - currValue);
         n1470->refresh();
     }
     emit hidePowerSupplyProcessBox();
@@ -314,8 +314,8 @@ bool WorkerMeasurementProcess::turnOnPowerSupply()
             return false;
         }
 
-        int currValue = qRound(n1470->monVoltCh0()) + qRound(n1470->monVoltCh1()) + qRound(n1470->monVoltCh2()) + qRound(n1470->monVoltCh3());
-        if(currValue == maxValue) {
+        int currValue = qRound(n1470->monVoltCh0() + n1470->monVoltCh1() + n1470->monVoltCh2() + n1470->monVoltCh3());
+        if(maxValue - currValue <= 2) {
             break;
         }
         emit setCurrentStatusPowerSupplyProcess(currValue);

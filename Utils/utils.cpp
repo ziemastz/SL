@@ -78,6 +78,7 @@ void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
     for(int j=0;j<columns;j++) {
         table->setItem(rows,j,new QTableWidgetItem(record.at(j)));
     }
+    table->resizeColumnsToContents();
     table->blockSignals(false);
 }
 
@@ -92,6 +93,7 @@ void Utils::updateLastItemTableWidget(QTableWidget *table, const QStringList &re
         table->item(rows-1,j)->setText(record.at(j));
         //table->setItem(rows-1,j,new QTableWidgetItem(record.at(j)));
     }
+    table->resizeColumnsToContents();
     table->blockSignals(false);
 }
 

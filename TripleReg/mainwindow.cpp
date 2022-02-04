@@ -332,7 +332,10 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     }
     QMessageBox::information(this,tr("New measurement"),tr("Succes!"));
     DialogMeasurementProcess dialogMeasurementProcess(reg);
+    this->hide();
     dialogMeasurementProcess.exec();
+    this->show();
+    this->setFocus();
 
 }
 

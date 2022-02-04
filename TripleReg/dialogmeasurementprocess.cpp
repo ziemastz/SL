@@ -179,6 +179,8 @@ void DialogMeasurementProcess::on_showMore1_checkBox_stateChanged(int arg1)
 
 void DialogMeasurementProcess::on_stop_pushButton_clicked()
 {
+    if(QMessageBox::question(this,tr("Stop measuring"),tr("Are you sure you want to stop measuring?")) == QMessageBox::Yes)
+        emit abortedPowerSupplyProcessBox();
 
 }
 
@@ -186,5 +188,22 @@ void DialogMeasurementProcess::finished()
 {
     QMessageBox::information(this,tr("Finished"),tr("Finished"));
     close();
+}
+
+
+void DialogMeasurementProcess::on_showMore2_checkBox_stateChanged(int arg1)
+{
+    switch(arg1){
+    case Qt::Unchecked:
+        ui->stackedWidget->setCurrentIndex(0);
+        break;
+    case Qt::Checked:
+        ui->stackedWidget->setCurrentIndex(1);
+    }
+}
+
+void DialogMeasurementProcess::reject()
+{
+    on_stop_pushButton_clicked();
 }
 
