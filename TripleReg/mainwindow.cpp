@@ -94,7 +94,7 @@ void MainWindow::on_settings_pushButton_clicked()
     ui->secondName_lineEdit->setText(user.secondName);
     ui->lastName_lineEdit->setText(user.lastName);
 
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(4);
     ui->tabWidget->setCurrentIndex(0);
 
     //system info
@@ -373,3 +373,96 @@ void MainWindow::on_saveSystemInfo_pushButton_clicked()
     }
 }
 
+
+void MainWindow::on_measReg_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    DatabaseStarlingLab db;
+    DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel);
+    TripleRegMeasurementRegisterModel reg;
+    UserModel autor;
+    QVector<QStringList> table;
+    QStringList filterNuclide;
+    QStringList filterSolution;
+    filterNuclide << QString("");
+    filterSolution << QString("");
+    for(int i=0; i < results.count(); i++) {
+        reg.setRecord(results.at(i)->record());
+        if(!db.select(reg.userId,&autor)){
+            QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+            return;
+        }
+        if(!filterNuclide.contains(reg.nuclide))
+            filterNuclide << reg.nuclide;
+        if(!filterSolution.contains(reg.solutionId))
+            filterSolution << reg.solutionId;
+        QStringList record;
+        record << reg.measurementId
+               << reg.measurementDate
+               << reg.nuclide
+               << reg.solutionId
+               << reg.sourceId
+               << reg.linked
+               << reg.category
+               << autor.captionShort();
+        table << record;
+    }
+    ui->measurementRegister_tableWidget->setSortingEnabled(false);
+    Utils::clearTableWidget(ui->measurementRegister_tableWidget);
+    foreach(QStringList record, table)
+        Utils::addItemTableWidget(ui->measurementRegister_tableWidget,record);
+    ui->measurementRegister_tableWidget->setSortingEnabled(true);
+
+    ui->filterNuclide_comboBox->blockSignals(true);
+    ui->filterNuclide_comboBox->clear();
+    filterNuclide.sort();
+    ui->filterNuclide_comboBox->addItems(filterNuclide);
+    ui->filterNuclide_comboBox->blockSignals(false);
+
+    ui->filterSolution_comboBox->blockSignals(true);
+    ui->filterSolution_comboBox->clear();
+    filterSolution.sort();
+    ui->filterSolution_comboBox->addItems(filterSolution);
+    ui->filterSolution_comboBox->blockSignals(false);
+}
+
+void MainWindow::on_filterNuclide_comboBox_currentIndexChanged(const QString &arg1)
+{
+    QStringList filterSolution;
+    filterSolution << QString("");
+    for(int i=0; i< ui->measurementRegister_tableWidget->rowCount(); i++) {
+        if(!arg1.isEmpty()){
+            bool match = ui->measurementRegister_tableWidget->item(i,2)->text() == arg1;
+            if(match) {
+                if(!filterSolution.contains(ui->measurementRegister_tableWidget->item(i,3)->text()))
+                    filterSolution << ui->measurementRegister_tableWidget->item(i,3)->text();
+            }
+            ui->measurementRegister_tableWidget->setRowHidden(i,!match);
+        }else {
+            ui->measurementRegister_tableWidget->setRowHidden(i,false);
+            if(!filterSolution.contains(ui->measurementRegister_tableWidget->item(i,3)->text()))
+                filterSolution << ui->measurementRegister_tableWidget->item(i,3)->text();
+        }
+    }
+    ui->filterSolution_comboBox->blockSignals(true);
+    ui->filterSolution_comboBox->clear();
+    filterSolution.sort();
+    ui->filterSolution_comboBox->addItems(filterSolution);
+    ui->filterSolution_comboBox->blockSignals(false);
+}
+
+void MainWindow::on_filterSolution_comboBox_currentIndexChanged(const QString &arg1)
+{
+    for(int i=0; i< ui->measurementRegister_tableWidget->rowCount(); i++) {
+        if(!arg1.isEmpty()){
+            bool match = ui->measurementRegister_tableWidget->item(i,3)->text() == arg1;
+            ui->measurementRegister_tableWidget->setRowHidden(i,!match);
+        }else {
+            if(!ui->filterNuclide_comboBox->currentText().isEmpty()){
+                bool match = ui->measurementRegister_tableWidget->item(i,2)->text() == ui->filterNuclide_comboBox->currentText();
+                ui->measurementRegister_tableWidget->setRowHidden(i,!match);
+            }else
+                ui->measurementRegister_tableWidget->setRowHidden(i,false);
+        }
+    }
+}

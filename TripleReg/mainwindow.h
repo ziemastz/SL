@@ -58,6 +58,12 @@ private slots:
 
     void on_saveSystemInfo_pushButton_clicked();
 
+    void on_measReg_pushButton_clicked();
+
+    void on_filterNuclide_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_filterSolution_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     UserModel user;

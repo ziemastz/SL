@@ -18,6 +18,9 @@ DialogCreateAnAccount::~DialogCreateAnAccount()
 void DialogCreateAnAccount::on_username_lineEdit_editingFinished()
 {
     //cheack avaible username
+    /**
+     * @brief db
+     */
     DatabaseStarlingLab db;
 
     switch(db.isAvailableUsername(ui->username_lineEdit->text())) {
