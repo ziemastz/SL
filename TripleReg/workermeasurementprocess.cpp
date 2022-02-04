@@ -83,7 +83,7 @@ void WorkerMeasurementProcess::abortedPowerSupplyProcessBox()
 
 void WorkerMeasurementProcess::process()
 {
-    timer->stop();
+    //timer->stop();
 
     if(!refreshN1470()) {
         stateProcess = WorkerMeasurementProcess::Finished;
@@ -194,7 +194,7 @@ void WorkerMeasurementProcess::process()
     }
     emit setEndTime(generatorEndTime());
     emit setTimeLeft(timeLeft());
-    timer->start(500);
+   // timer->start(500);
 }
 
 bool WorkerMeasurementProcess::refreshN1470()

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QThread>
+#include <QKeyEvent>
 
 #include "databasestarlinglab.h"
 
@@ -51,17 +52,14 @@ public slots:
     void setCurrentStatusPowerSupplyProcess(const int &val);
 
 private slots:
-    void on_showMore1_checkBox_stateChanged(int arg1);
-
     void on_stop_pushButton_clicked();
     void finished();
-    void on_showMore2_checkBox_stateChanged(int arg1);
-    void reject();
+    void keyPressEvent(QKeyEvent *e);
+    void on_showMore_checkBox_stateChanged(int arg1);
+
 private:
     Ui::DialogMeasurementProcess *ui;
     DialogPowerSupplyProcess *powerSupplyProcessBox;
-
-
 };
 
 #endif // DIALOGMEASUREMENTPROCESS_H

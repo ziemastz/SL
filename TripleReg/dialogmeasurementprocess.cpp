@@ -7,9 +7,7 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
-    ui->showMore1_checkBox->setChecked(false);
-
-
+    ui->showMore_checkBox->setChecked(false);
 
     //configure process
     QThread *thread = new QThread();
@@ -165,33 +163,27 @@ void DialogMeasurementProcess::setCurrentStatusPowerSupplyProcess(const int &val
     powerSupplyProcessBox->setCurrentState(val);
 }
 
-void DialogMeasurementProcess::on_showMore1_checkBox_stateChanged(int arg1)
-{
-    switch(arg1){
-    case Qt::Unchecked:
-        ui->stackedWidget->setCurrentIndex(0);
-        break;
-    case Qt::Checked:
-        ui->stackedWidget->setCurrentIndex(1);
-    }
-}
-
-
 void DialogMeasurementProcess::on_stop_pushButton_clicked()
 {
-    if(QMessageBox::question(this,tr("Stop measuring"),tr("Are you sure you want to stop measuring?")) == QMessageBox::Yes)
-        emit abortedPowerSupplyProcessBox();
-
+    if(QMessageBox::question(this,tr("Stop measuring"),tr("Are you sure you want to stop measuring?")) == QMessageBox::Yes) {
+        emit rejectedMessageBox();
+    }
 }
 
 void DialogMeasurementProcess::finished()
 {
-    QMessageBox::information(this,tr("Finished"),tr("Finished"));
+    QMessageBox::information(this,tr("Finished"),tr("The measurement is finished."));
     close();
 }
 
+void DialogMeasurementProcess::keyPressEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Escape)
+        return;
+    QDialog::keyPressEvent(e);
+}
 
-void DialogMeasurementProcess::on_showMore2_checkBox_stateChanged(int arg1)
+void DialogMeasurementProcess::on_showMore_checkBox_stateChanged(int arg1)
 {
     switch(arg1){
     case Qt::Unchecked:
@@ -201,9 +193,3 @@ void DialogMeasurementProcess::on_showMore2_checkBox_stateChanged(int arg1)
         ui->stackedWidget->setCurrentIndex(1);
     }
 }
-
-void DialogMeasurementProcess::reject()
-{
-    on_stop_pushButton_clicked();
-}
-

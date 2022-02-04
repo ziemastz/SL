@@ -276,7 +276,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         QMessageBox::warning(this,tr("New measurement"),tr("Please provide nuclide and source ID."));
         return;
     }
-    if(ui->sourceNo_spinBox->value() == 0 ||
+    if(ui->sourceNo_spinBox->value() == 0 &&
        !ui->isBlank_checkBox->isChecked()) {
         QMessageBox::warning(this,tr("New measurement"),tr("There are no measurement objects.\nEnter the measurement objects (e.g. blank, source)."));
         return;
@@ -330,7 +330,6 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
         return;
     }
-    QMessageBox::information(this,tr("New measurement"),tr("Succes!"));
     DialogMeasurementProcess dialogMeasurementProcess(reg);
     this->hide();
     dialogMeasurementProcess.exec();

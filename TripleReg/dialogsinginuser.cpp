@@ -6,7 +6,6 @@ DialogSingInUser::DialogSingInUser(QWidget *parent) :
     ui(new Ui::DialogSingInUser)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     this->setFocus();
     ui->username_lineEdit->setFocus();
 }
@@ -20,7 +19,6 @@ void DialogSingInUser::on_exit_pushButton_clicked()
 {
     close();
 }
-
 
 void DialogSingInUser::on_forgotPassword_pushButton_clicked()
 {
@@ -36,7 +34,6 @@ void DialogSingInUser::on_signUp_pushButton_clicked()
         QMessageBox::information(this,tr("Account"),tr("Congratulations, the new user has been successfully created.\nPlease sing in now with your username and password."));
     }
 }
-
 
 void DialogSingInUser::on_signIn_pushButton_clicked()
 {
