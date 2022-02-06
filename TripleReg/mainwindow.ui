@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>967</width>
-    <height>554</height>
+    <width>1079</width>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
           <string notr="true">border-color: rgb(0, 170, 0);</string>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">
@@ -1013,7 +1013,6 @@
               <widget class="QPushButton" name="startNewMeasurement_pushButton">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -1116,7 +1115,7 @@
               <bool>false</bool>
              </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
-              <number>23</number>
+              <number>24</number>
              </attribute>
              <column>
               <property name="text">
@@ -1156,6 +1155,11 @@
              <column>
               <property name="text">
                <string>Author</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Approved</string>
               </property>
              </column>
             </widget>
@@ -1206,7 +1210,7 @@
            <item row="0" column="0" colspan="2">
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>2</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
@@ -1561,7 +1565,6 @@
                 <widget class="QPushButton" name="saveGeneralSettings_pushButton">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1767,7 +1770,6 @@
                 <widget class="QPushButton" name="saveUserDatapushButton">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1795,7 +1797,7 @@
               <attribute name="title">
                <string>System</string>
               </attribute>
-              <layout class="QGridLayout" name="gridLayout_22">
+              <layout class="QGridLayout" name="gridLayout_24">
                <item row="0" column="0" rowspan="2">
                 <spacer name="horizontalSpacer_10">
                  <property name="orientation">
@@ -1852,7 +1854,14 @@
                    </widget>
                   </item>
                   <item row="1" column="1" colspan="3">
-                   <widget class="QPlainTextEdit" name="fullName_plainTextEdit"/>
+                   <widget class="QPlainTextEdit" name="fullName_plainTextEdit">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                   </widget>
                   </item>
                   <item row="2" column="0">
                    <widget class="QLabel" name="label_45">
@@ -1862,10 +1871,20 @@
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                     </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
+                    </property>
                    </widget>
                   </item>
                   <item row="2" column="1" colspan="3">
-                   <widget class="QPlainTextEdit" name="measurementProcedureName_plainTextEdit"/>
+                   <widget class="QPlainTextEdit" name="measurementProcedureName_plainTextEdit">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                   </widget>
                   </item>
                   <item row="3" column="0">
                    <widget class="QLabel" name="label_46">
@@ -1911,7 +1930,14 @@
                    </widget>
                   </item>
                   <item row="4" column="1" colspan="3">
-                   <widget class="QPlainTextEdit" name="notes_plainTextEdit"/>
+                   <widget class="QPlainTextEdit" name="notes_plainTextEdit">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                   </widget>
                   </item>
                   <item row="0" column="1">
                    <widget class="QSpinBox" name="number_spinBox">
@@ -1925,6 +1951,19 @@
                   </item>
                  </layout>
                 </widget>
+               </item>
+               <item row="2" column="1">
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="0" column="2" rowspan="2">
                 <spacer name="horizontalSpacer_11">
@@ -1943,7 +1982,190 @@
                 <widget class="QPushButton" name="saveSystemInfo_pushButton">
                  <property name="font">
                   <font>
-                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_4">
+              <attribute name="title">
+               <string>Lab</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_29">
+               <item row="0" column="0" rowspan="2">
+                <spacer name="horizontalSpacer_15">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>144</width>
+                   <height>318</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="groupBox_20">
+                 <property name="title">
+                  <string>Laboratory information</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_25">
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_64">
+                    <property name="text">
+                     <string>ZIP / Postal code</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_65">
+                    <property name="text">
+                     <string>Address line 1</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_66">
+                    <property name="text">
+                     <string>Address line 2</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="3">
+                   <widget class="QLineEdit" name="city_lineEdit"/>
+                  </item>
+                  <item row="4" column="1" colspan="3">
+                   <widget class="QLineEdit" name="addressLine2_lineEdit"/>
+                  </item>
+                  <item row="7" column="3">
+                   <widget class="QLineEdit" name="email_lineEdit"/>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_67">
+                    <property name="text">
+                     <string>Phone</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="2">
+                   <widget class="QLabel" name="label_68">
+                    <property name="text">
+                     <string>City</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1" colspan="3">
+                   <widget class="QLineEdit" name="addressLine1_lineEdit"/>
+                  </item>
+                  <item row="7" column="2">
+                   <widget class="QLabel" name="label_69">
+                    <property name="text">
+                     <string>E-mail</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_70">
+                    <property name="text">
+                     <string>Institute</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_71">
+                    <property name="text">
+                     <string>Department</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_72">
+                    <property name="text">
+                     <string>Country</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QLineEdit" name="zip_lineEdit"/>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QLineEdit" name="phone_lineEdit"/>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_73">
+                    <property name="text">
+                     <string>Lab</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1" colspan="3">
+                   <widget class="QLineEdit" name="lab_lineEdit"/>
+                  </item>
+                  <item row="1" column="1" colspan="3">
+                   <widget class="QLineEdit" name="department_lineEdit"/>
+                  </item>
+                  <item row="0" column="1" colspan="3">
+                   <widget class="QLineEdit" name="institute_lineEdit"/>
+                  </item>
+                  <item row="6" column="1" colspan="3">
+                   <widget class="QLineEdit" name="country_lineEdit"/>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="2" rowspan="2">
+                <spacer name="horizontalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>144</width>
+                   <height>318</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="saveLab_pushButton">
+                 <property name="font">
+                  <font>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1953,14 +2175,14 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <spacer name="verticalSpacer_4">
+                <spacer name="verticalSpacer_6">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>20</width>
-                   <height>40</height>
+                   <height>59</height>
                   </size>
                  </property>
                 </spacer>
@@ -2012,7 +2234,6 @@
         <property name="font">
          <font>
           <pointsize>26</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>

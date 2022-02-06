@@ -86,6 +86,8 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegister (
 	category TEXT NOT NULL,
 	comments TEXT,
 	authorId INTEGER NOT NULL,
+	approvedId INTEGER,
+	approvedDateTime TEXT,
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
