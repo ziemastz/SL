@@ -16,6 +16,7 @@ SOURCES += \
     dialogmeasurementreport.cpp \
     dialogpowersupplyprocess.cpp \
     dialogprotocol.cpp \
+    dialogreportprinter.cpp \
     dialogsinginuser.cpp \
     dialogvoltagetable.cpp \
     main.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     dialogmeasurementreport.h \
     dialogpowersupplyprocess.h \
     dialogprotocol.h \
+    dialogreportprinter.h \
     dialogsinginuser.h \
     dialogvoltagetable.h \
     mainwindow.h \
@@ -41,6 +43,7 @@ FORMS += \
     dialogmeasurementreport.ui \
     dialogpowersupplyprocess.ui \
     dialogprotocol.ui \
+    dialogreportprinter.ui \
     dialogsinginuser.ui \
     dialogvoltagetable.ui \
     mainwindow.ui
