@@ -18,6 +18,7 @@
 #include "DatabaseResults.h"
 #include "Model/baseModel.h"
 #include "Model/userModel.h"
+#include "Model/labInfoModel.h"
 #include "Model/tripleRegSettingsModel.h"
 #include "Model/tripleRegProtocolModel.h"
 #include "Model/tripleRegMeasurementProtocolModel.h"

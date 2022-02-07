@@ -51,6 +51,14 @@ QString Utils::toString(const QVariant &value)
     return ret;
 }
 
+QString Utils::toString(const QVector<int> &tab)
+{
+    QStringList ret;
+    foreach(int val,tab)
+        ret << QString::number(val);
+    return ret.join("|");
+}
+
 QStringList Utils::toStringList(const QVariantList &values)
 {
     QStringList ret;

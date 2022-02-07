@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegister (
 	category TEXT NOT NULL,
 	comments TEXT,
 	authorId INTEGER NOT NULL,
-	approvedId INTEGER,
-	approvedDateTime TEXT,
+        acceptedId INTEGER,
+        acceptedDateTime TEXT,
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
@@ -131,4 +131,21 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRAW (
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
-)
+);
+CREATE TABLE IF NOT EXISTS labInfo (
+	id INTEGER,
+	institute TEXT,
+	deparment TEXT,
+	lab TEXT,
+	addressLine1 TEXT,
+	addressLine2 TEXT,
+	zip TEXT,
+	city TEXT,
+	country TEXT,
+	phone TEXT,
+	email TEXT,
+	lastModification TEXT NOT NULL,
+	userId	INTEGER NOT NULL,
+	PRIMARY KEY(id AUTOINCREMENT)
+);
+INSERT OR IGNORE INTO labInfo VALUES(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1);

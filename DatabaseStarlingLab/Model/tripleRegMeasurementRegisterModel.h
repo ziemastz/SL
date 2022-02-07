@@ -19,8 +19,8 @@ public:
     QString category;
     QString comments;
     int authorId;
-    int approvedId;
-    QString approvedDateTime;
+    int acceptedId;
+    QString acceptedDateTime;
 
     BaseModel* copy() {
         BaseModel* ret = new TripleRegMeasurementRegisterModel;
@@ -49,8 +49,8 @@ public:
         category = record.at(i++).toString();
         comments = record.at(i++).toString();
         authorId = record.at(i++).toInt();
-        approvedId = record.at(i++).toInt();
-        approvedDateTime = record.at(i++).toString();
+        acceptedId = record.at(i++).toInt();
+        acceptedDateTime = record.at(i++).toString();
         lastModification = record.at(i++).toString();
         userId = record.at(i++).toInt();
     }
@@ -72,8 +72,8 @@ public:
             << category
             << comments
             << authorId
-            << approved
-            << approvedDateTime
+            << acceptedId
+            << acceptedDateTime
             << lastModification
             << userId;
         return ret;

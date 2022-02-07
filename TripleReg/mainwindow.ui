@@ -1013,6 +1013,7 @@
               <widget class="QPushButton" name="startNewMeasurement_pushButton">
                <property name="font">
                 <font>
+                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -1210,7 +1211,7 @@
            <item row="0" column="0" colspan="2">
             <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
-              <number>3</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
@@ -1565,6 +1566,7 @@
                 <widget class="QPushButton" name="saveGeneralSettings_pushButton">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1770,6 +1772,7 @@
                 <widget class="QPushButton" name="saveUserDatapushButton">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1982,6 +1985,7 @@
                 <widget class="QPushButton" name="saveSystemInfo_pushButton">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -2166,6 +2170,7 @@
                 <widget class="QPushButton" name="saveLab_pushButton">
                  <property name="font">
                   <font>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -2234,6 +2239,7 @@
         <property name="font">
          <font>
           <pointsize>26</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>

@@ -109,6 +109,23 @@ void MainWindow::on_settings_pushButton_clicked()
     ui->measurementProcedureName_plainTextEdit->setPlainText(system.measuremntProcedureName);
     ui->location_lineEdit->setText(system.location);
     ui->notes_plainTextEdit->setPlainText(system.notes);
+
+    //load lab infi
+    LabInfoModel lab;
+    if(!db.select(1,&lab)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    ui->institute_lineEdit->setText(lab.institute);
+    ui->department_lineEdit->setText(lab.deparment);
+    ui->lab_lineEdit->setText(lab.lab);
+    ui->addressLine1_lineEdit->setText(lab.addressLine1);
+    ui->addressLine2_lineEdit->setText(lab.addressLine2);
+    ui->zip_lineEdit->setText(lab.zip);
+    ui->city_lineEdit->setText(lab.city);
+    ui->country_lineEdit->setText(lab.country);
+    ui->phone_lineEdit->setText(lab.phone);
+    ui->email_lineEdit->setText(lab.email);
 }
 
 void MainWindow::on_saveGeneralSettings_pushButton_clicked()
@@ -467,3 +484,41 @@ void MainWindow::on_filterSolution_comboBox_currentIndexChanged(const QString &a
         }
     }
 }
+
+void MainWindow::on_saveLab_pushButton_clicked()
+{
+    DatabaseStarlingLab db;
+    LabInfoModel lab;
+    lab.id = 1;
+    lab.institute = ui->institute_lineEdit->text();
+    lab.deparment = ui->department_lineEdit->text();
+    lab.lab = ui->lab_lineEdit->text();
+    lab.addressLine1 = ui->addressLine1_lineEdit->text();
+    lab.addressLine2 = ui->addressLine2_lineEdit->text();
+    lab.zip = ui->zip_lineEdit->text();
+    lab.city = ui->city_lineEdit->text();
+    lab.country = ui->country_lineEdit->text();
+    lab.phone = ui->phone_lineEdit->text();
+    lab.email = ui->email_lineEdit->text();
+    lab.userId = Settings::loggedUserId();
+    if(!db.update(&lab)) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+}
+
+void MainWindow::on_measurementRegister_tableWidget_cellDoubleClicked(int row, int column)
+{
+    QString selectedMeasId = ui->measurementRegister_tableWidget->item(row,0)->text();
+    DatabaseStarlingLab db;
+    TripleRegMeasurementRegisterModel measReg;
+    DatabaseResults result = db.select(&measReg,"measurementId='"+selectedMeasId+"'");
+    if(result.count() != 1) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        return;
+    }
+    measReg.setRecord(result.at(0)->record());
+    DialogMeasurementReport dialogReport(measReg);
+
+}
+

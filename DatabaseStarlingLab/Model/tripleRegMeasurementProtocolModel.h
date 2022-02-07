@@ -3,20 +3,20 @@
 #include "baseModel.h"
 class TripleRegMeasurementProtocolModel : public BaseModel
 {
-private:
-    QVector<int> toVectorInt(const QString& str) const {
+    QVector<int> toVectorInt(const QString& str) {
         QVector<int> ret;
         QStringList list = str.split("|");
         foreach(QString val, list)
             ret << val.toInt();
         return ret;
     }
-    QString toString(const QVector<int>& tab) const {
+    QString toString(const QVector<int>& tab) {
         QStringList ret;
         foreach(int val,tab)
             ret << QString::number(val);
         return ret.join("|");
     }
+
 public:
     QString name;
     QVector<int> anodaVoltage;

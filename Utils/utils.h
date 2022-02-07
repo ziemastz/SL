@@ -15,6 +15,7 @@ public:
     static QString currentDateTime();
 
     static QString toString(const QVariant& value);
+    static QString toString(const QVector<int>& tab);
     static QStringList toStringList(const QVariantList& values);
     static QVector<int> toVectorInt(const QString& str);
     static QStringList toStringList(const QVector<int>& tab);

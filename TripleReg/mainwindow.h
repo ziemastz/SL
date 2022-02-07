@@ -14,6 +14,7 @@
 
 #include "dialogprotocol.h"
 #include "dialogmeasurementprocess.h"
+#include "dialogmeasurementreport.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -63,6 +64,10 @@ private slots:
     void on_filterNuclide_comboBox_currentIndexChanged(const QString &arg1);
 
     void on_filterSolution_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_saveLab_pushButton_clicked();
+
+    void on_measurementRegister_tableWidget_cellDoubleClicked(int row, int column);
 
 private:
     Ui::MainWindow *ui;
