@@ -187,7 +187,8 @@ void WorkerMeasurementProcess::process()
         break;
     }
     case WorkerMeasurementProcess::Finished: {
-        turnOffPowerSupply();
+        if(n1470 != nullptr)
+            turnOffPowerSupply();
         emit finished();
         break;
     }
@@ -240,7 +241,7 @@ bool WorkerMeasurementProcess::refreshMAC3()
         if(!counter->isConnect()) {
             delete counter;
             counter = nullptr;
-            QMessageBox::warning(nullptr,tr("Counter"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
+            //QMessageBox::warning(nullptr,tr("Counter"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
             return false;
         }
     }else {

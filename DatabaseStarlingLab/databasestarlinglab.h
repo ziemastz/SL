@@ -29,6 +29,12 @@
 class DatabaseStarlingLab : public QObject
 {
 public:
+    enum Order {
+        NoOrder = 0,
+        ASC = 1,
+        DESC = 2
+    };
+
     DatabaseStarlingLab();
     void createDatabase(const QString &configFile);
 
@@ -37,13 +43,17 @@ public:
 
     int isAvailableProtocolName(const QString &protocolName);
 
-    int countMeasurementFrom(const QString &date);
+    int countMeasurementAt(const int &year);
+    bool addCountMeasurementAt(const int &year);
+    bool increaseCountMeasurementAt(const int &year);
 
     bool select(const int &id, BaseModel *model);
-    DatabaseResults select(BaseModel *model, const QString &filter = QString(), const int &limit = 0, const int &offset = 0);
+    DatabaseResults select(BaseModel *model, const QString &filter = QString(),const Order &sort = Order::NoOrder, const int &limit = 0, const int &offset = 0);
     bool update(BaseModel *model);
     bool insert(BaseModel *model);
     bool remove(BaseModel *model);
+    bool remove(BaseModel *model, const int &loggedUserId);
+    bool remove(BaseModel *model, const QString &filter);
 
     int lastInsertId() const;
 

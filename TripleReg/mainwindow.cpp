@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-    loadProtocolName();
+
 }
 
 MainWindow::~MainWindow()
@@ -286,18 +286,6 @@ void MainWindow::on_editProtocol_pushButton_clicked()
     protocolDialog.exec();
 }
 
-void MainWindow::loadProtocolName()
-{
-    DatabaseStarlingLab db;
-    TripleRegProtocolModel protocol;
-    DatabaseResults result = db.select(&protocol);
-    for(int i=0; i<result.count(); i++){
-        protocol.setRecord(result.at(i)->record());
-        ui->protocol_comboBox->addItem(protocol.name);
-    }
-}
-
-
 void MainWindow::on_startNewMeasurement_pushButton_clicked()
 {
     //check data
@@ -315,10 +303,13 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     TripleRegMeasurementProtocolModel protocol;
     TripleRegMeasuringSystemModel system;
     DatabaseStarlingLab db;
-    int id = db.countMeasurementFrom(QDateTime::currentDateTime().toString("yyyy")+"-01-01");
+    int id = db.countMeasurementAt(QDateTime::currentDateTime().date().year());
     if(id == -1){
-        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
-        return;
+        if(!db.addCountMeasurementAt(QDateTime::currentDateTime().date().year())) {
+            QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+            return;
+        }
+        id=0;
     }
     id++;
     DatabaseResults result = db.select(&system,"isDefault=1");
@@ -361,6 +352,14 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     reg.userId = Settings::loggedUserId();
     if(!db.insert(&reg)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        //remove protocol
+        db.remove(&protocol);
+        return;
+    }
+    if(!db.increaseCountMeasurementAt(QDateTime::currentDateTime().date().year())) {
+        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+        db.remove(&protocol);
+        db.remove(&reg);
         return;
     }
     DialogMeasurementProcess dialogMeasurementProcess(reg);
@@ -397,8 +396,9 @@ void MainWindow::on_saveSystemInfo_pushButton_clicked()
 void MainWindow::on_measReg_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    this->setFocus();
     DatabaseStarlingLab db;
-    DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel);
+    DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel,QString(),DatabaseStarlingLab::Order::DESC);
     TripleRegMeasurementRegisterModel reg;
     UserModel autor;
     UserModel acceptedUser;
@@ -408,6 +408,7 @@ void MainWindow::on_measReg_pushButton_clicked()
     filterNuclide << QString("");
     filterSolution << QString("");
     for(int i=0; i < results.count(); i++) {
+        QApplication::processEvents();
         reg.setRecord(results.at(i)->record());
         if(!db.select(reg.userId,&autor)){
             QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
@@ -532,6 +533,7 @@ void MainWindow::on_measurementRegister_tableWidget_cellDoubleClicked(int row, i
     measReg.setRecord(result.at(0)->record());
     DialogMeasurementReport *dialogReport = new DialogMeasurementReport(measReg,this);
     connect(dialogReport,SIGNAL(rejected()),dialogReport,SLOT(deleteLater()));
+    connect(dialogReport,SIGNAL(rejected()),this,SLOT(on_measReg_pushButton_clicked()));
     dialogReport->show();
+    dialogReport->load();
 }
-

@@ -72,7 +72,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
     UserModel user;
-
-    void loadProtocolName();
 };
 #endif // MAINWINDOW_H

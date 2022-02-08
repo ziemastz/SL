@@ -43,14 +43,28 @@ int DatabaseStarlingLab::isAvailableProtocolName(const QString &protocolName)
     return -1;
 }
 
-int DatabaseStarlingLab::countMeasurementFrom(const QString &date)
+int DatabaseStarlingLab::countMeasurementAt(const int &year)
 {
-    exec("SELECT COUNT(*) FROM tripleRegMeasurementRegister WHERE measurementDate > '"+date+"'");
+    exec("SELECT number FROM tripleRegMeasurementRegisterCounter WHERE year="+QString::number(year));
     if(_records.count() == 1) {
         return _records.at(0).at(0).toInt();
     }else {
         return -1;
     }
+}
+
+bool DatabaseStarlingLab::addCountMeasurementAt(const int &year)
+{
+    return exec("INSERT INTO tripleRegMeasurementRegisterCounter VALUES("+QString::number(year)+", 0)");
+}
+
+bool DatabaseStarlingLab::increaseCountMeasurementAt(const int &year)
+{
+    int current = countMeasurementAt(year);
+    if(current == -1)
+        return false;
+    current++;
+    return exec("UPDATE tripleRegMeasurementRegisterCounter SET number="+QString::number(current)+" WHERE year="+QString::number(year));
 }
 
 bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
@@ -64,12 +78,24 @@ bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
     return false;
 }
 
-DatabaseResults DatabaseStarlingLab::select(BaseModel *model, const QString &filter, const int &limit, const int &offset)
+DatabaseResults DatabaseStarlingLab::select(BaseModel *model, const QString &filter,const Order &sort, const int &limit, const int &offset)
 {
     DatabaseResults ret;
     QString statement = "SELECT * FROM "+model->tableName();
     if(!filter.isEmpty())
         statement.append(" WHERE "+filter);
+
+    switch (sort) {
+    case DatabaseStarlingLab::NoOrder:
+        break;
+    case DatabaseStarlingLab::ASC:
+        statement.append(" ORDER BY 1 ASC");
+        break;
+    case DatabaseStarlingLab::DESC:
+        statement.append(" ORDER BY 1 DESC");
+        break;
+
+    }
 
     if(limit !=0)
         statement.append(" LIMIT "+QString::number(limit)+" OFFSET "+QString::number(offset));
@@ -128,6 +154,17 @@ bool DatabaseStarlingLab::insert(BaseModel *model)
 bool DatabaseStarlingLab::remove(BaseModel *model)
 {
     return exec("DELETE FROM "+model->tableName()+" WHERE id="+QString::number(model->id));
+}
+
+bool DatabaseStarlingLab::remove(BaseModel *model, const int &loggedUserId)
+{
+    //logbook add action delete
+    return remove(model);
+}
+
+bool DatabaseStarlingLab::remove(BaseModel *model, const QString &filter)
+{
+    return exec("DELETE FROM "+model->tableName()+" WHERE "+filter);
 }
 
 int DatabaseStarlingLab::lastInsertId() const

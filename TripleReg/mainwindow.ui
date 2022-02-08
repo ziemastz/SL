@@ -953,16 +953,6 @@
                   <string>Characteristic</string>
                  </property>
                 </item>
-                <item>
-                 <property name="text">
-                  <string>Research</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Unqualified</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item row="1" column="0">
@@ -1081,10 +1071,18 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QComboBox" name="filterNuclide_comboBox"/>
+               <widget class="QComboBox" name="filterNuclide_comboBox">
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToContents</enum>
+                </property>
+               </widget>
               </item>
               <item row="0" column="3">
-               <widget class="QComboBox" name="filterSolution_comboBox"/>
+               <widget class="QComboBox" name="filterSolution_comboBox">
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToContents</enum>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>

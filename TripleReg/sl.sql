@@ -92,6 +92,11 @@ CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegister (
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
 );
+CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegisterCounter (
+	year INTEGER,
+	number INTEGER,
+	PRIMARY KEY(year)
+);
 CREATE TABLE IF NOT EXISTS tripleRegMeasuringSystem (
 	id INTEGER,
 	number INTEGER NOT NULL UNIQUE,

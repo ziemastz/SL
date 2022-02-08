@@ -7,7 +7,6 @@ DialogMeasurementReport::DialogMeasurementReport(const TripleRegMeasurementRegis
 {
     _reg = measReg;
     ui->setupUi(this);
-    load();
 }
 
 DialogMeasurementReport::~DialogMeasurementReport()
@@ -33,7 +32,7 @@ void DialogMeasurementReport::load()
     ui->sourceTime_spinBox->setValue(_reg.sourceTime);
     ui->sourceNo_spinBox->setValue(_reg.sourceNo);
     ui->linked_lineEdit->setText(_reg.linked);
-    ui->category_lineEdit->setText(_reg.category);
+    ui->category_comboBox->setCurrentText(_reg.category);
     ui->comments_plainTextEdit->setPlainText(_reg.comments);
     DatabaseStarlingLab db;
     UserModel user;
@@ -60,24 +59,24 @@ void DialogMeasurementReport::load()
     ui->acceptedDateTime_label->setText(_reg.acceptedDateTime);
 
     //protocol
-    TripleRegMeasurementProtocolModel protocol;
-    if(!db.select(_reg.protocolId,&protocol)) {
+    if(!db.select(_reg.protocolId,&_protocol)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
         return;
     }
-    ui->protocolName_lineEdit->setText(protocol.name);
-    ui->voltageAnode_lineEdit->setText(Utils::toString(protocol.anodaVoltage));
-    ui->voltageFocusing_lineEdit->setText(Utils::toString(protocol.focusingVoltage));
-    ui->shiftA_spinBox->setValue(protocol.voltageShiftA);
-    ui->shiftB_spinBox->setValue(protocol.voltageShiftB);
-    ui->shiftC_spinBox->setValue(protocol.voltageShiftC);
-    ui->thrA_doubleSpinBox->setValue(protocol.thrA);
-    ui->thrB_doubleSpinBox->setValue(protocol.thrB);
-    ui->thrC_doubleSpinBox->setValue(protocol.thrC);
-    ui->resolvingTime_spinBox->setValue(protocol.resolvingTime);
-    ui->deadTime_spinBox->setValue(protocol.deadTime);
-    ui->notesProtocol_plainTextEdit->setPlainText(protocol.notes);
-    int points = protocol.anodaVoltage.count() * protocol.focusingVoltage.count();
+
+    ui->protocolName_lineEdit->setText(_protocol.name);
+    ui->voltageAnode_lineEdit->setText(Utils::toString(_protocol.anodaVoltage));
+    ui->voltageFocusing_lineEdit->setText(Utils::toString(_protocol.focusingVoltage));
+    ui->shiftA_spinBox->setValue(_protocol.voltageShiftA);
+    ui->shiftB_spinBox->setValue(_protocol.voltageShiftB);
+    ui->shiftC_spinBox->setValue(_protocol.voltageShiftC);
+    ui->thrA_doubleSpinBox->setValue(_protocol.thrA);
+    ui->thrB_doubleSpinBox->setValue(_protocol.thrB);
+    ui->thrC_doubleSpinBox->setValue(_protocol.thrC);
+    ui->resolvingTime_spinBox->setValue(_protocol.resolvingTime);
+    ui->deadTime_spinBox->setValue(_protocol.deadTime);
+    ui->notesProtocol_plainTextEdit->setPlainText(_protocol.notes);
+    int points = _protocol.anodaVoltage.count() * _protocol.focusingVoltage.count();
     ui->blankPoint_spinBox->setValue(points);
     ui->sourcePoint_spinBox->setValue(points);
     ui->blankSumTime_spinBox->setValue(points * _reg.blankTime * _reg.repeat);
@@ -101,6 +100,7 @@ void DialogMeasurementReport::load()
     Counter counter(new MAC3Counter);
     DatabaseResults results = db.select(&raw,"measurementId="+QString::number(_reg.id));
     for (int i=0; i<results.count(); i++) {
+        QApplication::processEvents();
         raw.setRecord(results.at(i)->record());
         Counts counts;
         counts.A = raw.A;
@@ -188,8 +188,7 @@ void DialogMeasurementReport::on_modify_pushButton_toggled(bool checked)
     ui->linked_lineEdit->setReadOnly(!checked);
     ui->linked_lineEdit->setFrame(checked);
 
-    ui->category_lineEdit->setReadOnly(!checked);
-    ui->category_lineEdit->setFrame(checked);
+    ui->category_comboBox->setFrame(checked);
 
     ui->comments_plainTextEdit->setReadOnly(!checked);
     if(checked)
@@ -202,5 +201,93 @@ void DialogMeasurementReport::on_modify_pushButton_toggled(bool checked)
         ui->notesProtocol_plainTextEdit->setFrameShape(QFrame::StyledPanel);
     else
         ui->notesProtocol_plainTextEdit->setFrameShape(QFrame::NoFrame);
+}
+
+
+void DialogMeasurementReport::on_save_pushButton_clicked()
+{
+   TripleRegMeasurementRegisterModel modified;
+   modified.setRecord(_reg.record());
+   modified.nuclide = ui->nuclide_lineEdit->text();
+   modified.solutionId = ui->solutionId_lineEdit->text();
+   modified.sourceId = ui->sourceId_lineEdit->text();
+   modified.linked = ui->linked_lineEdit->text();
+   modified.category = ui->category_comboBox->currentText();
+   modified.comments = ui->comments_plainTextEdit->toPlainText();
+   if(!(modified == _reg)) {
+       DatabaseStarlingLab db;
+       modified.userId = Settings::loggedUserId();
+
+       modified.acceptedDateTime.clear();
+       modified.acceptedId = 0;
+       if(!db.update(&modified)){
+           QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+           return;
+       }
+       if(_reg.acceptedId > 0)
+           QMessageBox::information(this,tr("Accepted"),tr("Please, re-accept of the measurement is required."));
+       db.select(_reg.id,&_reg);
+
+   }
+   if(_protocol.notes != ui->notesProtocol_plainTextEdit->toPlainText()) {
+       _protocol.notes = ui->notesProtocol_plainTextEdit->toPlainText();
+       _protocol.userId = Settings::loggedUserId();
+       DatabaseStarlingLab db;
+       if(!db.update(&_protocol)){
+           QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+           return;
+       }
+       db.select(_protocol.id,&_protocol);
+       if(_reg.acceptedId > 0) {
+           QMessageBox::information(this,tr("Accepted"),tr("Please, re-accept of the measurement is required."));
+           _reg.acceptedDateTime.clear();
+           _reg.acceptedId = 0;
+           db.update(&_reg);
+           db.select(_reg.id,&_reg);
+       }
+   }
+   load();
+   ui->modify_pushButton->setChecked(false);
+}
+
+
+void DialogMeasurementReport::on_approveMeasurement_pushButton_clicked()
+{
+    if(ui->save_pushButton->isEnabled()) {
+       QMessageBox::warning(this,tr("Modification"),tr("Please save your changes!"));
+       return;
+    }
+    if(_reg.acceptedId > 0) {
+       QMessageBox::information(this,tr("Accepted"),tr("The measurement has already been accepted."));
+       return;
+    }
+    if(QMessageBox::question(this,tr("Accept"),tr("Do you really want to accept this measurement?"))==QMessageBox::Yes) {
+        _reg.acceptedDateTime = Utils::currentDateTime();
+        _reg.acceptedId = Settings::loggedUserId();
+        _reg.userId = Settings::loggedUserId();
+        DatabaseStarlingLab db;
+        if(!db.update(&_reg)){
+            QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+            return;
+        }
+        db.select(_reg.id,&_reg);
+        load();
+    }
+}
+
+
+void DialogMeasurementReport::on_remove_pushButton_clicked()
+{
+    if(QMessageBox::question(this,tr("Remove"),tr("Do you really want to remove this measurement?"))==QMessageBox::Yes) {
+        DatabaseStarlingLab db;
+        if(!db.remove(&_reg,Settings::loggedUserId())) {
+            QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+            return;
+        }else {
+            db.remove(&_protocol);
+            db.remove(new TripleRegMeasurementRAWModel,"measurementId="+QString::number(_reg.id));
+            reject();
+        }
+    }
 }
 
