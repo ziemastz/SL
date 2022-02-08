@@ -6,6 +6,7 @@
 
 #include "utils.h"
 #include "databasestarlinglab.h"
+#include "counter.h"
 
 namespace Ui {
 class DialogMeasurementReport;
@@ -22,7 +23,9 @@ public:
 private slots:
     void on_cancel_pushButton_clicked();
 
-    void on_modify_pushButton_clicked();
+    void on_cps_radioButton_toggled(bool checked);
+
+    void on_modify_pushButton_toggled(bool checked);
 
 private:
     Ui::DialogMeasurementReport *ui;

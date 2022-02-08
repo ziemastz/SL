@@ -143,6 +143,11 @@ const Counts &Counter::getCounts() const
     return counts;
 }
 
+void Counter::setCounts(const Counts &newCounts)
+{
+    counts = newCounts;
+}
+
 double Counter::cps(const unsigned int &port)
 {
     return (double)port / ( ((double)counts.LT) / freqLT);

@@ -356,6 +356,8 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     reg.category = ui->category_comboBox->currentText();
     reg.comments = ui->comment_plainTextEdit->toPlainText();
     reg.authorId = Settings::loggedUserId();
+    reg.acceptedId = 0;
+    reg.acceptedDateTime = "";
     reg.userId = Settings::loggedUserId();
     if(!db.insert(&reg)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
@@ -399,6 +401,7 @@ void MainWindow::on_measReg_pushButton_clicked()
     DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel);
     TripleRegMeasurementRegisterModel reg;
     UserModel autor;
+    UserModel acceptedUser;
     QVector<QStringList> table;
     QStringList filterNuclide;
     QStringList filterSolution;
@@ -409,6 +412,14 @@ void MainWindow::on_measReg_pushButton_clicked()
         if(!db.select(reg.userId,&autor)){
             QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
             return;
+        }
+        if(reg.acceptedId > 0) {
+            if(!db.select(reg.acceptedId,&acceptedUser)){
+                QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                return;
+            }
+        }else {
+            acceptedUser.firstName = "";
         }
         if(!filterNuclide.contains(reg.nuclide))
             filterNuclide << reg.nuclide;
@@ -422,7 +433,8 @@ void MainWindow::on_measReg_pushButton_clicked()
                << reg.sourceId
                << reg.linked
                << reg.category
-               << autor.captionShort();
+               << autor.captionShort()
+               << acceptedUser.captionShort()+" "+reg.acceptedDateTime;
         table << record;
     }
     ui->measurementRegister_tableWidget->setSortingEnabled(false);
@@ -518,7 +530,8 @@ void MainWindow::on_measurementRegister_tableWidget_cellDoubleClicked(int row, i
         return;
     }
     measReg.setRecord(result.at(0)->record());
-    DialogMeasurementReport dialogReport(measReg);
-
+    DialogMeasurementReport *dialogReport = new DialogMeasurementReport(measReg,this);
+    connect(dialogReport,SIGNAL(rejected()),dialogReport,SLOT(deleteLater()));
+    dialogReport->show();
 }
 

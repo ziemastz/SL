@@ -93,7 +93,7 @@ public:
             << lastModification
             << userId;
         return ret;
-    }
+    }  
 };
 
 #endif // TRIPLEREGMEASUREMENTRAWMODEL_H

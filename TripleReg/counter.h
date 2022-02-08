@@ -41,6 +41,8 @@ public:
     QDateTime startDateTime() const;
     const Counts &getCounts() const;
 
+    void setCounts(const Counts &newCounts);
+
 private:
     bool _isConnect;
     QDateTime _startDateTime;

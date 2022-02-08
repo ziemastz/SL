@@ -466,7 +466,7 @@ void WorkerMeasurementProcess::setRAW(TripleRegMeasurementRAWModel *model)
     model->startMeasurementDateTime = counter->startDateTime().toString("yyyy-MM-dd hh:mm:ss");
     model->sourceNo = currSource;
     model->pointTag = generatorPointTag();
-    model->repeat = currPoint;
+    model->repeat = currRepeat;
     model->A = counter->getCounts().A;
     model->B = counter->getCounts().B;
     model->C = counter->getCounts().C;

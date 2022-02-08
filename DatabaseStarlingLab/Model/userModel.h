@@ -59,6 +59,8 @@ public:
     }
 
     QString caption()const {
+        if(firstName.isEmpty())
+            return QString();
         QString ret;
         if(!degree.isEmpty()) {
             ret = degree;
@@ -73,6 +75,8 @@ public:
         return ret;
     }
     QString captionShort()const {
+        if(firstName.isEmpty())
+            return QString();
         QString ret = firstName.at(0);
         ret.append(".");
         if(!secondName.isEmpty())

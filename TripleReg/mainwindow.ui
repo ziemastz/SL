@@ -1160,7 +1160,7 @@
              </column>
              <column>
               <property name="text">
-               <string>Approved</string>
+               <string>Accepted</string>
               </property>
              </column>
             </widget>
