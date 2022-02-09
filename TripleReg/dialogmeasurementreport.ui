@@ -1657,6 +1657,16 @@ background-color: rgb(240, 240, 240);
              </column>
              <column>
               <property name="text">
+               <string>Live time (s)</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Real time (s)</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
                <string>Rel.1</string>
               </property>
              </column>
@@ -1836,13 +1846,6 @@ background-color: rgb(240, 240, 240);
       <widget class="QPushButton" name="export_pushButton">
        <property name="text">
         <string>Export</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="print_pushButton">
-       <property name="text">
-        <string>Print</string>
        </property>
       </widget>
      </item>

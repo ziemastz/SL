@@ -1,0 +1,17 @@
+TripleReg software (ver. 1.0.0)
+================================================================================
+           |
+   Accepted|Triple R. Software 
+     Author|Triple R. Software
+   Category|Standardization
+   Comments|
+       Date|2022-02-09
+         ID|S01-22-007
+Last modification|2022-02-09 09:46:45 Triple R. Software
+     Linked|
+    Nuclide|t
+Protocol name|Default (Last modification 2022-02-09 09:46:45)
+Solution ID|t
+  Source ID|t
+================================================================================
+  Start  Source No  Point  Repeat  A  B  C  S  AB  BC  AC  T   D  TDCR  Dead-time (%)  Live time (s)  Real time (s)  Rel.1  Rel.2  PMT A (V)  PMT B (V)  PMT C (V)  PMT Focusing (V)

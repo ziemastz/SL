@@ -6,9 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(0);
-
-
+    on_measReg_pushButton_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -55,11 +53,13 @@ void MainWindow::on_newMeasurement_pushButton_clicked()
 
 void MainWindow::on_cancelNewMeasurement_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_settings_pushButton_clicked()
 {
+    ui->stackedWidget->setCurrentIndex(4);
+    ui->tabWidget->setCurrentIndex(0);
     //load parameter
     DatabaseStarlingLab db;
     TripleRegSettingsModel settings;
@@ -94,8 +94,6 @@ void MainWindow::on_settings_pushButton_clicked()
     ui->secondName_lineEdit->setText(user.secondName);
     ui->lastName_lineEdit->setText(user.lastName);
 
-    ui->stackedWidget->setCurrentIndex(4);
-    ui->tabWidget->setCurrentIndex(0);
 
     //system info
     TripleRegMeasuringSystemModel system;
@@ -204,7 +202,7 @@ void MainWindow::on_passwordChange_pushButton_clicked()
 
 void MainWindow::on_cancelSettings_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_connectionTestN1470_pushButton_clicked()
@@ -367,6 +365,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     dialogMeasurementProcess.exec();
     this->show();
     this->setFocus();
+    on_measReg_pushButton_clicked();
 
 }
 

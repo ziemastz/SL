@@ -2,12 +2,15 @@
 #define DIALOGMEASUREMENTREPORT_H
 
 #include <QDialog>
+#include <QDir>
 #include <QMessageBox>
+#include <QFileDialog>
 
 #include "utils.h"
 #include "databasestarlinglab.h"
 #include "counter.h"
 #include "settings.h"
+#include "reportgenerator.h"
 
 namespace Ui {
 class DialogMeasurementReport;
@@ -36,10 +39,13 @@ private slots:
 
     void on_remove_pushButton_clicked();
 
+    void on_export_pushButton_clicked();
+
 private:
     Ui::DialogMeasurementReport *ui;
     TripleRegMeasurementRegisterModel _reg;
     TripleRegMeasurementProtocolModel _protocol;
+    QVector<QStringList> _counts;
 
 };
 

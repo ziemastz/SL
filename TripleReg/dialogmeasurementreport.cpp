@@ -96,6 +96,12 @@ void DialogMeasurementReport::load()
 
     //counts
     //1'Counts and 2'CPS
+    _counts.clear();
+    QStringList labels;
+    for(int i=0;i<ui->counts_tableWidget->columnCount();i++)
+        labels << ui->counts_tableWidget->horizontalHeaderItem(i)->text();
+    _counts << labels;
+
     TripleRegMeasurementRAWModel raw;
     Counter counter(new MAC3Counter);
     DatabaseResults results = db.select(&raw,"measurementId="+QString::number(_reg.id));
@@ -154,6 +160,8 @@ void DialogMeasurementReport::load()
                << QString::number(raw.D)
                << QString::number(counter.cpsT()/counter.cpsD(),'f',4)
                << QString::number((counter.deadTime()*100)/counter.realTime(),'f',1)
+               << QString::number(counter.liveTime())
+               << QString::number(counter.realTime())
                << QString::number(counter.rel1())
                << QString::number(counter.rel2())
                << QString::number(raw.voltageCh0)
@@ -161,6 +169,7 @@ void DialogMeasurementReport::load()
                << QString::number(raw.voltageCh2)
                << QString::number(raw.voltageCh3);
         Utils::addItemTableWidget(ui->counts_tableWidget,record);
+        _counts<<record;
     }
 }
 
@@ -275,7 +284,6 @@ void DialogMeasurementReport::on_approveMeasurement_pushButton_clicked()
     }
 }
 
-
 void DialogMeasurementReport::on_remove_pushButton_clicked()
 {
     if(QMessageBox::question(this,tr("Remove"),tr("Do you really want to remove this measurement?"))==QMessageBox::Yes) {
@@ -291,3 +299,18 @@ void DialogMeasurementReport::on_remove_pushButton_clicked()
     }
 }
 
+void DialogMeasurementReport::on_export_pushButton_clicked()
+{
+    QDir dirReport(QDir::currentPath()+"/Export");
+    if(!dirReport.exists())
+        dirReport.mkpath(dirReport.path());
+
+
+    QString fileNameReport = QFileDialog::getSaveFileName(this,tr("Export"),dirReport.path()+"/"+_reg.measurementId+".tdk",tr("TDK (*.tdk)"));
+    ReportGenerator report(fileNameReport);
+    report.setMeasurementRegister(_reg);
+    report.setMeasurementProtocol(_protocol);
+    report.setCounts(_counts);
+    report.create();
+
+}
