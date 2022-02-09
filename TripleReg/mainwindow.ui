@@ -33,7 +33,7 @@
           <string notr="true">border-color: rgb(0, 170, 0);</string>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">
@@ -1166,23 +1166,46 @@
           </layout>
          </widget>
          <widget class="QWidget" name="pageLogbook">
-          <layout class="QGridLayout" name="gridLayout_13">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_31">
-             <property name="font">
-              <font>
-               <italic>true</italic>
-              </font>
-             </property>
-             <property name="text">
-              <string>Under construction...</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QTableWidget" name="logbook_tableWidget">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>891</width>
+             <height>521</height>
+            </rect>
+           </property>
+           <column>
+            <property name="text">
+             <string>Date</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Type</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Desciption</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Root</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Element</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>User</string>
+            </property>
+           </column>
+          </widget>
          </widget>
          <widget class="QWidget" name="pageSettings">
           <layout class="QGridLayout" name="gridLayout_15">
