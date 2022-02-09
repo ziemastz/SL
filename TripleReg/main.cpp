@@ -9,6 +9,7 @@
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::addLibraryPath("/bin");
     QApplication a(argc, argv);
     QApplication::setApplicationName("TripleReg");
     QApplication::setApplicationVersion("1.0.0");
