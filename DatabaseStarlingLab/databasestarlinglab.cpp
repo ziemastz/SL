@@ -67,6 +67,16 @@ bool DatabaseStarlingLab::increaseCountMeasurementAt(const int &year)
     return exec("UPDATE tripleRegMeasurementRegisterCounter SET number="+QString::number(current)+" WHERE year="+QString::number(year));
 }
 
+int DatabaseStarlingLab::countRecord(BaseModel *model)
+{
+    exec("SELECT COUNT(*) FROM "+model->tableName());
+    if(_records.count() == 1) {
+        return _records.at(0).at(0).toInt();
+    }else {
+        return -1;
+    }
+}
+
 bool DatabaseStarlingLab::select(const int &id, BaseModel *model)
 {
     if(exec("SELECT * FROM "+model->tableName()+" WHERE id="+QString::number(id))) {
@@ -156,10 +166,13 @@ bool DatabaseStarlingLab::remove(BaseModel *model)
     return exec("DELETE FROM "+model->tableName()+" WHERE id="+QString::number(model->id));
 }
 
-bool DatabaseStarlingLab::remove(BaseModel *model, const int &loggedUserId)
+bool DatabaseStarlingLab::remove(TripleRegMeasurementRegisterModel *model, const int &loggedUserId)
 {
-    //logbook add action delete
-    return remove(model);
+    if(remove(model)) {
+        exec("INSERT INTO tripleRegLogbook VALUES(NULL, 'Delete','The measurement with ID "+model->measurementId+" has been deleted along with the all measurement data.', 'Measurement', '"+model->measurementId+"', CURRENT_TIMESTAMP,"+QString::number(loggedUserId)+")");
+        return true;
+    }else
+        return false;
 }
 
 bool DatabaseStarlingLab::remove(BaseModel *model, const QString &filter)
@@ -221,7 +234,7 @@ void DatabaseStarlingLab::createDatabase(const QString &configFile)
         return;
 
     QString config = file.readAll();
-    QStringList sqlStatements = config.split(";",Qt::SkipEmptyParts);
+    QStringList sqlStatements = config.split("^_",Qt::SkipEmptyParts);
 
     foreach(QString statement, sqlStatements) {
         if(!exec(statement)){

@@ -156,6 +156,7 @@ void MainWindow::on_saveUserDatapushButton_clicked()
     user.firstName = ui->firstName_lineEdit->text();
     user.secondName = ui->secondName_lineEdit->text();
     user.lastName = ui->lastName_lineEdit->text();
+    user.userId = Settings::loggedUserId();
 
     DatabaseStarlingLab db;
     if(!db.update(&user)) {
@@ -536,3 +537,37 @@ void MainWindow::on_measurementRegister_tableWidget_cellDoubleClicked(int row, i
     dialogReport->show();
     dialogReport->load();
 }
+
+void MainWindow::on_logbook_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    Utils::clearTableWidget(ui->logbook_tableWidget);
+    DatabaseStarlingLab db;
+    int countRecord = db.countRecord(new TripleRegLogbookModel);
+    int partSize = 10;
+    for(int i=0; i<countRecord; i+=partSize) {
+        QApplication::processEvents();
+        DatabaseResults results = db.select(new TripleRegLogbookModel,QString(""),DatabaseStarlingLab::DESC,partSize,i);
+        TripleRegLogbookModel logbook;
+        UserModel author;
+        QVector<QStringList> table;
+        for(int j=0; j < results.count(); j++) {
+            logbook.setRecord(results.at(j)->record());
+            db.select(logbook.userId,&author);
+            QStringList record;
+            record << logbook.lastModification
+                   << logbook.type
+                   << logbook.description
+                   << logbook.root
+                   << logbook.element
+                   << author.captionShort();
+            table << record;
+        }
+        ui->logbook_tableWidget->setSortingEnabled(false);
+        foreach(QStringList record, table)
+            Utils::addItemTableWidget(ui->logbook_tableWidget,record);
+        ui->logbook_tableWidget->setSortingEnabled(true);
+    }
+
+}
+

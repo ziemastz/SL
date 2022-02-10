@@ -19,6 +19,7 @@
 #include "Model/baseModel.h"
 #include "Model/userModel.h"
 #include "Model/labInfoModel.h"
+#include "Model/tripleRegLogbookModel.h"
 #include "Model/tripleRegSettingsModel.h"
 #include "Model/tripleRegProtocolModel.h"
 #include "Model/tripleRegMeasurementProtocolModel.h"
@@ -46,6 +47,8 @@ public:
     int countMeasurementAt(const int &year);
     bool addCountMeasurementAt(const int &year);
     bool increaseCountMeasurementAt(const int &year);
+
+    int countRecord(BaseModel *model);
 
     bool select(const int &id, BaseModel *model);
     DatabaseResults select(BaseModel *model, const QString &filter = QString(),const Order &sort = Order::NoOrder, const int &limit = 0, const int &offset = 0);

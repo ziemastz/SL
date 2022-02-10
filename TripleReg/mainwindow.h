@@ -69,6 +69,8 @@ private slots:
 
     void on_measurementRegister_tableWidget_cellDoubleClicked(int row, int column);
 
+    void on_logbook_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     UserModel user;

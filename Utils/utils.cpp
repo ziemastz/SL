@@ -87,6 +87,7 @@ void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
         table->setItem(rows,j,new QTableWidgetItem(record.at(j)));
     }
     table->resizeColumnsToContents();
+    table->resizeRowsToContents();
     table->blockSignals(false);
 }
 
