@@ -255,8 +255,8 @@ void DialogMeasurementReport::on_save_pushButton_clicked()
            db.select(_reg.id,&_reg);
        }
    }
-   load();
    ui->modify_pushButton->setChecked(false);
+   load();
 }
 
 
