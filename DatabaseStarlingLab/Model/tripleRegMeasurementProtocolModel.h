@@ -45,7 +45,8 @@ public:
     void setRecord(const QVariantList& record) {
         int i=0;
         id = record.at(i++).toInt();
-        measurementId = record.at(i++).toString();
+        if(record.count() == this->record().count())
+            measurementId = record.at(i++).toString();
         name = record.at(i++).toString();
         anodaVoltage = toVectorInt(record.at(i++).toString());
         voltageShiftA = record.at(i++).toInt();
