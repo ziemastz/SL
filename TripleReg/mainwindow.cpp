@@ -181,6 +181,11 @@ void MainWindow::on_passwordChange_pushButton_clicked()
                                                         tr("New password"), QLineEdit::Password,
                                                         QString(),&ok);
         if (ok && !newPassword.isEmpty()) {
+            if(newPassword.size() < 3) {
+                QMessageBox::warning(this,tr("New password"),tr("Password too short!\nEnter at least 3 characters."));
+                return;
+            }
+
             QString confirmNewPassword = QInputDialog::getText(this,tr("Password change"),
                                                             tr("Confirm new password"), QLineEdit::Password,
                                                             QString(),&ok);
@@ -263,13 +268,8 @@ void MainWindow::on_removeProtocol_pushButton_clicked()
             return;
         }
         protocol.setRecord(results.at(0)->record());
-        protocol.userId = Settings::loggedUserId();
-        if(!db.update(&protocol)) {
-            QMessageBox::warning(this,tr("Database"),tr("Updating error from database!\nPlease contact the administrator."));
-            QMessageBox::warning(this,tr("Remove protocol"),tr("The protocol has not been deleted."));
-            return;
-        }
-        if(!db.remove(&protocol)) {
+
+        if(!db.remove(&protocol,Settings::loggedUserId())) {
             QMessageBox::warning(this,tr("Database"),tr("Removing error from database!\nPlease contact the administrator."));
             QMessageBox::warning(this,tr("Remove protocol"),tr("The protocol has not been deleted."));
             return;
@@ -336,6 +336,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
     }
     protocol.setRecord(result2.at(0)->record());
     protocol.id = 0;
+    protocol.measurementId = reg.measurementId;
     protocol.userId = Settings::loggedUserId();
     if(!db.insert(&protocol)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
@@ -396,53 +397,57 @@ void MainWindow::on_saveSystemInfo_pushButton_clicked()
 void MainWindow::on_measReg_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    Utils::clearTableWidget(ui->measurementRegister_tableWidget);
     this->setFocus();
     DatabaseStarlingLab db;
-    DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel,QString(),DatabaseStarlingLab::Order::DESC);
     TripleRegMeasurementRegisterModel reg;
-    UserModel autor;
-    UserModel acceptedUser;
-    QVector<QStringList> table;
     QStringList filterNuclide;
     QStringList filterSolution;
-    filterNuclide << QString("");
-    filterSolution << QString("");
-    for(int i=0; i < results.count(); i++) {
+    int countRecord = db.countRecord(&reg);
+    int partSize = 10;
+    for(int i=0; i<countRecord; i+=partSize) {
         QApplication::processEvents();
-        reg.setRecord(results.at(i)->record());
-        if(!db.select(reg.userId,&autor)){
-            QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
-            return;
-        }
-        if(reg.acceptedId > 0) {
-            if(!db.select(reg.acceptedId,&acceptedUser)){
+        DatabaseResults results = db.select(new TripleRegMeasurementRegisterModel,QString(),DatabaseStarlingLab::Order::DESC,partSize,i);
+        UserModel autor;
+        UserModel acceptedUser;
+        QVector<QStringList> table;
+        filterNuclide << QString("");
+        filterSolution << QString("");
+        for(int i=0; i < results.count(); i++) {
+            reg.setRecord(results.at(i)->record());
+            if(!db.select(reg.userId,&autor)){
                 QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
                 return;
             }
-        }else {
-            acceptedUser.firstName = "";
+            if(reg.acceptedId > 0) {
+                if(!db.select(reg.acceptedId,&acceptedUser)){
+                    QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                    return;
+                }
+            }else {
+                acceptedUser.firstName = "";
+            }
+            if(!filterNuclide.contains(reg.nuclide))
+                filterNuclide << reg.nuclide;
+            if(!filterSolution.contains(reg.solutionId))
+                filterSolution << reg.solutionId;
+            QStringList record;
+            record << reg.measurementId
+                   << reg.measurementDate
+                   << reg.nuclide
+                   << reg.solutionId
+                   << reg.sourceId
+                   << reg.linked
+                   << reg.category
+                   << autor.captionShort()
+                   << acceptedUser.captionShort()+" "+reg.acceptedDateTime;
+            table << record;
         }
-        if(!filterNuclide.contains(reg.nuclide))
-            filterNuclide << reg.nuclide;
-        if(!filterSolution.contains(reg.solutionId))
-            filterSolution << reg.solutionId;
-        QStringList record;
-        record << reg.measurementId
-               << reg.measurementDate
-               << reg.nuclide
-               << reg.solutionId
-               << reg.sourceId
-               << reg.linked
-               << reg.category
-               << autor.captionShort()
-               << acceptedUser.captionShort()+" "+reg.acceptedDateTime;
-        table << record;
+        ui->measurementRegister_tableWidget->setSortingEnabled(false);
+        foreach(QStringList record, table)
+            Utils::addItemTableWidget(ui->measurementRegister_tableWidget,record);
+        ui->measurementRegister_tableWidget->setSortingEnabled(true);
     }
-    ui->measurementRegister_tableWidget->setSortingEnabled(false);
-    Utils::clearTableWidget(ui->measurementRegister_tableWidget);
-    foreach(QStringList record, table)
-        Utils::addItemTableWidget(ui->measurementRegister_tableWidget,record);
-    ui->measurementRegister_tableWidget->setSortingEnabled(true);
 
     ui->filterNuclide_comboBox->blockSignals(true);
     ui->filterNuclide_comboBox->clear();
@@ -462,6 +467,7 @@ void MainWindow::on_filterNuclide_comboBox_currentIndexChanged(const QString &ar
     QStringList filterSolution;
     filterSolution << QString("");
     for(int i=0; i< ui->measurementRegister_tableWidget->rowCount(); i++) {
+        QApplication::processEvents();
         if(!arg1.isEmpty()){
             bool match = ui->measurementRegister_tableWidget->item(i,2)->text() == arg1;
             if(match) {
@@ -543,6 +549,10 @@ void MainWindow::on_logbook_pushButton_clicked()
     ui->stackedWidget->setCurrentIndex(3);
     Utils::clearTableWidget(ui->logbook_tableWidget);
     DatabaseStarlingLab db;
+    QStringList rootFilter;
+    QStringList elementFilter;
+    rootFilter << QString("");
+    elementFilter << QString("");
     int countRecord = db.countRecord(new TripleRegLogbookModel);
     int partSize = 10;
     for(int i=0; i<countRecord; i+=partSize) {
@@ -554,6 +564,10 @@ void MainWindow::on_logbook_pushButton_clicked()
         for(int j=0; j < results.count(); j++) {
             logbook.setRecord(results.at(j)->record());
             db.select(logbook.userId,&author);
+            if(!rootFilter.contains(logbook.root))
+                rootFilter << logbook.root;
+            if(!elementFilter.contains(logbook.element))
+                elementFilter << logbook.element;
             QStringList record;
             record << logbook.lastModification
                    << logbook.type
@@ -568,6 +582,71 @@ void MainWindow::on_logbook_pushButton_clicked()
             Utils::addItemTableWidget(ui->logbook_tableWidget,record);
         ui->logbook_tableWidget->setSortingEnabled(true);
     }
+    ui->rootFilter_comboBox->blockSignals(true);
+    ui->rootFilter_comboBox->clear();
+    rootFilter.sort();
+    ui->rootFilter_comboBox->addItems(rootFilter);
+    ui->rootFilter_comboBox->blockSignals(false);
 
+    ui->elementFilter_comboBox->blockSignals(true);
+    ui->elementFilter_comboBox->clear();
+    elementFilter.sort();
+    ui->elementFilter_comboBox->addItems(elementFilter);
+    ui->elementFilter_comboBox->blockSignals(false);
+
+}
+
+
+void MainWindow::on_addEventLogbook_pushButton_clicked()
+{
+    DialogAddEven addEven;
+    if(addEven.exec() == QDialog::Accepted) {
+        on_logbook_pushButton_clicked();
+        this->setFocus();
+    }
+}
+
+
+void MainWindow::on_rootFilter_comboBox_currentIndexChanged(const QString &arg1)
+{
+    QStringList elementFilter;
+    elementFilter << QString("");
+    for(int i=0; i<ui->logbook_tableWidget->rowCount();i++) {
+        QApplication::processEvents();
+        if(!arg1.isEmpty()) {
+            bool match = ui->logbook_tableWidget->item(i,3)->text() == arg1;
+            if(match) {
+                if(!elementFilter.contains(ui->logbook_tableWidget->item(i,4)->text()))
+                    elementFilter << ui->logbook_tableWidget->item(i,4)->text();
+            }
+            ui->logbook_tableWidget->setRowHidden(i,!match);
+        }else {
+            ui->logbook_tableWidget->setRowHidden(i,false);
+            if(!elementFilter.contains(ui->logbook_tableWidget->item(i,4)->text()))
+                elementFilter << ui->logbook_tableWidget->item(i,4)->text();
+        }
+    }
+    ui->elementFilter_comboBox->blockSignals(true);
+    ui->elementFilter_comboBox->clear();
+    elementFilter.sort();
+    ui->elementFilter_comboBox->addItems(elementFilter);
+    ui->elementFilter_comboBox->blockSignals(false);
+}
+
+
+void MainWindow::on_elementFilter_comboBox_currentIndexChanged(const QString &arg1)
+{
+    for(int i=0; i< ui->logbook_tableWidget->rowCount(); i++) {
+        if(!arg1.isEmpty()){
+            bool match = ui->logbook_tableWidget->item(i,4)->text() == arg1;
+            ui->logbook_tableWidget->setRowHidden(i,!match);
+        }else {
+            if(!ui->rootFilter_comboBox->currentText().isEmpty()){
+                bool match = ui->logbook_tableWidget->item(i,3)->text() == ui->rootFilter_comboBox->currentText();
+                ui->logbook_tableWidget->setRowHidden(i,!match);
+            }else
+                ui->logbook_tableWidget->setRowHidden(i,false);
+        }
+    }
 }
 

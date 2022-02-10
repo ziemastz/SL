@@ -18,6 +18,7 @@ class TripleRegMeasurementProtocolModel : public BaseModel
     }
 
 public:
+    QString measurementId;
     QString name;
     QVector<int> anodaVoltage;
     int voltageShiftA;
@@ -44,6 +45,7 @@ public:
     void setRecord(const QVariantList& record) {
         int i=0;
         id = record.at(i++).toInt();
+        measurementId = record.at(i++).toString();
         name = record.at(i++).toString();
         anodaVoltage = toVectorInt(record.at(i++).toString());
         voltageShiftA = record.at(i++).toInt();
@@ -63,6 +65,7 @@ public:
     QVariantList record()const {
         QVariantList ret;
         ret << id
+            << measurementId
             << name
             << toString(anodaVoltage)
             << voltageShiftA

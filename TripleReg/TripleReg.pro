@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     counter.cpp \
     counts.cpp \
+    dialogaddeven.cpp \
     dialogcreateanaccount.cpp \
     dialogmeasurementprocess.cpp \
     dialogmeasurementreport.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     counter.h \
     counts.h \
+    dialogaddeven.h \
     dialogcreateanaccount.h \
     dialogmeasurementprocess.h \
     dialogmeasurementreport.h \
@@ -40,6 +42,7 @@ HEADERS += \
     workermeasurementprocess.h
 
 FORMS += \
+    dialogaddeven.ui \
     dialogcreateanaccount.ui \
     dialogmeasurementprocess.ui \
     dialogmeasurementreport.ui \

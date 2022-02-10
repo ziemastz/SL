@@ -175,6 +175,15 @@ bool DatabaseStarlingLab::remove(TripleRegMeasurementRegisterModel *model, const
         return false;
 }
 
+bool DatabaseStarlingLab::remove(TripleRegProtocolModel *model, const int &loggedUserId)
+{
+    if(remove(model)) {
+        exec("INSERT INTO tripleRegLogbook VALUES(NULL, 'Delete','The measurement protocol named "+model->name+" has been removed.', 'Protocol', '"+model->name+"', CURRENT_TIMESTAMP,"+QString::number(loggedUserId)+")");
+        return true;
+    }else
+        return false;
+}
+
 bool DatabaseStarlingLab::remove(BaseModel *model, const QString &filter)
 {
     return exec("DELETE FROM "+model->tableName()+" WHERE "+filter);

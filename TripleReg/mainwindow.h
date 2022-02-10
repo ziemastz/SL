@@ -15,6 +15,7 @@
 #include "dialogprotocol.h"
 #include "dialogmeasurementprocess.h"
 #include "dialogmeasurementreport.h"
+#include "dialogaddeven.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -70,6 +71,12 @@ private slots:
     void on_measurementRegister_tableWidget_cellDoubleClicked(int row, int column);
 
     void on_logbook_pushButton_clicked();
+
+    void on_addEventLogbook_pushButton_clicked();
+
+    void on_rootFilter_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_elementFilter_comboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

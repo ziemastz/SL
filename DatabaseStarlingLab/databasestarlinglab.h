@@ -55,7 +55,8 @@ public:
     bool update(BaseModel *model);
     bool insert(BaseModel *model);
     bool remove(BaseModel *model);
-    bool remove(BaseModel *model, const int &loggedUserId);
+    bool remove(TripleRegMeasurementRegisterModel *model, const int &loggedUserId);
+    bool remove(TripleRegProtocolModel *model, const int &loggedUserId);
     bool remove(BaseModel *model, const QString &filter);
 
     int lastInsertId() const;
