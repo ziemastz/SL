@@ -36,7 +36,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/logo_tripleReg.png</pixmap>
+        <pixmap resource="resources.qrc">:/logo_crystal.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -63,7 +63,7 @@
         </font>
        </property>
        <property name="text">
-        <string>TripleReg</string>
+        <string>CRYSTAL</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
