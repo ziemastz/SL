@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->version_label->setText(tr("Version ")+QApplication::applicationVersion());
     on_measReg_pushButton_clicked();
 }
 
@@ -362,7 +363,7 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         db.remove(&reg);
         return;
     }
-    DialogMeasurementProcess dialogMeasurementProcess(reg);
+    DialogMeasurementProcess dialogMeasurementProcess(reg,this);
     this->hide();
     dialogMeasurementProcess.exec();
     this->show();

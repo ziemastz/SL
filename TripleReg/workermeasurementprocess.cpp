@@ -86,10 +86,12 @@ void WorkerMeasurementProcess::process()
     //timer->stop();
 
     if(!refreshN1470()) {
+        emit showMessageBox(tr("Power Supply"),tr("Communication error with the CAEN N1470 power supply.\nPlease check the connectivity parameters."));
         stateProcess = WorkerMeasurementProcess::Finished;
     }
 
     if(!refreshMAC3()) {
+        emit showMessageBox(tr("Counter"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
         stateProcess = WorkerMeasurementProcess::Finished;
     }
 

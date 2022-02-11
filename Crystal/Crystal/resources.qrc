@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>logo_crystal.ico</file>
+        <file>logo_crystal.png</file>
+    </qresource>
+    <qresource prefix="/db">
+        <file>sl.sql</file>
+    </qresource>
+</RCC>
