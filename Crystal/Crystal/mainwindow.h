@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+
+#include "settings.h"
+#include "dbcrystal.h"
+#include "formnewmeasurement.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +20,21 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_exit_pushButton_clicked();
+
+    void on_newMeasurement_pushButton_clicked();
+
+    void on_cancelSettings_pushButton_clicked();
+
+    void on_measurementRegister_pushButton_clicked();
+
+    void on_saveSettings_pushButton_clicked();
+
+    void on_settings_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    void addFormSystem();
 };
 #endif // MAINWINDOW_H

@@ -17,7 +17,6 @@ SOURCES += \
 HEADERS += \
     DatabaseResults.h \
     Model/baseModel.h \
-    Model/labInfoModel.h \
     sldatabase.h \
     Model/userModel.h
 

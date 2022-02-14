@@ -12,18 +12,26 @@ SOURCES += \
     dbcrystal.cpp \
     dialogcreateanaccount.cpp \
     dialogsinginuser.cpp \
+    formnewmeasurement.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    Model/crystalMeasurementProtocolModel.h \
+    Model/crystalMeasurementRegisterModel.h \
+    Model/crystalMeasuringSystemModel.h \
+    Model/crystalProtocolModel.h \
+    Model/crystalSettingsModel.h \
     dbcrystal.h \
     dialogcreateanaccount.h \
     dialogsinginuser.h \
+    formnewmeasurement.h \
     mainwindow.h
 
 FORMS += \
     dialogcreateanaccount.ui \
     dialogsinginuser.ui \
+    formnewmeasurement.ui \
     mainwindow.ui
 
 TRANSLATIONS += \

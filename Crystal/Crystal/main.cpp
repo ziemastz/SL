@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         }
     }
     DBCrystal db;
-    db.configDatabase(":/db/sl.sql");
+    db.configDatabase(":/db/crystal.sql");
 
     DialogSingInUser signIn;
     if(signIn.exec() != QDialog::Accepted) {

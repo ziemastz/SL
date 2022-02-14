@@ -43,7 +43,7 @@ QDialog {
 }</string>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">
@@ -2450,7 +2450,7 @@ QDialog {
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="resources.qrc">:/logo_tripleReg.png</pixmap>
+         <pixmap>:/logo_tripleReg.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2603,8 +2603,6 @@ QDialog {
   <tabstop>measReg_pushButton</tabstop>
   <tabstop>logbook_pushButton</tabstop>
  </tabstops>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
