@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS crystalProtocol (
 	systemLabel	TEXT NOT NULL UNIQUE,
 	anodeVoltage	TEXT NOT NULL DEFAULT 1000,
 	thresholdVolatge	TEXT NOT NULL DEFAULT 2,
-	extendDeadTime	REAL NOT NULL DEFAULT 3,
+	extendableDeadTime	REAL NOT NULL DEFAULT 3,
 	notes	TEXT,
 	lastModification	TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userId	INTEGER NOT NULL DEFAULT 1,
@@ -41,20 +41,12 @@ INSERT OR IGNORE INTO crystalProtocol VALUES (1, 'A', NULL, NULL, NULL, NULL, CU
 INSERT OR IGNORE INTO crystalProtocol VALUES (2, 'B', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
 INSERT OR IGNORE INTO crystalProtocol VALUES (3, 'C', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
 INSERT OR IGNORE INTO crystalProtocol VALUES (4, 'D', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-CREATE TABLE IF NOT EXISTS tripleRegMeasurementProtocol (
+CREATE TABLE IF NOT EXISTS crystalMeasurementProtocol (
 	id	INTEGER,
-	measurementId TEXT NOT NULL DEFAULT 'Unknown',
-	name	TEXT NOT NULL DEFAULT 'Default',
-	anodeVoltage	TEXT NOT NULL DEFAULT 2000,
-	voltageShiftA	INTEGER NOT NULL DEFAULT 0,
-	voltageShiftB	INTEGER NOT NULL DEFAULT 0,
-	voltageShiftC	INTEGER NOT NULL DEFAULT 0,
-	focusingVoltage	TEXT NOT NULL DEFAULT 660,
-	resolvingTime	INTEGER NOT NULL DEFAULT 40,
-	deadTime	INTEGER NOT NULL DEFAULT 30,
-	thrA	REAL NOT NULL DEFAULT 0.1,
-	thrB	REAL NOT NULL DEFAULT 0.1,
-	thrC	REAL NOT NULL DEFAULT 0.1,
+	systemLabel	TEXT NOT NULL UNIQUE,
+	anodeVoltage	TEXT NOT NULL DEFAULT 1000,
+	thresholdVolatge	TEXT NOT NULL DEFAULT 2,
+	extendableDeadTime	REAL NOT NULL DEFAULT 3,
 	notes	TEXT,
 	lastModification	TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userId	INTEGER NOT NULL DEFAULT 1,
@@ -82,25 +74,28 @@ CREATE TABLE IF NOT EXISTS crystalMeasurementRegister (
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
-CREATE TABLE IF NOT EXISTS tripleRegMeasurementRegisterCounter (
+CREATE TABLE IF NOT EXISTS crystalMeasurementRegisterCounter (
 	year INTEGER,
+	syatemNumber TEXT,
 	number INTEGER,
 	PRIMARY KEY(year)
 )^_
-CREATE TABLE IF NOT EXISTS tripleRegMeasuringSystem (
+CREATE TABLE IF NOT EXISTS crystalMeasuringSystem (
 	id INTEGER,
-	number INTEGER NOT NULL UNIQUE,
+    numberA TEXT NOT NULL,
+	numberB TEXT NOT NULL,
+	numberC TEXT NOT NULL,
+	numberD TEXT NOT NULL,
 	name TEXT NOT NULL,
 	fullName TEXT NOT NULL,
 	measuremntProcedureName TEXT,
 	location TEXT,
-	isDefault INTEGER NOT NULL,
 	notes TEXT,
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
-INSERT OR IGNORE INTO tripleRegMeasuringSystem VALUES(1, 1, 'TDK', 'Układ potrójno–podwójnych koincydencji TDK', 'BW-PP-1: Pomiar aktywności promieniotwórczej radionuklidów metodą potrójno-podwójnych koincydencji TDK. Wyd. 7 z dn. 02.10.2019', '4C', 1, NULL, CURRENT_TIMESTAMP, 1)^_
+INSERT OR IGNORE INTO crystalMeasuringSystem VALUES(1, '14.A', '14.B', '14.C', '14.D', 'Domki NaI', 'Układ z detektorem scyntylacyjnym NaI(Tl)', 'BW-PP-14: Pomiar aktywności promieniotwórczej w układach z detektorami scyntylacyjnymi NaI(Tl). Wyd. 7 z dn. 02.10.2019', 'Piwnica', NULL, CURRENT_TIMESTAMP, 1)^_
 CREATE TABLE IF NOT EXISTS tripleRegMeasurementRAW (
 	id INTEGER,
 	measurementId INTEGER NOT NULL,
