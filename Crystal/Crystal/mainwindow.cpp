@@ -131,3 +131,15 @@ void MainWindow::on_settings_pushButton_clicked()
 
 }
 
+
+void MainWindow::on_connectionTestNaICounter_pushButton_clicked()
+{
+    Counter counter;
+    counter.setDeviceName(ui->deviceName_lineEdit->text());
+    if(counter.isConnect()) {
+        QMessageBox::information(this,tr("Connection test"),tr("Successful connection to the device!"));
+    }else {
+        QMessageBox::warning(this,tr("Connetion test"),tr("Connection failed! Check device name and the USB cable."));
+    }
+}
+

@@ -18,7 +18,6 @@
 #include "DatabaseResults.h"
 #include "Model/baseModel.h"
 #include "Model/userModel.h"
-#include "Model/labInfoModel.h"
 
 class SLDatabase
 {

@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    counter.cpp \
     dbcrystal.cpp \
     dialogcreateanaccount.cpp \
     dialogsinginuser.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     Model/crystalMeasuringSystemModel.h \
     Model/crystalProtocolModel.h \
     Model/crystalSettingsModel.h \
+    counter.h \
     dbcrystal.h \
     dialogcreateanaccount.h \
     dialogsinginuser.h \
@@ -78,3 +80,24 @@ win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Utils/re
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Utils/debug/libUtils.a
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Utils/release/Utils.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Utils/debug/Utils.lib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../Adept/NaICounter/release/ -lNaICounter
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../Adept/NaICounter/debug/ -lNaICounter
+
+INCLUDEPATH += $$PWD/../../../Adept/NaICounter
+DEPENDPATH += $$PWD/../../../Adept/NaICounter
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/NaICounter/release/libNaICounter.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/NaICounter/debug/libNaICounter.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/NaICounter/release/NaICounter.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../Adept/NaICounter/debug/NaICounter.lib
+
+win32: LIBS += -L$$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
+
+INCLUDEPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include
+DEPENDPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include
+
+win32: LIBS += -L$$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
+
+INCLUDEPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include
+DEPENDPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include

@@ -7,6 +7,7 @@
 #include "settings.h"
 #include "dbcrystal.h"
 #include "formnewmeasurement.h"
+#include "counter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,6 +33,8 @@ private slots:
     void on_saveSettings_pushButton_clicked();
 
     void on_settings_pushButton_clicked();
+
+    void on_connectionTestNaICounter_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
