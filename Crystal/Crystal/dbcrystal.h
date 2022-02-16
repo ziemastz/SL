@@ -14,6 +14,9 @@ class DBCrystal : public SLDatabase
 {
 public:
     DBCrystal();
+    int countsMeasurement(const QString &systemNumber, const int &year);
+    bool addCountsMeasurement(const QString &systemNumber, const int &year);
+    bool increaseCountsMeasurement(const QString &systemNumber, const int &year);
 
 signals:
 

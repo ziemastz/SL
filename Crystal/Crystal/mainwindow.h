@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include "settings.h"
 #include "dbcrystal.h"
@@ -35,6 +36,20 @@ private slots:
     void on_settings_pushButton_clicked();
 
     void on_connectionTestNaICounter_pushButton_clicked();
+
+    void on_saveProtocolo_pushButton_clicked();
+
+    void on_saveProtocolo_pushButton_2_clicked();
+
+    void on_saveProtocolo_pushButton_3_clicked();
+
+    void on_saveProtocolo_pushButton_4_clicked();
+
+    void on_saveSystem_pushButton_clicked();
+
+    void on_passwordChange_pushButton_clicked();
+
+    void on_saveUser_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

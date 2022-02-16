@@ -12,6 +12,8 @@ SOURCES += \
     counter.cpp \
     dbcrystal.cpp \
     dialogcreateanaccount.cpp \
+    dialognewmeasurement.cpp \
+    dialogpointstable.cpp \
     dialogsinginuser.cpp \
     formnewmeasurement.cpp \
     main.cpp \
@@ -26,12 +28,16 @@ HEADERS += \
     counter.h \
     dbcrystal.h \
     dialogcreateanaccount.h \
+    dialognewmeasurement.h \
+    dialogpointstable.h \
     dialogsinginuser.h \
     formnewmeasurement.h \
     mainwindow.h
 
 FORMS += \
     dialogcreateanaccount.ui \
+    dialognewmeasurement.ui \
+    dialogpointstable.ui \
     dialogsinginuser.ui \
     formnewmeasurement.ui \
     mainwindow.ui

@@ -42,16 +42,17 @@ public:
     bool insert(BaseModel *model);
     bool remove(BaseModel *model);
     bool remove(BaseModel *model, const QString &filter);
+protected:
+    bool exec(const QString &statement);
+    QVector<QVariantList> _records;
 
 private:
     QString _driver;
     QString _databaseName;
-    QVector<QVariantList> _records;
     int _lastInsertId;
 
     QStringList fieldName(BaseModel *model) const;
 
-    bool exec(const QString &statement);
     QVector<QVariantList> records() const;
 
 };

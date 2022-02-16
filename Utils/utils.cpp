@@ -127,6 +127,12 @@ QString Utils::generatorMeasurementId(const int &systemId, const int &id)
     return QString("S%1-%2-%3").arg(systemId,2,10,QLatin1Char('0')).arg(yy).arg(id,3,10,QLatin1Char('0'));
 }
 
+QString Utils::generatorMeasurementId(const QString &systemId, const int &id)
+{
+    QString yy = QDateTime::currentDateTime().toString("yy");
+    return QString("S%1-%2-%3").arg(systemId).arg(yy).arg(id,3,10,QLatin1Char('0'));
+}
+
 QString Utils::generatorTimeDHMSString(const int &leftTime)
 {
     int minute = leftTime/60;

@@ -8,7 +8,8 @@ public:
     QString measurementId;
     QString measurementDate;
     QString nuclide;
-    QStringList sourceId;
+    QString sourceId;
+    int sourceNo;
     QString geometry;
     int protocolId;
     int blankTime;
@@ -37,7 +38,8 @@ public:
         measurementId = record.at(i++).toString();
         measurementDate = record.at(i++).toString();
         nuclide = record.at(i++).toString();
-        sourceId = record.at(i++).toString().split("|");
+        sourceId = record.at(i++).toString();
+        sourceNo = record.at(i++).toInt();
         geometry = record.at(i++).toString();
         protocolId = record.at(i++).toInt();
         blankTime = record.at(i++).toInt();
@@ -60,6 +62,7 @@ public:
             << measurementDate
             << nuclide
             << sourceId
+            << sourceNo
             << geometry
             << protocolId
             << blankTime

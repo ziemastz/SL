@@ -37,17 +37,18 @@ CREATE TABLE IF NOT EXISTS crystalProtocol (
 	userId	INTEGER NOT NULL DEFAULT 1,
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
-INSERT OR IGNORE INTO crystalProtocol VALUES (1, 'A', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-INSERT OR IGNORE INTO crystalProtocol VALUES (2, 'B', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-INSERT OR IGNORE INTO crystalProtocol VALUES (3, 'C', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-INSERT OR IGNORE INTO crystalProtocol VALUES (4, 'D', NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
+INSERT OR IGNORE INTO crystalProtocol VALUES(1, 'A', 1000, 2, 3, NULL, CURRENT_TIMESTAMP, 1)^_
+INSERT OR IGNORE INTO crystalProtocol VALUES(2, 'B', 1000, 2, 3, NULL, CURRENT_TIMESTAMP, 1)^_
+INSERT OR IGNORE INTO crystalProtocol VALUES(3, 'C', 1000, 2, 3, NULL, CURRENT_TIMESTAMP, 1)^_
+INSERT OR IGNORE INTO crystalProtocol VALUES(4, 'D', 1000, 2, 3, NULL, CURRENT_TIMESTAMP, 1)^_
 CREATE TABLE IF NOT EXISTS crystalMeasurementProtocol (
 	id	INTEGER,
-	systemLabel	TEXT NOT NULL UNIQUE,
 	anodeVoltage	TEXT NOT NULL DEFAULT 1000,
 	thresholdVolatge	TEXT NOT NULL DEFAULT 2,
 	extendableDeadTime	REAL NOT NULL DEFAULT 3,
 	notes	TEXT,
+	typePoints	TEXT,
+	points	TEXT,
 	lastModification	TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userId	INTEGER NOT NULL DEFAULT 1,
 	PRIMARY KEY(id AUTOINCREMENT)
@@ -59,6 +60,7 @@ CREATE TABLE IF NOT EXISTS crystalMeasurementRegister (
 	measurementDate TEXT NOT NULL,
 	nuclide TEXT NOT NULL,
 	sourceId TEXT NOT NULL,
+	sourceNo INTEGER NOT NULL,
 	geometry TEXT NOT NULL,
 	blankTime INTEGER NOT NULL,
 	sourceTime INTEGER NOT NULL,
@@ -76,9 +78,9 @@ CREATE TABLE IF NOT EXISTS crystalMeasurementRegister (
 )^_
 CREATE TABLE IF NOT EXISTS crystalMeasurementRegisterCounter (
 	year INTEGER,
-	syatemNumber TEXT,
+	systemNumber TEXT,
 	number INTEGER,
-	PRIMARY KEY(year)
+	PRIMARY KEY(systemNumber)
 )^_
 CREATE TABLE IF NOT EXISTS crystalMeasuringSystem (
 	id INTEGER,
@@ -96,28 +98,16 @@ CREATE TABLE IF NOT EXISTS crystalMeasuringSystem (
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
 INSERT OR IGNORE INTO crystalMeasuringSystem VALUES(1, '14.A', '14.B', '14.C', '14.D', 'Domki NaI', 'Układ z detektorem scyntylacyjnym NaI(Tl)', 'BW-PP-14: Pomiar aktywności promieniotwórczej w układach z detektorami scyntylacyjnymi NaI(Tl). Wyd. 7 z dn. 02.10.2019', 'Piwnica', NULL, CURRENT_TIMESTAMP, 1)^_
-CREATE TABLE IF NOT EXISTS tripleRegMeasurementRAW (
+CREATE TABLE IF NOT EXISTS crystalMeasurementRAW (
 	id INTEGER,
 	measurementId INTEGER NOT NULL,
 	startMeasurementDateTime TEXT NOT NULL,
 	sourceNo INTEGER NOT NULL,
 	pointTag TEXT NOT NULL,
 	repeat INTEGER NOT NULL,
-	A INTEGER NOT NULL,
-	B INTEGER NOT NULL,
-	C INTEGER NOT NULL,
-	S INTEGER NOT NULL,
-	AB INTEGER NOT NULL,
-	BC INTEGER NOT NULL,
-	AC INTEGER NOT NULL,
-	T INTEGER NOT NULL,
-	D INTEGER NOT NULL,
-	LT INTEGER NOT NULL,
-	CLK_IN INTEGER NOT NULL,
-	voltageCh0 REAL NOT NULL,
-	voltageCh1 REAL NOT NULL,
-	voltageCh2 REAL NOT NULL,
-	voltageCh3 REAL NOT NULL,
+	counts INTEGER NOT NULL,
+	liveTime INTEGER NOT NULL,
+	realTime INTEGER NOT NULL,
 	lastModification TEXT NOT NULL,
 	userId	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT)
