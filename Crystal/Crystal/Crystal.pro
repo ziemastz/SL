@@ -17,7 +17,8 @@ SOURCES += \
     dialogsinginuser.cpp \
     formnewmeasurement.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    workermeasurement.cpp
 
 HEADERS += \
     Model/crystalMeasurementProtocolModel.h \
@@ -32,7 +33,8 @@ HEADERS += \
     dialogpointstable.h \
     dialogsinginuser.h \
     formnewmeasurement.h \
-    mainwindow.h
+    mainwindow.h \
+    workermeasurement.h
 
 FORMS += \
     dialogcreateanaccount.ui \
