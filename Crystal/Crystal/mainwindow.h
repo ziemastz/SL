@@ -9,6 +9,8 @@
 #include "dbcrystal.h"
 #include "formnewmeasurement.h"
 #include "counter.h"
+#include "workermeasurement.h"
+#include "dialogmsgbox.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +23,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+public slots:
+    void showMsgBox(const QString &title, const QString &text, const int &portId);
 
 private slots:
     void on_exit_pushButton_clicked();
@@ -54,5 +59,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void addFormSystem();
+
+    Counter *counter;
+    WorkerMeasurement *workerA;
+    WorkerMeasurement *workerB;
+    WorkerMeasurement *workerC;
+    WorkerMeasurement *workerD;
 };
 #endif // MAINWINDOW_H

@@ -15,12 +15,36 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::showMsgBox(const QString &title, const QString &text, const int &portId)
+{
+    DialogMsgBox box(this);
+    box.setTitle(title);
+    box.setText(text);
+    if(box.exec() == QMessageBox::Accepted) {
+        emit acceptedMessageBox(portId);
+    }else {
+        emit rejectedMessageBox();
+    }
+}
+
 void MainWindow::addFormSystem()
 {
     ui->newA_widget->setSystemLabel("A");
     ui->newB_widget->setSystemLabel("B");
     ui->newC_widget->setSystemLabel("C");
     ui->newD_widget->setSystemLabel("D");
+    counter = new Counter();
+    worker = new WorkerMeasurement(NaICounter::PORT_A,counter);
+    workerB = new WorkerMeasurement(NaICounter::PORT_B,counter);
+    workerC = new WorkerMeasurement(NaICounter::PORT_C,counter);
+    workerD = new WorkerMeasurement(NaICounter::PORT_D,counter);
+
+    connect(ui->newA_widget,SIGNAL(startNewMeasurement(int)),worker,SLOT(startNewMeasurementA(int)));
+    connect(ui->newB_widget,SIGNAL(startNewMeasurement(int)),worker,SLOT(startNewMeasurementB(int)));
+    connect(ui->newC_widget,SIGNAL(startNewMeasurement(int)),worker,SLOT(startNewMeasurementC(int)));
+    connect(ui->newD_widget,SIGNAL(startNewMeasurement(int)),worker,SLOT(startNewMeasurementD(int)));
+
+    connect(workerA,SIGNAL(msgBox(QString,QString,int)),this,SLOT(showMsgBox(QString,QString,int)));
 }
 
 void MainWindow::on_exit_pushButton_clicked()

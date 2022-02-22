@@ -9,6 +9,8 @@ public:
     WorkerMeasurement(const NaICounter::PORT &port, Counter *counter);
 
 signals:
+    void msgBox(const QString &title, const QString &text, const int &portId);
+
     void setNuclide(const QString &nuclide);
     void setSourceId(const QString &sourceId);
     void setGeometry(const QString &geometry);
