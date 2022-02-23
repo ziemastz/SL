@@ -9,6 +9,7 @@
 #include "Model/crystalMeasuringSystemModel.h"
 #include "Model/crystalProtocolModel.h"
 #include "Model/crystalSettingsModel.h"
+#include "Model/crystalMeasurementRAWModel.h"
 
 class DBCrystal : public SLDatabase
 {

@@ -16,6 +16,11 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QGroupBox" name="system_groupBox">
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {
+	background-color: rgb(244, 244, 244);
+}</string>
+     </property>
      <property name="title">
       <string>System A</string>
      </property>
@@ -204,6 +209,12 @@
         </item>
         <item>
          <widget class="QLineEdit" name="process_lineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="font">
            <font>
             <pointsize>8</pointsize>
@@ -212,7 +223,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Measurement blank</string>
+           <string/>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -233,8 +244,11 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximum">
+           <number>0</number>
+          </property>
           <property name="value">
-           <number>24</number>
+           <number>0</number>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -270,7 +284,7 @@
            </font>
           </property>
           <property name="text">
-           <string>1d 1h 1min 1s</string>
+           <string/>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -332,7 +346,7 @@
            </font>
           </property>
           <property name="text">
-           <string>H-3</string>
+           <string/>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -365,7 +379,7 @@
            </font>
           </property>
           <property name="text">
-           <string>BW/12/12/12</string>
+           <string/>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -398,7 +412,7 @@
            </font>
           </property>
           <property name="text">
-           <string>PLASKA</string>
+           <string/>
           </property>
           <property name="frame">
            <bool>false</bool>

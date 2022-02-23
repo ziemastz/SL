@@ -4,13 +4,14 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QThread>
 
 #include "settings.h"
 #include "dbcrystal.h"
 #include "formnewmeasurement.h"
 #include "counter.h"
 #include "workermeasurement.h"
-#include "dialogmsgbox.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,10 +24,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+signals:
+    void acceptedMsgBox(const int &portId);
+    void rejectedMsgBox(const int &portId);
 public slots:
-    void showMsgBox(const QString &title, const QString &text, const int &portId);
-
+    void showMsgBox(const QString&title, const QString &text, const int &portId);
 private slots:
     void on_exit_pushButton_clicked();
 
@@ -65,5 +67,9 @@ private:
     WorkerMeasurement *workerB;
     WorkerMeasurement *workerC;
     WorkerMeasurement *workerD;
+    QThread *threadA;
+    QThread *threadB;
+    QThread *threadC;
+    QThread *threadD;
 };
 #endif // MAINWINDOW_H

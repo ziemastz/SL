@@ -43,12 +43,11 @@ INSERT OR IGNORE INTO crystalProtocol VALUES(3, 'C', 1000, 2, 3, NULL, CURRENT_T
 INSERT OR IGNORE INTO crystalProtocol VALUES(4, 'D', 1000, 2, 3, NULL, CURRENT_TIMESTAMP, 1)^_
 CREATE TABLE IF NOT EXISTS crystalMeasurementProtocol (
 	id	INTEGER,
+	measurementId TEXT NOT NULL,
 	anodeVoltage	TEXT NOT NULL DEFAULT 1000,
 	thresholdVolatge	TEXT NOT NULL DEFAULT 2,
 	extendableDeadTime	REAL NOT NULL DEFAULT 3,
 	notes	TEXT,
-	typePoints	TEXT,
-	points	TEXT,
 	lastModification	TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	userId	INTEGER NOT NULL DEFAULT 1,
 	PRIMARY KEY(id AUTOINCREMENT)
@@ -129,7 +128,7 @@ CREATE TABLE IF NOT EXISTS labInfo (
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
 INSERT OR IGNORE INTO labInfo VALUES(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-CREATE TABLE IF NOT EXISTS tripleRegLogbook (
+CREATE TABLE IF NOT EXISTS crystalRegLogbook (
 	id INTEGER,
 	type TEXT,
 	description TEXT,
@@ -141,11 +140,11 @@ CREATE TABLE IF NOT EXISTS tripleRegLogbook (
 )^_
 CREATE TRIGGER IF NOT EXISTS userInsert AFTER INSERT ON user
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Add', 'Create new user', 'User', new.username, CURRENT_TIMESTAMP, new.userId);
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Add', 'Create new user', 'User', new.username, CURRENT_TIMESTAMP, new.userId);
 END^_
 CREATE TRIGGER IF NOT EXISTS userUpdate AFTER UPDATE ON user
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.password<>old.password,' - Password was changed.','')||
 		iif(new.degree<>old.degree,' - Degree from '||old.degree||' to '||new.degree||'.'||char(10),'')||
 		iif(new.firstName<>old.firstName,' - First name from '||old.firstName||' to '||new.firstName||'.'||char(10),'')||
@@ -153,15 +152,15 @@ BEGIN
 		iif(new.lastName<>old.lastName,' - Second name from '||old.lastName||' to '||new.lastName||'.'||char(10),''),
 		'User',new.username, CURRENT_TIMESTAMP, new.userId);
 END^_
-CREATE TRIGGER IF NOT EXISTS measurementRegisterInsert AFTER INSERT ON tripleRegMeasurementRegister
+CREATE TRIGGER IF NOT EXISTS measurementRegisterInsert AFTER INSERT ON crystalMeasurementRegister
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Add', 'A new measurement has been added with the ID '||new.measurementId, 'Measurement', new.measurementId, CURRENT_TIMESTAMP, new.userId);
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Add', 'A new measurement has been added with the ID '||new.measurementId, 'Measurement', new.measurementId, CURRENT_TIMESTAMP, new.userId);
 END^_
-CREATE TRIGGER IF NOT EXISTS measurementRegisterUpdate AFTER UPDATE ON tripleRegMeasurementRegister
+CREATE TRIGGER IF NOT EXISTS measurementRegisterUpdate AFTER UPDATE ON crystalMeasurementRegister
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.nuclide<>old.nuclide,' - Nuclide from '||old.nuclide||' to '||new.nuclide||'.'||char(10),'')||
-		iif(new.solutionId<>old.solutionId,' - Solution ID from '||old.solutionId||' to '||new.solutionId||'.'||char(10),'')||
+		iif(new.geometry<>old.geometry,' - Geometry from '||old.geometry||' to '||new.geometry||'.'||char(10),'')||
 		iif(new.sourceId<>old.sourceId,' - Source ID from '||old.sourceId||' to '||new.sourceId||'.'||char(10),'')||
 		iif(new.linked<>old.linked,' - Linked from '||old.linked||' to '||new.linked||'.'||char(10),'')||
 		iif(new.category<>old.category,' - Category from '||old.category||' to '||new.category||'.'||char(10),'')||
@@ -169,29 +168,18 @@ BEGIN
 		iif(new.acceptedId=0,' - Acceptance of the measurement has been revoked.'||char(10),' - The measurement was accepted on '||new.acceptedDateTime),
 		'Measurement',new.measurementId, CURRENT_TIMESTAMP, new.userId);
 END^_
-CREATE TRIGGER IF NOT EXISTS protocolInsert AFTER INSERT ON tripleRegProtocol
+CREATE TRIGGER IF NOT EXISTS protocolUpdate AFTER UPDATE ON crystalProtocol
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Add', 'A new measurement protocol was created with the name '||new.name, 'Protocol', new.name, CURRENT_TIMESTAMP, new.userId);
-END^_
-CREATE TRIGGER IF NOT EXISTS protocolUpdate AFTER UPDATE ON tripleRegProtocol
-BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.anodeVoltage<>old.anodeVoltage,' - Anode voltage from '||old.anodeVoltage||' to '||new.anodeVoltage||'.'||char(10),'')||
-		iif(new.focusingVoltage<>old.focusingVoltage,' - Focusing voltage from '||old.focusingVoltage||' to '||new.focusingVoltage||'.'||char(10),'')||
-		iif(new.voltageShiftA<>old.voltageShiftA,' - Voltage shift in the PMT A from '||old.voltageShiftA||' to '||new.voltageShiftA||'.'||char(10),'')||
-		iif(new.voltageShiftB<>old.voltageShiftB,' - Voltage shift in the PMT B from '||old.voltageShiftB||' to '||new.voltageShiftB||'.'||char(10),'')||
-		iif(new.voltageShiftC<>old.voltageShiftC,' - Voltage shift in the PMT C from '||old.voltageShiftC||' to '||new.voltageShiftC||'.'||char(10),'')||
-		iif(new.resolvingTime<>old.resolvingTime,' - Resolving time from '||old.resolvingTime||' to '||new.resolvingTime||'.'||char(10),'')||
-		iif(new.deadTime<>old.deadTime,' - Dead-time from '||old.deadTime||' to '||new.deadTime||'.'||char(10),'')||
-		iif(new.notes<>old.notes,' - Notes from '||old.notes||' to '||new.notes||'.'||char(10),'')||
-		iif(new.thrA<>old.thrA,' - The discrimination threshold in PMT A from '||old.thrA||' to '||new.thrA||'.'||char(10),'')||
-		iif(new.thrB<>old.thrB,' - The discrimination threshold in PMT B from '||old.thrB||' to '||new.thrB||'.'||char(10),'')||
-		iif(new.thrC<>old.thrC,' - The discrimination threshold in PMT C from '||old.thrC||' to '||new.thrC||'.'||char(10),''),
-		'Protocol',new.name, CURRENT_TIMESTAMP, new.userId);
+		iif(new.thresholdVolatge<>old.thresholdVolatge,' - Threshold voltage from '||old.thresholdVolatge||' to '||new.thresholdVolatge||'.'||char(10),'')||
+		iif(new.extendableDeadTime<>old.extendableDeadTime,' - Dead-time from '||old.extendableDeadTime||' to '||new.extendableDeadTime||'.'||char(10),'')||
+		iif(new.notes<>old.notes,' - Notes from '||old.notes||' to '||new.notes||'.'||char(10),''),
+		'Protocol',new.systemLabel, CURRENT_TIMESTAMP, new.userId);
 END^_
-CREATE TRIGGER IF NOT EXISTS measurementProtocolUpdate AFTER UPDATE ON tripleRegMeasurementProtocol
+CREATE TRIGGER IF NOT EXISTS measurementProtocolUpdate AFTER UPDATE ON crystalMeasurementProtocol
 BEGIN
-	INSERT INTO tripleRegLogbook VALUES(NULL, 'Modify',
+	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify',
 		iif(new.notes<>old.notes,'Modified protocol notes in the measurement '||old.measurementId||' from '||old.notes||' to '||new.notes||'.'||char(10),''),
 		'Measurement',old.measurementId, CURRENT_TIMESTAMP, new.userId);
 END^_

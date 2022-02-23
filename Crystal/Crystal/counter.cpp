@@ -110,6 +110,22 @@ bool Counter::resetD()
     return setReset(NaICounter::PORT_D);
 }
 
+unsigned int Counter::counts(const NaICounter::PORT &id) const
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return countsA();
+    case NaICounter::PORT_B:
+        return countsB();
+    case NaICounter::PORT_C:
+        return countsC();
+    case NaICounter::PORT_D:
+        return countsD();
+    default:
+        return 0;
+    }
+}
+
 unsigned int Counter::countsA() const
 {
     return _countsA;
@@ -128,6 +144,22 @@ unsigned int Counter::countsC() const
 unsigned int Counter::countsD() const
 {
     return _countsD;
+}
+
+double Counter::cps(const NaICounter::PORT &id)
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return cpsA();
+    case NaICounter::PORT_B:
+        return cpsB();
+    case NaICounter::PORT_C:
+        return cpsC();
+    case NaICounter::PORT_D:
+        return cpsD();
+    default:
+        return 0;
+    }
 }
 
 double Counter::cpsA() const
@@ -151,6 +183,22 @@ double Counter::cpsD() const
     return (double)_countsD / liveTimeD();
 }
 
+unsigned int Counter::countsLiveTime(const NaICounter::PORT &id) const
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return _liveTimeA;
+    case NaICounter::PORT_B:
+        return _liveTimeB;
+    case NaICounter::PORT_C:
+        return _liveTimeC;
+    case NaICounter::PORT_D:
+        return _liveTimeD;
+    default:
+        return 0;
+    }
+}
+
 double Counter::liveTimeA() const
 {
     return (double)_liveTimeA / freq;
@@ -169,6 +217,22 @@ double Counter::liveTimeC() const
 double Counter::liveTimeD() const
 {
     return (double)_liveTimeD / freq;
+}
+
+double Counter::realTime(const NaICounter::PORT &id)
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return realTimeA();
+    case NaICounter::PORT_B:
+        return realTimeB();
+    case NaICounter::PORT_C:
+        return realTimeC();
+    case NaICounter::PORT_D:
+        return realTimeD();
+    default:
+        return 0;
+    }
 }
 
 double Counter::realTimeA() const
@@ -191,6 +255,22 @@ double Counter::realTimeD() const
     return (double)_realTimeD / freq;
 }
 
+double Counter::deadTime(const NaICounter::PORT &id)
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return deadTimeA();
+    case NaICounter::PORT_B:
+        return deadTimeB();
+    case NaICounter::PORT_C:
+        return deadTimeC();
+    case NaICounter::PORT_D:
+        return deadTimeD();
+    default:
+        return 0;
+    }
+}
+
 double Counter::deadTimeA() const
 {
     return 100 - (liveTimeA()*100/realTimeA());
@@ -211,10 +291,40 @@ double Counter::deadTimeD() const
     return 100 - (liveTimeD()*100/realTimeD());
 }
 
+QDateTime Counter::startDateTime(const NaICounter::PORT &id) const
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return _startA;
+    case NaICounter::PORT_B:
+        return _startB;
+    case NaICounter::PORT_C:
+        return _startC;
+    case NaICounter::PORT_D:
+        return _startD;
+    default:
+        return QDateTime();
+    }
+}
+
 
 bool Counter::setStart(const NaICounter::PORT &id)
 {
     if(nai.setEnable(id,true) && nai.setReset(id,false)) {
+        switch (id) {
+        case NaICounter::PORT_A:
+            _startA = QDateTime::currentDateTime();
+            break;
+        case NaICounter::PORT_B:
+            _startB = QDateTime::currentDateTime();
+            break;
+        case NaICounter::PORT_C:
+            _startC = QDateTime::currentDateTime();
+            break;
+        case NaICounter::PORT_D:
+            _startD = QDateTime::currentDateTime();
+            break;
+        }
         return true;
     }else{
         //message warning
@@ -240,7 +350,35 @@ bool Counter::setReset(const NaICounter::PORT &id)
         return true;
     }else{
         //message warning
-        qWarning() << "Stoping error!";
+        qWarning() << "Reseting error!";
         return false;
+    }
+}
+
+bool Counter::setDeadTime(const NaICounter::PORT &id, const double &value)
+{
+    unsigned short dt = (unsigned short)((value * 1000)/20);
+
+   if(nai.setDeadTime(id,dt)) {
+       return true;
+   }else {
+       qWarning() << "Setting dead-time error!";
+       return false;
+   }
+}
+
+unsigned int Counter::countsRealTime(const NaICounter::PORT &id) const
+{
+    switch (id) {
+    case NaICounter::PORT_A:
+        return _realTimeA;
+    case NaICounter::PORT_B:
+        return _realTimeB;
+    case NaICounter::PORT_C:
+        return _realTimeC;
+    case NaICounter::PORT_D:
+        return _realTimeD;
+    default:
+        return 0;
     }
 }

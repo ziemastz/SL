@@ -30,6 +30,8 @@ private slots:
 
     void on_start_pushButton_clicked();
 
+    void on_isBlank_checkBox_toggled(bool checked);
+
 private:
     Ui::DialogNewMeasurement *ui;
     int _id;

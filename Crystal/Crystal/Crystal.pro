@@ -23,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     Model/crystalMeasurementProtocolModel.h \
+    Model/crystalMeasurementRAWModel.h \
     Model/crystalMeasurementRegisterModel.h \
     Model/crystalMeasuringSystemModel.h \
     Model/crystalProtocolModel.h \

@@ -19,7 +19,7 @@ public:
 
     const QString &typePoints() const;
 
-    const QStringList &points() const;
+    QVector<double> points() const;
 
     void setTypePoints(const QString &newTypePoints);
 

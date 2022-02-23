@@ -5,7 +5,7 @@ DialogNewMeasurement::DialogNewMeasurement(const int &id, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogNewMeasurement)
 {
-    _id = id;
+    _id = id+1;
     ui->setupUi(this);
     loadDefaultParameters();
 }
@@ -41,20 +41,6 @@ void DialogNewMeasurement::on_start_pushButton_clicked()
 
     //add measurement
     DBCrystal db;
-    CrystalMeasurementProtocolModel protocol;
-    protocol.anodeVoltage = ui->anodeVoltage_doubleSpinBox->value();
-    protocol.thresholdVoltage = ui->thresholdVoltage_doubleSpinBox->value();
-    protocol.extendableDeadTime = ui->extendableDeadTime_doubleSpinBox->value();
-    protocol.notes = ui->notes_plainTextEdit->toPlainText();
-    if(ui->pointsTable_checkBox->isChecked()) {
-        protocol.typePoints = pointsTableDialog.typePoints();
-        protocol.points = pointsTableDialog.points();
-    }
-    protocol.userId = Settings::loggedUserId();
-    if(!db.insert(&protocol)) {
-        QMessageBox::warning(this,tr("Inserting error"),tr("Database communication error!\nPlease contact the administrator."));
-        return;
-    }
     CrystalMeasurementRegisterModel reg;
     reg.id = 0;
     reg.systemLabel = _systemLabel;
@@ -96,6 +82,26 @@ void DialogNewMeasurement::on_start_pushButton_clicked()
     reg.sourceId = ui->sourceID_lineEdit->text();
     reg.sourceNo = ui->sourceNo_spinBox->value();
     reg.geometry = ui->geometry_lineEdit->text();
+    CrystalMeasurementProtocolModel protocol;
+    protocol.measurementId = reg.measurementId;
+    protocol.anodeVoltage << ui->anodeVoltage_doubleSpinBox->value();
+    protocol.thresholdVoltage << ui->thresholdVoltage_doubleSpinBox->value();
+    protocol.extendableDeadTime = ui->extendableDeadTime_doubleSpinBox->value();
+    protocol.notes = ui->notes_plainTextEdit->toPlainText();
+    if(ui->pointsTable_checkBox->isChecked()) {
+        if(pointsTableDialog.typePoints() == "Anode") {
+            protocol.anodeVoltage.clear();
+            protocol.anodeVoltage = pointsTableDialog.points();
+        }else if(pointsTableDialog.typePoints() == "Threshold") {
+            protocol.thresholdVoltage.clear();
+            protocol.thresholdVoltage = pointsTableDialog.points();
+        }
+    }
+    protocol.userId = Settings::loggedUserId();
+    if(!db.insert(&protocol)) {
+        QMessageBox::warning(this,tr("Inserting error"),tr("Database communication error!\nPlease contact the administrator."));
+        return;
+    }
     reg.protocolId = protocol.id;
     reg.blankTime = ui->blankTime_spinBox->value();
     reg.sourceTime = ui->sourceTime_spinBox->value();
@@ -145,6 +151,17 @@ void DialogNewMeasurement::loadDefaultParameters()
         ui->thresholdVoltage_doubleSpinBox->setValue(protocol.thresholdVoltage);
         ui->extendableDeadTime_doubleSpinBox->setValue(protocol.extendableDeadTime);
         ui->notes_plainTextEdit->setPlainText(protocol.notes);
+    }
+}
+
+
+void DialogNewMeasurement::on_isBlank_checkBox_toggled(bool checked)
+{
+    if(checked) {
+        ui->blankTime_spinBox->setEnabled(true);
+    }else {
+        ui->blankTime_spinBox->setEnabled(false);
+        ui->blankTime_spinBox->setValue(0);
     }
 }
 

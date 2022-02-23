@@ -16,6 +16,9 @@
   <property name="styleSheet">
    <string notr="true">QMainWindow, QDialog {
 	background-color: rgb(255, 255, 255);
+}
+QGroupBox {
+	background-color: rgb(244, 244, 244);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -165,7 +168,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -267,7 +270,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">

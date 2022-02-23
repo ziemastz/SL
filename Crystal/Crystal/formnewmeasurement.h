@@ -18,7 +18,9 @@ public:
 
     void setSystemLabel(const QString &newSystemLabel);
 signals:
-    void startNewMeasurement(int registerId);
+    void startNewMeasurement(const int &registerId);
+    void abortMeasurement(const int &portId);
+
 public slots:
     void setNuclide(const QString &nuclide);
     void setSourceId(const QString &sourceId);
@@ -31,8 +33,12 @@ public slots:
     void setCounts(const double &value);
     void setDeadTime(const double &value);
 
+    void finished();
+
 private slots:
     void on_start_pushButton_clicked();
+
+    void on_stop_pushButton_clicked();
 
 private:
     Ui::FormNewMeasurement *ui;

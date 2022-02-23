@@ -3,13 +3,25 @@
 #include "dbcrystal.h"
 class CrystalMeasurementProtocolModel : public BaseModel
 {
+    QVector<double> toVectorDouble(const QString& str) const {
+        QVector<double> ret;
+        QStringList list = str.split("|");
+        foreach(QString val, list)
+            ret << val.toDouble();
+        return ret;
+    }
+    QString toString(const QVector<double>& tab) const {
+        QStringList ret;
+        foreach(double val,tab)
+            ret << QString::number(val);
+        return ret.join("|");
+    }
 public:
-    double anodeVoltage;
-    double thresholdVoltage;
+    QString measurementId;
+    QVector<double> anodeVoltage;
+    QVector<double> thresholdVoltage;
     double extendableDeadTime;
     QString notes;
-    QString typePoints;
-    QStringList points;
 
     BaseModel *copy() {
         CrystalMeasurementProtocolModel *ret = new CrystalMeasurementProtocolModel;
@@ -23,24 +35,22 @@ public:
     void setRecord(const QVariantList& record) {
         int i=0;
         id = record.at(i++).toInt();
-        anodeVoltage = record.at(i++).toDouble();
-        thresholdVoltage = record.at(i++).toDouble();
+        measurementId = record.at(i++).toString();
+        anodeVoltage = toVectorDouble(record.at(i++).toString());
+        thresholdVoltage = toVectorDouble(record.at(i++).toString());
         extendableDeadTime = record.at(i++).toDouble();
         notes = record.at(i++).toString();
-        typePoints = record.at(i++).toString();
-        points = record.at(i++).toString().split("|");
         lastModification = record.at(i++).toString();
         userId = record.at(i++).toInt();
     }
     QVariantList record()const {
         QVariantList ret;
         ret << id
-            << anodeVoltage
-            << thresholdVoltage
+            << measurementId
+            << toString(anodeVoltage)
+            << toString(thresholdVoltage)
             << extendableDeadTime
             << notes
-            << typePoints
-            << points
             << lastModification
             << userId;
         return ret;

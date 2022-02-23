@@ -71,9 +71,12 @@ void DialogPointsTable::setTypePoints(const QString &newTypePoints)
     ui->typePoints_comboBox->setCurrentText(_typePoints);
 }
 
-const QStringList &DialogPointsTable::points() const
+QVector<double> DialogPointsTable::points() const
 {
-    return _points;
+    QVector<double> ret;
+    foreach(QString val, _points)
+        ret << val.toDouble();
+    return ret;
 }
 
 const QString &DialogPointsTable::typePoints() const

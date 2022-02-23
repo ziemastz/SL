@@ -2,6 +2,7 @@
 #define COUNTER_H
 #include <QObject>
 #include <QDebug>
+#include <QDateTime>
 #include "naicounter.h"
 #include "dbcrystal.h"
 class Counter
@@ -11,7 +12,12 @@ public:
     ~Counter();
     void setDeviceName(const QString &deviceName);
     bool isConnect() const;
+public slots:
     void readData();
+    bool setStart(const NaICounter::PORT &id);
+    bool setStop(const NaICounter::PORT &id);
+    bool setReset(const NaICounter::PORT &id);
+    bool setDeadTime(const NaICounter::PORT &id, const double &value);
 
     bool startA();
     bool startB();
@@ -28,30 +34,38 @@ public:
     bool resetC();
     bool resetD();
 
+    unsigned int counts(const NaICounter::PORT &id) const;
     unsigned int countsA() const;
     unsigned int countsB() const;
     unsigned int countsC() const;
     unsigned int countsD() const;
 
+    double cps(const NaICounter::PORT &id);
     double cpsA() const;
     double cpsB() const;
     double cpsC() const;
     double cpsD() const;
 
+    unsigned int countsLiveTime(const NaICounter::PORT &id) const;
     double liveTimeA() const;
     double liveTimeB() const;
     double liveTimeC() const;
     double liveTimeD() const;
 
+    unsigned int countsRealTime(const NaICounter::PORT &id) const;
+    double realTime(const NaICounter::PORT &id);
     double realTimeA() const;
     double realTimeB() const;
     double realTimeC() const;
     double realTimeD() const;
 
+    double deadTime(const NaICounter::PORT &id);
     double deadTimeA() const;
     double deadTimeB() const;
     double deadTimeC() const;
     double deadTimeD() const;
+
+    QDateTime startDateTime(const NaICounter::PORT &id) const;
 
 
 private:
@@ -77,9 +91,11 @@ private:
     unsigned int _realTimeC;
     unsigned int _realTimeD;
 
-    bool setStart(const NaICounter::PORT &id);
-    bool setStop(const NaICounter::PORT &id);
-    bool setReset(const NaICounter::PORT &id);
+    QDateTime _startA;
+    QDateTime _startB;
+    QDateTime _startC;
+    QDateTime _startD;
+
 };
 
 #endif // COUNTER_H
