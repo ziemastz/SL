@@ -58,6 +58,12 @@ private slots:
 
     void on_saveUser_pushButton_clicked();
 
+    void on_filterSystem_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_filterNuclide_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_filterSourceId_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void addFormSystem();
