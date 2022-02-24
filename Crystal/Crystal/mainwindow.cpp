@@ -690,3 +690,15 @@ void MainWindow::on_filterSourceId_comboBox_currentIndexChanged(const QString &a
     }
 }
 
+
+void MainWindow::on_register_tableWidget_cellDoubleClicked(int row, int column)
+{
+    QString selectedMeasId = ui->register_tableWidget->item(row,0)->text();
+
+    DialogMeasurementReport *reportDialog = new DialogMeasurementReport(selectedMeasId,this);
+    connect(reportDialog,SIGNAL(rejected()),reportDialog,SLOT(deleteLater()));
+    connect(reportDialog,SIGNAL(rejected()),this,SLOT(on_measurementRegister_pushButton_clicked()));
+    reportDialog->show();
+    reportDialog->load();
+}
+

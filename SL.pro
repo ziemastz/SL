@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 SUBDIRS += \
     DatabaseStarlingLab \
     Settings \
+    Statistics \
     TripleReg \
     Utils
 

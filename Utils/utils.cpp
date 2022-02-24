@@ -153,3 +153,11 @@ QString Utils::generatorTimeDHMSString(const int &leftTime)
         return QString("%1d %2h %3min %4s").arg(day).arg(hour).arg(minute).arg(second);
     }
 }
+
+QString Utils::toString(const QVector<double> &tab)
+{
+    QStringList ret;
+    foreach(double val,tab)
+        ret << QString::number(val);
+    return ret.join("|");
+}

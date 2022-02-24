@@ -12,6 +12,7 @@ SOURCES += \
     counter.cpp \
     dbcrystal.cpp \
     dialogcreateanaccount.cpp \
+    dialogmeasurementreport.cpp \
     dialogmsgbox.cpp \
     dialognewmeasurement.cpp \
     dialogpointstable.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     counter.h \
     dbcrystal.h \
     dialogcreateanaccount.h \
+    dialogmeasurementreport.h \
     dialogmsgbox.h \
     dialognewmeasurement.h \
     dialogpointstable.h \
@@ -41,6 +43,7 @@ HEADERS += \
 
 FORMS += \
     dialogcreateanaccount.ui \
+    dialogmeasurementreport.ui \
     dialogmsgbox.ui \
     dialognewmeasurement.ui \
     dialogpointstable.ui \
@@ -113,3 +116,14 @@ win32: LIBS += -L$$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
 
 INCLUDEPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include
 DEPENDPATH += $$PWD/../../../Adept/digilent.adept.sdk_v2.4.2/include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Statistics/release/ -lStatistics
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Statistics/debug/ -lStatistics
+
+INCLUDEPATH += $$PWD/../../Statistics
+DEPENDPATH += $$PWD/../../Statistics
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Statistics/release/libStatistics.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Statistics/debug/libStatistics.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Statistics/release/Statistics.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Statistics/debug/Statistics.lib
