@@ -69,9 +69,6 @@ void DialogMeasurementReport::load()
     }
 
     //raw
-    QVector<double> blankCps;
-    QMap<int,QVector<double> > sourcesCps;
-    QStringList pointsTagList;
     CrystalMeasurementRAWModel raw;
     DatabaseResults results = db.select(&raw,"measurementId="+QString::number(reg.id));
     for(int i=0; i<results.count(); i++) {
@@ -87,20 +84,5 @@ void DialogMeasurementReport::load()
                   << QString::number((double)raw.realTime/1000,'f',2)
                   << QString::number(100-((double)raw.liveTime*100/(double)raw.realTime),'f',1);
         Utils::addItemTableWidget(ui->raw_tableWidget,rawCounts);
-        if(reg.sourceNo == 0) {
-            blankCps << (double)raw.counts/((double)raw.liveTime/1000);
-        }else {
-            if(sourcesCps.contains(reg.sourceNo)) {
-                sourcesCps[reg.sourceNo] << (double)raw.counts/((double)raw.liveTime/1000);
-            }else {
-                sourcesCps.insert(reg.sourceNo,QVector<double>() <<(double)raw.counts/((double)raw.liveTime/1000));
-            }
-        }
-        if(!pointsTagList.contains(raw.pointTag))
-            pointsTagList << raw.pointTag;
-
     }
-
-
-
 }

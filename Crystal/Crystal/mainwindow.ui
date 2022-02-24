@@ -107,13 +107,6 @@ QGroupBox {
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="1" column="0">
-          <widget class="QPushButton" name="report_pushButton">
-           <property name="text">
-            <string>Report</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
           <widget class="QPushButton" name="logbook_pushButton">
            <property name="text">
             <string>Logbook</string>
@@ -168,7 +161,7 @@ QGroupBox {
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1869,6 +1862,7 @@ QGroupBox {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_logbook"/>
      </widget>
     </item>
    </layout>
