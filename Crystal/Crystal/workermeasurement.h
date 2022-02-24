@@ -2,6 +2,8 @@
 #define WORKERMEASUREMENT_H
 #include <QObject>
 #include <QTimer>
+#include <QMutex>
+
 #include "dbcrystal.h"
 #include "counter.h"
 #include "dialogmsgbox.h"
@@ -50,7 +52,7 @@ private:
         Stop,
         Finished
     }stateProcess;
-
+    QMutex mutex;
     NaICounter::PORT _port;
     Counter *_counter;
     QTimer *timer;

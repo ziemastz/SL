@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     addFormSystem();
-    ui->stackedWidget->setCurrentIndex(2);
+    on_measurementRegister_pushButton_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -171,6 +171,77 @@ void MainWindow::on_cancelSettings_pushButton_clicked()
 void MainWindow::on_measurementRegister_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    Utils::clearTableWidget(ui->register_tableWidget);
+
+    QStringList filterSystem;
+    QStringList filterNuclide;
+    QStringList filterSourceId;
+    filterSystem << QString("");
+    filterNuclide << QString("");
+    filterSourceId << QString("");
+
+    DBCrystal db;
+    CrystalMeasurementRegisterModel reg;
+    int countReg = db.countRecord(&reg);
+    int partSize = 10;
+    for(int i=0; i<countReg; i+=partSize) {
+        QApplication::processEvents();
+        DatabaseResults results = db.select(&reg,QString(),DBCrystal::Order::DESC,partSize,i);
+        UserModel author;
+        UserModel acceptedBy;
+        QVector<QStringList> table;
+        for(int j=0; j<results.count(); j++) {
+            reg.setRecord(results.at(j)->record());
+            if(!db.select(reg.userId,&author)){
+                QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                return;
+            }
+            if(reg.acceptedId > 0) {
+                if(!db.select(reg.acceptedId,&acceptedBy)){
+                    QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                    return;
+                }
+            }else {
+                acceptedBy.firstName = "";
+            }
+            if(!filterSystem.contains(reg.systemLabel))
+                filterSystem << reg.systemLabel;
+            if(!filterNuclide.contains(reg.nuclide))
+                filterNuclide << reg.nuclide;
+            if(!filterSourceId.contains(reg.sourceId))
+                filterSourceId << reg.sourceId;
+            QStringList record;
+            record << reg.measurementId
+                   << reg.measurementDate
+                   << reg.nuclide
+                   << reg.sourceId
+                   << reg.linked
+                   << reg.category
+                   << author.captionShort()
+                   << acceptedBy.captionShort()+" "+reg.acceptedDateTime;
+            table << record;
+        }
+        ui->register_tableWidget->setSortingEnabled(false);
+        foreach(QStringList record, table) {
+            Utils::addItemTableWidget(ui->register_tableWidget,record);
+        }
+        ui->register_tableWidget->setSortingEnabled(true);
+    }
+    ui->filterSystem_comboBox->blockSignals(true);
+    ui->filterSystem_comboBox->clear();
+    ui->filterSystem_comboBox->addItems(filterSystem);
+    ui->filterSystem_comboBox->blockSignals(false);
+
+    ui->filterNuclide_comboBox->blockSignals(true);
+    ui->filterNuclide_comboBox->clear();
+    ui->filterNuclide_comboBox->addItems(filterNuclide);
+    ui->filterNuclide_comboBox->blockSignals(false);
+
+    ui->filterSourceId_comboBox->blockSignals(true);
+    ui->filterSourceId_comboBox->clear();
+    ui->filterSourceId_comboBox->addItems(filterSourceId);
+    ui->filterSourceId_comboBox->blockSignals(false);
+
 }
 
 void MainWindow::on_saveSettings_pushButton_clicked()

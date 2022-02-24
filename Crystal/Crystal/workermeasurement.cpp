@@ -17,7 +17,9 @@ void WorkerMeasurement::startNewMeasurement(int registerId)
         emit msgBox(tr("Reading error"),tr("Database communication error!\nPlease contact the administrator."),_port);
         return;
     }
+    mutex.lock();
     _counter->setDeadTime(_port,protocol.extendableDeadTime);
+    mutex.unlock();
 
     emit setNuclide(reg.nuclide);
     emit setGeometry(reg.geometry);
@@ -51,7 +53,7 @@ void WorkerMeasurement::startNewMeasurement(int registerId)
     timer = new QTimer(0);
     connect(timer, SIGNAL(timeout()), this, SLOT(process()));
     connect(this, SIGNAL(finished()), timer, SLOT(stop()));
-    timer->start(200);
+    timer->start(500);
 }
 
 void WorkerMeasurement::acceptedMsgBox(const int &portId)
@@ -86,7 +88,9 @@ void WorkerMeasurement::abortMeasurement(const int &portId)
 
 void WorkerMeasurement::process()
 {
+    mutex.lock();
     _counter->readData();
+    mutex.unlock();
 
     switch (stateProcess) {
     case WorkerMeasurement::Blank: {
@@ -150,9 +154,11 @@ void WorkerMeasurement::process()
             stateProcess = WorkerMeasurement::NextPoint;
         }else {
             currTime = 0;
+            mutex.lock();
             _counter->setReset(_port);
             _counter->setStart(_port);
             _counter->readData();
+            mutex.unlock();
             emit setActivity(0.0);
             emit setCounts(0.0);
             emit setDeadTime(0.0);
@@ -165,8 +171,10 @@ void WorkerMeasurement::process()
     case WorkerMeasurement::Measurement: {
         currTime = qRound(_counter->realTime(_port));
         if(currTime>maxTime) {
+            mutex.lock();
             _counter->setStop(_port);
             _counter->readData();
+            mutex.unlock();
             stateProcess = WorkerMeasurement::Stop;
         }
         //update activity counts deadTIme
