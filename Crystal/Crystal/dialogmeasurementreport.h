@@ -33,6 +33,8 @@ private slots:
 
     void on_remove_pushButton_clicked();
 
+    void on_cancel_pushButton_clicked();
+
 private:
     Ui::DialogMeasurementReport *ui;
     QString _measId;

@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS labInfo (
 	PRIMARY KEY(id AUTOINCREMENT)
 )^_
 INSERT OR IGNORE INTO labInfo VALUES(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1)^_
-CREATE TABLE IF NOT EXISTS crystalRegLogbook (
+CREATE TABLE IF NOT EXISTS crystalLogbook (
 	id INTEGER,
 	type TEXT,
 	description TEXT,
@@ -140,11 +140,11 @@ CREATE TABLE IF NOT EXISTS crystalRegLogbook (
 )^_
 CREATE TRIGGER IF NOT EXISTS userInsert AFTER INSERT ON user
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Add', 'Create new user', 'User', new.username, CURRENT_TIMESTAMP, new.userId);
+	INSERT INTO crystalLogbook VALUES(NULL, 'Add', 'Create new user', 'User', new.username, CURRENT_TIMESTAMP, new.userId);
 END^_
 CREATE TRIGGER IF NOT EXISTS userUpdate AFTER UPDATE ON user
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+	INSERT INTO crystalLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.password<>old.password,' - Password was changed.','')||
 		iif(new.degree<>old.degree,' - Degree from '||old.degree||' to '||new.degree||'.'||char(10),'')||
 		iif(new.firstName<>old.firstName,' - First name from '||old.firstName||' to '||new.firstName||'.'||char(10),'')||
@@ -154,7 +154,7 @@ BEGIN
 END^_
 CREATE TRIGGER IF NOT EXISTS measurementRegisterInsert AFTER INSERT ON crystalMeasurementRegister
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Add', 'A new measurement has been added with the ID '||new.measurementId, 'Measurement', new.measurementId, CURRENT_TIMESTAMP, new.userId);
+	INSERT INTO crystalLogbook VALUES(NULL, 'Add', 'A new measurement has been added with the ID '||new.measurementId, 'Measurement', new.measurementId, CURRENT_TIMESTAMP, new.userId);
 END^_
 CREATE TRIGGER IF NOT EXISTS measurementRegisterUpdate AFTER UPDATE ON crystalMeasurementRegister
 BEGIN
@@ -170,7 +170,7 @@ BEGIN
 END^_
 CREATE TRIGGER IF NOT EXISTS protocolUpdate AFTER UPDATE ON crystalProtocol
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+	INSERT INTO crystalLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.anodeVoltage<>old.anodeVoltage,' - Anode voltage from '||old.anodeVoltage||' to '||new.anodeVoltage||'.'||char(10),'')||
 		iif(new.thresholdVolatge<>old.thresholdVolatge,' - Threshold voltage from '||old.thresholdVolatge||' to '||new.thresholdVolatge||'.'||char(10),'')||
 		iif(new.extendableDeadTime<>old.extendableDeadTime,' - Dead-time from '||old.extendableDeadTime||' to '||new.extendableDeadTime||'.'||char(10),'')||
@@ -179,7 +179,7 @@ BEGIN
 END^_
 CREATE TRIGGER IF NOT EXISTS measurementProtocolUpdate AFTER UPDATE ON crystalMeasurementProtocol
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify',
+	INSERT INTO crystalLogbook VALUES(NULL, 'Modify',
 		iif(new.notes<>old.notes,'Modified protocol notes in the measurement '||old.measurementId||' from '||old.notes||' to '||new.notes||'.'||char(10),''),
 		'Measurement',old.measurementId, CURRENT_TIMESTAMP, new.userId);
 END^_

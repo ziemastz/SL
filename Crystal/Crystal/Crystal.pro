@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     counter.cpp \
     dbcrystal.cpp \
+    dialogaddeven.cpp \
     dialogcreateanaccount.cpp \
     dialogmeasurementreport.cpp \
     dialogmsgbox.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
     workermeasurement.cpp
 
 HEADERS += \
+    Model/crystalLogbookModel.h \
     Model/crystalMeasurementProtocolModel.h \
     Model/crystalMeasurementRAWModel.h \
     Model/crystalMeasurementRegisterModel.h \
@@ -31,6 +33,7 @@ HEADERS += \
     Model/crystalSettingsModel.h \
     counter.h \
     dbcrystal.h \
+    dialogaddeven.h \
     dialogcreateanaccount.h \
     dialogmeasurementreport.h \
     dialogmsgbox.h \
@@ -42,6 +45,7 @@ HEADERS += \
     workermeasurement.h
 
 FORMS += \
+    dialogaddeven.ui \
     dialogcreateanaccount.ui \
     dialogmeasurementreport.ui \
     dialogmsgbox.ui \

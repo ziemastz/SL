@@ -702,3 +702,110 @@ void MainWindow::on_register_tableWidget_cellDoubleClicked(int row, int column)
     reportDialog->load();
 }
 
+void MainWindow::on_logbook_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    Utils::clearTableWidget(ui->logbook_tableWidget);
+    DBCrystal db;
+    QStringList rootFilter;
+    QStringList elementFilter;
+    rootFilter << QString("");
+    elementFilter << QString("");
+    int countRecord = db.countRecord(new CrystalLogbookModel);
+    int partSize = 10;
+    for(int i=0; i<countRecord; i+=partSize) {
+        QApplication::processEvents();
+        DatabaseResults results = db.select(new CrystalLogbookModel,QString(""),DBCrystal::Order::DESC,partSize,i);
+        CrystalLogbookModel logbook;
+        UserModel author;
+        QVector<QStringList> table;
+        for(int j=0; j < results.count(); j++) {
+            logbook.setRecord(results.at(j)->record());
+            db.select(logbook.userId,&author);
+            if(!rootFilter.contains(logbook.root))
+                rootFilter << logbook.root;
+            if(!elementFilter.contains(logbook.element))
+                elementFilter << logbook.element;
+            QStringList record;
+            record << logbook.lastModification
+                   << logbook.type
+                   << logbook.description
+                   << logbook.root
+                   << logbook.element
+                   << author.captionShort();
+            table << record;
+        }
+        ui->logbook_tableWidget->setSortingEnabled(false);
+        foreach(QStringList record, table)
+            Utils::addItemTableWidget(ui->logbook_tableWidget,record);
+        ui->logbook_tableWidget->setSortingEnabled(true);
+    }
+    ui->rootFilter_comboBox->blockSignals(true);
+    ui->rootFilter_comboBox->clear();
+    rootFilter.sort();
+    ui->rootFilter_comboBox->addItems(rootFilter);
+    ui->rootFilter_comboBox->blockSignals(false);
+
+    ui->elementFilter_comboBox->blockSignals(true);
+    ui->elementFilter_comboBox->clear();
+    elementFilter.sort();
+    ui->elementFilter_comboBox->addItems(elementFilter);
+    ui->elementFilter_comboBox->blockSignals(false);
+
+}
+
+
+
+void MainWindow::on_rootFilter_comboBox_currentIndexChanged(const QString &arg1)
+{
+    QStringList elementFilter;
+    elementFilter << QString("");
+    for(int i=0; i<ui->logbook_tableWidget->rowCount();i++) {
+        QApplication::processEvents();
+        if(!arg1.isEmpty()) {
+            bool match = ui->logbook_tableWidget->item(i,3)->text() == arg1;
+            if(match) {
+                if(!elementFilter.contains(ui->logbook_tableWidget->item(i,4)->text()))
+                    elementFilter << ui->logbook_tableWidget->item(i,4)->text();
+            }
+            ui->logbook_tableWidget->setRowHidden(i,!match);
+        }else {
+            ui->logbook_tableWidget->setRowHidden(i,false);
+            if(!elementFilter.contains(ui->logbook_tableWidget->item(i,4)->text()))
+                elementFilter << ui->logbook_tableWidget->item(i,4)->text();
+        }
+    }
+    ui->elementFilter_comboBox->blockSignals(true);
+    ui->elementFilter_comboBox->clear();
+    elementFilter.sort();
+    ui->elementFilter_comboBox->addItems(elementFilter);
+    ui->elementFilter_comboBox->blockSignals(false);
+}
+
+
+void MainWindow::on_elementFilter_comboBox_currentIndexChanged(const QString &arg1)
+{
+    for(int i=0; i< ui->logbook_tableWidget->rowCount(); i++) {
+        if(!arg1.isEmpty()){
+            bool match = ui->logbook_tableWidget->item(i,4)->text() == arg1;
+            ui->logbook_tableWidget->setRowHidden(i,!match);
+        }else {
+            if(!ui->rootFilter_comboBox->currentText().isEmpty()){
+                bool match = ui->logbook_tableWidget->item(i,3)->text() == ui->rootFilter_comboBox->currentText();
+                ui->logbook_tableWidget->setRowHidden(i,!match);
+            }else
+                ui->logbook_tableWidget->setRowHidden(i,false);
+        }
+    }
+}
+
+
+void MainWindow::on_addEventLogbook_pushButton_clicked()
+{
+    DialogAddEven addEven;
+    if(addEven.exec() == QDialog::Accepted) {
+        on_logbook_pushButton_clicked();
+        this->setFocus();
+    }
+}
+

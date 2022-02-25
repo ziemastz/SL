@@ -12,6 +12,7 @@
 #include "counter.h"
 #include "workermeasurement.h"
 #include "dialogmeasurementreport.h"
+#include "dialogaddeven.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -66,6 +67,14 @@ private slots:
     void on_filterSourceId_comboBox_currentIndexChanged(const QString &arg1);
 
     void on_register_tableWidget_cellDoubleClicked(int row, int column);
+
+    void on_logbook_pushButton_clicked();
+
+    void on_rootFilter_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_elementFilter_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_addEventLogbook_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

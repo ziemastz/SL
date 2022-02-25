@@ -10,6 +10,7 @@
 #include "Model/crystalProtocolModel.h"
 #include "Model/crystalSettingsModel.h"
 #include "Model/crystalMeasurementRAWModel.h"
+#include "Model/crystalLogbookModel.h"
 
 class DBCrystal : public SLDatabase
 {
