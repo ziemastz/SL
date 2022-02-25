@@ -205,10 +205,16 @@ void DialogMeasurementReport::on_remove_pushButton_clicked()
             QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
             return;
         }else {
-            db.remove(&protocol);
-            db.remove(new CrystalMeasurementRAWModel,"measurementId="+QString::number(reg.id));
+            db.SLDatabase::remove(&protocol);
+            db.SLDatabase::remove(new CrystalMeasurementRAWModel,"measurementId="+QString::number(reg.id));
             reject();
         }
     }
+}
+
+
+void DialogMeasurementReport::on_cancel_pushButton_clicked()
+{
+    reject();
 }
 

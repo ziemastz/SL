@@ -32,7 +32,7 @@ bool DBCrystal::increaseCountsMeasurement(const QString &systemNumber, const int
 
 bool DBCrystal::remove(CrystalMeasurementRegisterModel *model, const int &loggedUserId)
 {
-    if(remove(model)) {
+    if(SLDatabase::remove(model)) {
         exec("INSERT INTO crystalRegLogbook VALUES(NULL, 'Delete','The measurement with ID "+model->measurementId+" has been deleted along with the all measurement data.', 'Measurement', '"+model->measurementId+"', CURRENT_TIMESTAMP,"+QString::number(loggedUserId)+")");
         return true;
     }else {

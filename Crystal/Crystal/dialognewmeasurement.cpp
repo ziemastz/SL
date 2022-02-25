@@ -115,13 +115,13 @@ void DialogNewMeasurement::on_start_pushButton_clicked()
     reg.userId = Settings::loggedUserId();
     if(!db.insert(&reg)) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
-        db.remove(&protocol);
+        db.SLDatabase::remove(&protocol);
         return;
     }
     if(!db.increaseCountsMeasurement(systemNumber,QDateTime::currentDateTime().date().year())) {
         QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
-        db.remove(&protocol);
-        db.remove(&reg);
+        db.SLDatabase::remove(&protocol);
+        db.SLDatabase::remove(&reg);
         return;
     }
     emit startNewMeasurement(reg.id);
