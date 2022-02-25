@@ -21,6 +21,8 @@ SOURCES += \
     formnewmeasurement.cpp \
     main.cpp \
     mainwindow.cpp \
+    map.cpp \
+    reportgenerator.cpp \
     workermeasurement.cpp
 
 HEADERS += \
@@ -42,6 +44,8 @@ HEADERS += \
     dialogsinginuser.h \
     formnewmeasurement.h \
     mainwindow.h \
+    map.h \
+    reportgenerator.h \
     workermeasurement.h
 
 FORMS += \

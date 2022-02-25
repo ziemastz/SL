@@ -4,11 +4,14 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QMap>
+#include <QDir>
+#include <QFileDialog>
 
 #include "dbcrystal.h"
 #include "utils.h"
 #include "statistics.h"
 #include "settings.h"
+#include "reportgenerator.h"
 
 namespace Ui {
 class DialogMeasurementReport;
@@ -35,11 +38,14 @@ private slots:
 
     void on_cancel_pushButton_clicked();
 
+    void on_export_pushButton_clicked();
+
 private:
     Ui::DialogMeasurementReport *ui;
     QString _measId;
     CrystalMeasurementRegisterModel reg;
     CrystalMeasurementProtocolModel protocol;
+    QVector<QStringList> _counts;
 };
 
 #endif // DIALOGMEASUREMENTREPORT_H

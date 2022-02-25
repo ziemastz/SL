@@ -71,6 +71,11 @@ void DialogMeasurementReport::load()
     //raw
     CrystalMeasurementRAWModel raw;
     DatabaseResults results = db.select(&raw,"measurementId="+QString::number(reg.id));
+    _counts.clear();
+    QStringList labels;
+    for(int i=0;i<ui->raw_tableWidget->columnCount();i++)
+        labels << ui->raw_tableWidget->horizontalHeaderItem(i)->text();
+    _counts << labels;
     for(int i=0; i<results.count(); i++) {
         raw.setRecord(results.at(i)->record());
         QStringList rawCounts;
@@ -84,6 +89,7 @@ void DialogMeasurementReport::load()
                   << QString::number((double)raw.realTime/1000,'f',2)
                   << QString::number(100-((double)raw.liveTime*100/(double)raw.realTime),'f',1);
         Utils::addItemTableWidget(ui->raw_tableWidget,rawCounts);
+        _counts << rawCounts;
     }
 }
 
@@ -216,5 +222,20 @@ void DialogMeasurementReport::on_remove_pushButton_clicked()
 void DialogMeasurementReport::on_cancel_pushButton_clicked()
 {
     reject();
+}
+
+
+void DialogMeasurementReport::on_export_pushButton_clicked()
+{
+    QDir dirReport(QDir::currentPath()+"/Export");
+    if(!dirReport.exists())
+        dirReport.mkpath(dirReport.path());
+
+    QString fileNameReport = QFileDialog::getSaveFileName(this,tr("Export"),dirReport.path()+"/"+reg.measurementId+".nai",tr("NaI (*.nai)"));
+    ReportGenerator report(fileNameReport);
+    report.setMeasurementRegister(reg);
+    report.setMeasurementProtocol(protocol);
+    report.setCounts(_counts);
+    report.create();
 }
 
