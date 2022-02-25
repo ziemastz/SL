@@ -29,3 +29,13 @@ bool DBCrystal::increaseCountsMeasurement(const QString &systemNumber, const int
     current++;
     return exec("UPDATE crystalMeasurementRegisterCounter SET number="+QString::number(current)+" WHERE year="+QString::number(year)+" AND systemNumber='"+systemNumber+"'");
 }
+
+bool DBCrystal::remove(CrystalMeasurementRegisterModel *model, const int &loggedUserId)
+{
+    if(remove(model)) {
+        exec("INSERT INTO crystalRegLogbook VALUES(NULL, 'Delete','The measurement with ID "+model->measurementId+" has been deleted along with the all measurement data.', 'Measurement', '"+model->measurementId+"', CURRENT_TIMESTAMP,"+QString::number(loggedUserId)+")");
+        return true;
+    }else {
+        return false;
+    }
+}

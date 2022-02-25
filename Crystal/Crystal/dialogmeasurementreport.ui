@@ -785,8 +785,14 @@
          </item>
          <item row="0" column="3">
           <widget class="QComboBox" name="category_comboBox">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizeAdjustPolicy">
             <enum>QComboBox::AdjustToContents</enum>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
            </property>
            <item>
             <property name="text">
@@ -914,6 +920,9 @@
         <widget class="QPushButton" name="modify_pushButton">
          <property name="text">
           <string>Modify</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

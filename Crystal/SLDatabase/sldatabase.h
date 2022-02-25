@@ -42,6 +42,7 @@ public:
     bool insert(BaseModel *model);
     bool remove(BaseModel *model);
     bool remove(BaseModel *model, const QString &filter);
+
 protected:
     bool exec(const QString &statement);
     QVector<QVariantList> _records;
