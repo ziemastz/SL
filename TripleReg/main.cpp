@@ -10,6 +10,8 @@
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
       QByteArray localMsg = msg.toLocal8Bit();
+      const char *file = context.file ? context.file : "";
+      const char *function = context.function ? context.function : "";
       QString txt;
       QDateTime date;
 
@@ -19,19 +21,19 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
           QTextStream out(&outFile);
           switch (type) {
           case QtDebugMsg:
-              txt.append(QString("Debug: %1").arg(localMsg.constData()));
+              txt.append(QString("Debug: %1 (%2:%3, %4)").arg(localMsg.constData()).arg(file).arg(context.line).arg(function));
               break;
           case QtInfoMsg:
-              txt.append(QString("Info: %1").arg(localMsg.constData()));
+              txt.append(QString("Info: %1 (%2:%3, %4)").arg(localMsg.constData()).arg(file).arg(context.line).arg(function));
               break;
           case QtWarningMsg:
-              txt.append(QString("Warning: %1").arg(localMsg.constData()));
+              txt.append(QString("Warning: %1 (%2:%3, %4)").arg(localMsg.constData()).arg(file).arg(context.line).arg(function));
               break;
           case QtCriticalMsg:
-              txt.append(QString("Critical: %1").arg(localMsg.constData()));
+              txt.append(QString("Critical: %1 (%2:%3, %4)").arg(localMsg.constData()).arg(file).arg(context.line).arg(function));
               break;
           case QtFatalMsg:
-              txt.append(QString("Fatal: %1").arg(localMsg.constData()));
+              txt.append(QString("Fatal: %1 (%2:%3, %4)").arg(localMsg.constData()).arg(file).arg(context.line).arg(function));
               abort();
           }
           txt.prepend(" - ");
@@ -66,6 +68,7 @@ int main(int argc, char *argv[])
     if(signIn.exec() != QDialog::Accepted) {
         return 0;
     }
+    qDebug() << "Logged user";
     MainWindow w;
     w.show();
     return a.exec();

@@ -127,12 +127,14 @@ void WorkerMeasurementProcess::process()
         break;
     }
     case WorkerMeasurementProcess::SetupHV: {// nextPoint
+        qDebug() << "Start setup HV";
         if(!nextPoint()) {
             currPoint = 0;
             currAnode = 0;
             currFocusing = 0;
             stateProcess = WorkerMeasurementProcess::NextSource;
         }else {
+            qDebug() << "Start setup HV";
             emit setCurrentPoint(currPoint);
             if(!turnOnPowerSupply()) {
                 stateProcess = WorkerMeasurementProcess::Finished;
@@ -288,6 +290,7 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
 
 bool WorkerMeasurementProcess::turnOnPowerSupply()
 {
+    qDebug() << "Turn on HV";
     int ch0 = _protocol.anodaVoltage.at(currAnode-1) + _protocol.voltageShiftA;
     int ch1 = _protocol.anodaVoltage.at(currAnode-1) + _protocol.voltageShiftB;
     int ch2 = _protocol.anodaVoltage.at(currAnode-1) + _protocol.voltageShiftC;
