@@ -122,11 +122,11 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/release/MAC3Counter.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../Adept/MAC3Counter/debug/MAC3Counter.lib
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
+else:win32:CONFIG(debug, debug|release): LIBS += -$$PWD/../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldmgr
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../Adept/digilent.adept.sdk_v2.4.2/lib64/ -ldepp
 
-INCLUDEPATH += $$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
-DEPENDPATH += $$PWD/../../Adept/MAC3Counter/digilent.adept.sdk_v2.4.2/include
+INCLUDEPATH += $$PWD/../../Adept/digilent.adept.sdk_v2.4.2/include
+DEPENDPATH += $$PWD/../../Adept/digilent.adept.sdk_v2.4.2/include
