@@ -47,11 +47,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 int main(int argc, char *argv[])
 {
     qInstallMessageHandler(myMessageOutput);
-    QCoreApplication::addLibraryPath("/bin");
+    QCoreApplication::addLibraryPath(QDir::currentPath()+"/bin");
     QApplication a(argc, argv);
     QApplication::setApplicationName("TripleReg");
     QApplication::setApplicationVersion("1.0.0");
-
+/*
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    */
     DatabaseStarlingLab db;
     db.createDatabase(":/db/sl.sql");
 

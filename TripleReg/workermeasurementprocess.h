@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtGlobal>
-#include <QApplication>
+#include <QCoreApplication>
 #include <QMessageBox>
 #include <QTimer>
 #include <QElapsedTimer>

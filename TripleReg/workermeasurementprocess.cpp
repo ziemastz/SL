@@ -59,11 +59,13 @@ void WorkerMeasurementProcess::init()
 
     emit setEndTime(generatorEndTime());
     emit setTimeLeft(timeLeft());
-
+/*
     timer = new QTimer(0);
     connect(timer, SIGNAL(timeout()), this, SLOT(process()));
     connect(this, SIGNAL(finished()), timer, SLOT(stop()));
     timer->start(500);
+  */
+    QTimer::singleShot(500,this,SLOT(process()));
 }
 
 void WorkerMeasurementProcess::acceptedMessageBox()
@@ -73,7 +75,7 @@ void WorkerMeasurementProcess::acceptedMessageBox()
 
 void WorkerMeasurementProcess::rejectedMessageBox()
 {
-    stateProcess = WorkerMeasurementProcess::Finished;
+   stateProcess = WorkerMeasurementProcess::Finished;
 }
 
 void WorkerMeasurementProcess::abortedPowerSupplyProcessBox()
@@ -135,7 +137,7 @@ void WorkerMeasurementProcess::process()
             stateProcess = WorkerMeasurementProcess::NextSource;
         }else {
             qDebug() << "Start setup HV";
-            emit setCurrentPoint(currPoint);
+           // emit setCurrentPoint(currPoint);
             if(!turnOnPowerSupply()) {
                 stateProcess = WorkerMeasurementProcess::Finished;
                 break;
@@ -162,7 +164,7 @@ void WorkerMeasurementProcess::process()
         break;
     }
     case WorkerMeasurementProcess::Measurement: {
-        currTime = (int)counter->realTime();
+        currTime = qRound(counter->realTime());
         emit setCurrentTime(currTime);
         if(currTime >= maxTime) {
             counter->stop();
@@ -199,7 +201,8 @@ void WorkerMeasurementProcess::process()
     }
     emit setEndTime(generatorEndTime());
     emit setTimeLeft(timeLeft());
-   // timer->start(500);
+   QTimer::singleShot(500,this,SLOT(process()));
+    // timer->start(500);
 }
 
 bool WorkerMeasurementProcess::refreshN1470()
@@ -248,6 +251,8 @@ bool WorkerMeasurementProcess::refreshMAC3()
             //QMessageBox::warning(nullptr,tr("Counter"),tr("Communication error with the MAC3 counter.\nPlease check the connectivity parameters."));
             return false;
         }
+        mac3->setExtClk(settings.isExtClk);
+        mac3->disconnect();
     }else {
         counter->readData();
     }
@@ -271,7 +276,7 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
         return false;
     }
     while(1) {
-        QApplication::processEvents();
+        QCoreApplication::processEvents();
         if(isAbort) {
             emit hidePowerSupplyProcessBox();
             return false;
@@ -314,7 +319,7 @@ bool WorkerMeasurementProcess::turnOnPowerSupply()
         return false;
     }
     while(1) {
-        QApplication::processEvents();
+        QCoreApplication::processEvents();
         if(isAbort) {
             emit hidePowerSupplyProcessBox();
             return false;
@@ -338,7 +343,7 @@ bool WorkerMeasurementProcess::stabilizationPowerSupply()
     QElapsedTimer time;
     time.start();
     while(1) {
-        QApplication::processEvents();
+        QCoreApplication::processEvents();
         if(isAbort) {
             emit hidePowerSupplyProcessBox();
             return false;

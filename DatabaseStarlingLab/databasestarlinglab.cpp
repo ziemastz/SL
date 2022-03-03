@@ -243,7 +243,7 @@ void DatabaseStarlingLab::createDatabase(const QString &configFile)
         return;
 
     QString config = file.readAll();
-    QStringList sqlStatements = config.split("^_",Qt::SkipEmptyParts);
+    QStringList sqlStatements = config.split("^_",QString::SkipEmptyParts);
 
     foreach(QString statement, sqlStatements) {
         if(!exec(statement)){

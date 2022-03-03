@@ -364,9 +364,9 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         return;
     }
     DialogMeasurementProcess dialogMeasurementProcess(reg,this);
-    this->hide();
+    //this->show();
     dialogMeasurementProcess.exec();
-    this->show();
+    //this->show();
     this->setFocus();
     on_measReg_pushButton_clicked();
 
