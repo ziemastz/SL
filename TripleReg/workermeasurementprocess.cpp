@@ -252,7 +252,6 @@ bool WorkerMeasurementProcess::refreshMAC3()
             return false;
         }
         mac3->setExtClk(settings.isExtClk);
-        mac3->disconnect();
     }else {
         counter->readData();
     }

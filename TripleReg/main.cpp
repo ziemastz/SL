@@ -46,8 +46,8 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 int main(int argc, char *argv[])
 {
-    qInstallMessageHandler(myMessageOutput);
-    QCoreApplication::addLibraryPath(QDir::currentPath()+"/bin");
+    //qInstallMessageHandler(myMessageOutput);
+    //QCoreApplication::addLibraryPath(QDir::currentPath()+"/bin");
     QApplication a(argc, argv);
     QApplication::setApplicationName("TripleReg");
     QApplication::setApplicationVersion("1.0.0");
