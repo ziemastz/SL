@@ -26,11 +26,22 @@ void DialogMeasurementReport::load()
     ui->measurementDate_lineEdit->setText(_reg.measurementDate);
     ui->solutionId_lineEdit->setText(_reg.solutionId);
     ui->sourceId_lineEdit->setText(_reg.sourceId);
-    ui->blankTime_spinBox->setValue(_reg.blankTime);
-    ui->blankRepeat_spinBox->setValue(_reg.repeat);
-    ui->sourceRepeat_spinBox->setValue(_reg.repeat);
-    ui->sourceTime_spinBox->setValue(_reg.sourceTime);
-    ui->sourceNo_spinBox->setValue(_reg.sourceNo);
+    if(_reg.isBlank){
+        ui->blankTime_spinBox->setValue(_reg.blankTime);
+        ui->blankRepeat_spinBox->setValue(_reg.repeat);
+    }else {
+        ui->blankTime_spinBox->setValue(0);
+        ui->blankRepeat_spinBox->setValue(0);
+    }
+    if(_reg.sourceNo == 0) {
+        ui->sourceRepeat_spinBox->setValue(0);
+        ui->sourceTime_spinBox->setValue(0);
+        ui->sourceNo_spinBox->setValue(0);
+    }else {
+        ui->sourceRepeat_spinBox->setValue(_reg.repeat);
+        ui->sourceTime_spinBox->setValue(_reg.sourceTime);
+        ui->sourceNo_spinBox->setValue(_reg.sourceNo);
+    }
     ui->linked_lineEdit->setText(_reg.linked);
     ui->category_comboBox->setCurrentText(_reg.category);
     ui->comments_plainTextEdit->setPlainText(_reg.comments);
@@ -79,9 +90,9 @@ void DialogMeasurementReport::load()
     int points = _protocol.anodaVoltage.count() * _protocol.focusingVoltage.count();
     ui->blankPoint_spinBox->setValue(points);
     ui->sourcePoint_spinBox->setValue(points);
-    ui->blankSumTime_spinBox->setValue(points * _reg.blankTime * _reg.repeat);
-    ui->sourceSumTime_spinBox->setValue(points * _reg.sourceTime * _reg.repeat);
-    double hours = (double)(points * _reg.sourceTime * _reg.repeat * _reg.sourceNo) / 3600;
+    ui->blankSumTime_spinBox->setValue(points * ui->blankTime_spinBox->value() * ui->blankRepeat_spinBox->value());
+    ui->sourceSumTime_spinBox->setValue(points * ui->sourceTime_spinBox->value() * ui->sourceRepeat_spinBox->value());
+    double hours = (double)(points * ui->sourceTime_spinBox->value() * ui->sourceRepeat_spinBox->value() * _reg.sourceNo) / 3600;
     if(hours<=1.0) {
         if(hours*60<=1.0){
             ui->sourcesTotalTime_doubleSpinBox->setSuffix(" s");

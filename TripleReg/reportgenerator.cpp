@@ -21,8 +21,8 @@ ReportGenerator::ReportGenerator(const QString &fileName, QObject *parent) : QOb
 
 ReportGenerator::~ReportGenerator()
 {
-    delete _textStream;
     _file.close();
+    delete _textStream;
 }
 
 void ReportGenerator::setMeasurementRegister(const TripleRegMeasurementRegisterModel &reg)
@@ -262,7 +262,9 @@ void ReportGenerator::generatorRES()
         pointList << QString::number(i+1);
     }
     appendText(" "+pointList.join(" "));
-    appendText(QString("  0.00      %1       %2").arg(QString::number(_reg.blankTime),QString::number(_reg.repeat)));
+    if(_reg.isBlank) {
+        appendText(QString("  0.00      %1       %2").arg(QString::number(_reg.blankTime),QString::number(_reg.repeat)));
+    }
     QVector<QStringList> countsRES;
     int sourceNo = 0;
     for(int i=1;i<_counts.count();i++){
