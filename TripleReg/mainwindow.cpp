@@ -52,6 +52,38 @@ void MainWindow::on_newMeasurement_pushButton_clicked()
 
 }
 
+void MainWindow::on_newMeasurement_pushButton_clicked(const TripleRegMeasurementRegisterModel &reg)
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    DatabaseStarlingLab db;
+    //clear & load
+    // first clear
+    ui->nuclide_lineEdit->setText(reg.nuclide);
+    ui->solutionID_lineEdit->setText(reg.solutionId);
+    ui->sourceID_lineEdit->setText(reg.sourceId);
+    ui->sourceNo_spinBox->setValue(reg.sourceNo);
+    ui->isBlank_checkBox->setChecked(reg.isBlank);
+
+
+    ui->blankTime_spinBox->setValue(reg.blankTime);
+    ui->sourceTime_spinBox->setValue(reg.sourceTime);
+    ui->repeat_spinBox->setValue(reg.repeat);
+
+    TripleRegProtocolModel protocol;
+    DatabaseResults result = db.select(&protocol);
+    ui->protocol_comboBox->clear();
+    for(int i=0; i<result.count(); i++){
+        protocol.setRecord(result.at(i)->record());
+        ui->protocol_comboBox->addItem(protocol.name);
+    }
+    db.select(reg.protocolId,&protocol);
+    ui->protocol_comboBox->setCurrentText(protocol.name);
+
+    ui->linked_lineEdit->setPlaceholderText(reg.linked);
+    ui->category_comboBox->setCurrentText(reg.category);
+    ui->comment_plainTextEdit->setPlaceholderText(reg.comments);
+}
+
 void MainWindow::on_cancelNewMeasurement_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
@@ -624,5 +656,62 @@ void MainWindow::on_isBlank_checkBox_toggled(bool checked)
 {
     if(!checked)
         ui->blankTime_spinBox->setValue(0);
+}
+
+
+void MainWindow::on_measurementRegister_tableWidget_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu menu;
+    menu.addAction(tr("Powtórz pomiar"));
+    menu.addAction(tr("Usuń"));
+
+    QPoint globalPos = ui->measurementRegister_tableWidget->mapToGlobal(pos);
+    QAction* selectedItem = menu.exec(globalPos);
+    if(selectedItem) {
+        QString textAction = selectedItem->text();
+
+        QStringList ids;
+        foreach(QTableWidgetItem *item, ui->measurementRegister_tableWidget->selectedItems()) {
+            ids << ui->measurementRegister_tableWidget->item(item->row(),0)->text();
+        }
+        if(textAction == tr("Usuń")) {
+            if(QMessageBox::question(this,tr("Delete"),tr("Are you sure you want to delete this measurement?"),QMessageBox::Yes,QMessageBox::No) == QMessageBox::Yes) {
+                DatabaseStarlingLab db;
+                TripleRegMeasurementRegisterModel _reg;
+                TripleRegMeasurementProtocolModel _protocol;
+                DatabaseResults result = db.select(&_reg,"measurementId='"+ids.first()+"'");
+                if(result.count() != 1) {
+                    QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                    return;
+                }
+                _reg.setRecord(result.at(0)->record());
+                if(!db.remove(&_reg,Settings::loggedUserId())) {
+                    QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                    return;
+                }else {
+                    //protocol
+                    if(!db.select(_reg.protocolId,&_protocol)) {
+                        QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                        return;
+                    }
+                    db.remove(&_protocol);
+                    db.remove(new TripleRegMeasurementRAWModel,"measurementId="+QString::number(_reg.id));
+                }
+            }
+
+        }else if(textAction==tr("Powtórz pomiar"))
+        {
+            DatabaseStarlingLab db;
+            TripleRegMeasurementRegisterModel _reg;
+            DatabaseResults result = db.select(&_reg,"measurementId='"+ids.first()+"'");
+            if(result.count() != 1) {
+                QMessageBox::warning(this,tr("Database"),tr("Database communication error. Please contact the administrator."));
+                return;
+            }
+            _reg.setRecord(result.at(0)->record());
+            on_newMeasurement_pushButton_clicked(_reg);
+        }
+
+    }
 }
 

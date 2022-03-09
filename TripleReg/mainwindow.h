@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QPoint>
+#include <QMenu>
+#include <QAction>
 
 #include "utils.h"
 #include "settings.h"
@@ -33,6 +36,7 @@ private slots:
     void on_exit_pushButton_clicked();
 
     void on_newMeasurement_pushButton_clicked();
+    void on_newMeasurement_pushButton_clicked(const TripleRegMeasurementRegisterModel &reg);
 
     void on_cancelNewMeasurement_pushButton_clicked();
 
@@ -79,6 +83,8 @@ private slots:
     void on_sourceNo_spinBox_valueChanged(int arg1);
 
     void on_isBlank_checkBox_toggled(bool checked);
+
+    void on_measurementRegister_tableWidget_customContextMenuRequested(const QPoint &pos);
 
 private:
     Ui::MainWindow *ui;
