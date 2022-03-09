@@ -66,8 +66,6 @@ private slots:
 
     void on_filterSolution_comboBox_currentIndexChanged(const QString &arg1);
 
-    void on_saveLab_pushButton_clicked();
-
     void on_measurementRegister_tableWidget_cellDoubleClicked(int row, int column);
 
     void on_logbook_pushButton_clicked();
@@ -77,6 +75,10 @@ private slots:
     void on_rootFilter_comboBox_currentIndexChanged(const QString &arg1);
 
     void on_elementFilter_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_sourceNo_spinBox_valueChanged(int arg1);
+
+    void on_isBlank_checkBox_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;

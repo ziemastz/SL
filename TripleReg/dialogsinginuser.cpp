@@ -23,7 +23,7 @@ void DialogSingInUser::on_exit_pushButton_clicked()
 void DialogSingInUser::on_forgotPassword_pushButton_clicked()
 {
     //TODO in future: open dialog with form to send email
-    QMessageBox::information(this,tr("Forgot password"),tr("Please contact the TripleReg administrator."));
+    QMessageBox::information(this,tr("Zapomiałeś hasło"),tr("Proszę skontaktuj się z administratorem programu TripleReg."));
 }
 
 
@@ -31,7 +31,7 @@ void DialogSingInUser::on_signUp_pushButton_clicked()
 {
     DialogCreateAnAccount createAnAccount;
     if(createAnAccount.exec() == QDialog::Accepted) {
-        QMessageBox::information(this,tr("Account"),tr("Congratulations, the new user has been successfully created.\nPlease sing in now with your username and password."));
+        QMessageBox::information(this,tr("Nowe konto"),tr("Gratulacje, nowe konto zostało dodane..\nProsze zaloguj się uzywać nazwy użytkownika i hasła."));
     }
 }
 
@@ -43,6 +43,6 @@ void DialogSingInUser::on_signIn_pushButton_clicked()
         Settings::setLoggedUserId(_loggedUserId);
         accept();
     }else {
-        QMessageBox::warning(this,tr("Login error"),tr("The username or password is incorrect.\nPlease check and try again."));
+        QMessageBox::warning(this,tr("Bład logowania"),tr("Nazwa użytkonika lub/i hasło podane jest nie prawidłowe.\nProsze sprawdź i spróbuj ponownie."));
     }
 }

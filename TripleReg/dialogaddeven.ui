@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>381</width>
-    <height>218</height>
+    <width>413</width>
+    <height>215</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="cancel_pushButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -58,7 +58,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Logbook</string>
+        <string>Dziennik</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -83,7 +83,7 @@
    <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Add an event</string>
+      <string>Dodaj nowe zdarzenie</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -92,7 +92,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Type</string>
+         <string>Rodzaj</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -139,7 +139,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Desciption</string>
+         <string>Opis zdarzenia</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -149,7 +149,7 @@
       <item row="1" column="1" colspan="3">
        <widget class="QPlainTextEdit" name="desciption_plainTextEdit">
         <property name="placeholderText">
-         <string>Please provide a detailed description of the event</string>
+         <string>Prosimy o dokładny opis wydarzenia</string>
         </property>
        </widget>
       </item>
@@ -169,7 +169,7 @@
       <item row="2" column="3">
        <widget class="QPushButton" name="add_pushButton">
         <property name="text">
-         <string>Add</string>
+         <string>Dodaj</string>
         </property>
        </widget>
       </item>

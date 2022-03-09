@@ -17,7 +17,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="text_label">
      <property name="text">
-      <string>High voltage setup in progress ... </string>
+      <string>Trwa ustawianie wysokiego napięcia... </string>
      </property>
     </widget>
    </item>
@@ -34,7 +34,7 @@
    <item row="2" column="0">
     <widget class="QPushButton" name="abort_pushButton">
      <property name="text">
-      <string>Abort</string>
+      <string>Przerwij</string>
      </property>
      <property name="autoDefault">
       <bool>false</bool>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>657</width>
-    <height>643</height>
+    <width>642</width>
+    <height>627</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="cancel_pushButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -58,7 +58,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Measurement Report</string>
+        <string>Raport pomiarowy</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -101,7 +101,7 @@ background-color: rgb(240, 240, 240);
 }</string>
       </property>
       <attribute name="title">
-       <string>Register</string>
+       <string>Pomiar</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="0" column="0" colspan="3">
@@ -178,7 +178,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Nuclide</string>
+            <string>Radionuklid</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -241,7 +241,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Measurement date</string>
+            <string>Data pomiaru</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -308,10 +308,13 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Solution ID</string>
+            <string>Identyfikator roztworu</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -324,7 +327,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Source ID</string>
+            <string>Identyfikator źródeł</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -395,7 +398,7 @@ background-color: rgb(240, 240, 240);
            <item row="0" column="0">
             <widget class="QLabel" name="label_23">
              <property name="text">
-              <string>Name</string>
+              <string>Nazwa</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -427,7 +430,7 @@ background-color: rgb(240, 240, 240);
            <item row="1" column="2">
             <widget class="QLabel" name="label_25">
              <property name="text">
-              <string>HV focusing (V)</string>
+              <string>WN fokalizacji [V]</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -437,7 +440,7 @@ background-color: rgb(240, 240, 240);
            <item row="0" column="2">
             <widget class="QLabel" name="label_24">
              <property name="text">
-              <string>HV anode (V)</string>
+              <string>WN Anody [V]</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -560,7 +563,7 @@ background-color: rgb(240, 240, 240);
              <item row="1" column="4">
               <widget class="QLabel" name="label_66">
                <property name="text">
-                <string>Resolving time</string>
+                <string>Czas rozdzielczy</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -570,7 +573,7 @@ background-color: rgb(240, 240, 240);
              <item row="2" column="0">
               <widget class="QLabel" name="label_61">
                <property name="text">
-                <string>Threshold (V)</string>
+                <string>Próg dyskryminacji [V]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -686,7 +689,7 @@ background-color: rgb(240, 240, 240);
              <item row="2" column="4">
               <widget class="QLabel" name="label_67">
                <property name="text">
-                <string>Dead-time</string>
+                <string>Czas martwy</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -696,7 +699,7 @@ background-color: rgb(240, 240, 240);
              <item row="1" column="0">
               <widget class="QLabel" name="label_65">
                <property name="text">
-                <string>Shift anode (V)</string>
+                <string>Dopasowanie anodowe [V]</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -706,7 +709,7 @@ background-color: rgb(240, 240, 240);
              <item row="3" column="0">
               <widget class="QLabel" name="label_62">
                <property name="text">
-                <string>Notes</string>
+                <string>Uwagi</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -742,7 +745,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Comments</string>
+            <string>Komentarz</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -853,7 +856,7 @@ background-color: rgb(240, 240, 240);
            <item row="0" column="3">
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>Time</string>
+              <string>Czas</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -885,7 +888,7 @@ background-color: rgb(240, 240, 240);
            <item row="0" column="1">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>Point</string>
+              <string>Punkty</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -945,7 +948,7 @@ background-color: rgb(240, 240, 240);
               <enum>QAbstractSpinBox::NoButtons</enum>
              </property>
              <property name="suffix">
-              <string> sources</string>
+              <string> źr.</string>
              </property>
              <property name="maximum">
               <number>9999</number>
@@ -965,7 +968,7 @@ background-color: rgb(240, 240, 240);
            <item row="2" column="0">
             <widget class="QLabel" name="label_14">
              <property name="text">
-              <string>Source</string>
+              <string>Źródło</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1008,7 +1011,7 @@ background-color: rgb(240, 240, 240);
            <item row="0" column="5">
             <widget class="QLabel" name="label_13">
              <property name="text">
-              <string>Repeat</string>
+              <string>Powtórzenia</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -1062,7 +1065,7 @@ background-color: rgb(240, 240, 240);
            <item row="1" column="0">
             <widget class="QLabel" name="label_10">
              <property name="text">
-              <string>Blank</string>
+              <string>Tło</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1135,7 +1138,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Measurement protocol</string>
+            <string>Protokół pomiarowy</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1189,7 +1192,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Last modification</string>
+            <string>Ostatnia modyfikacja</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1233,7 +1236,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Measurement time</string>
+            <string>Czas pomiaru</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1252,7 +1255,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Author</string>
+            <string>Wykonał</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1275,7 +1278,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Linked</string>
+            <string>Połączone</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1313,7 +1316,7 @@ background-color: rgb(240, 240, 240);
             </font>
            </property>
            <property name="text">
-            <string>Category</string>
+            <string>Kategoria</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1336,17 +1339,17 @@ background-color: rgb(240, 240, 240);
            </property>
            <item>
             <property name="text">
-             <string>Standardization</string>
+             <string>Pomiar</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Control</string>
+             <string>Kontrola</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Characteristic</string>
+             <string>Charakterystyka</string>
             </property>
            </item>
           </widget>
@@ -1374,7 +1377,7 @@ background-color: rgb(240, 240, 240);
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>Save</string>
+            <string>Zapisz</string>
            </property>
           </widget>
          </item>
@@ -1394,7 +1397,7 @@ background-color: rgb(240, 240, 240);
          <item>
           <widget class="QPushButton" name="modify_pushButton">
            <property name="text">
-            <string>Modify</string>
+            <string>Modyfikuj</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -1423,7 +1426,7 @@ background-color: rgb(240, 240, 240);
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Counts</string>
+       <string>Zliczenia</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
@@ -1471,17 +1474,17 @@ background-color: rgb(240, 240, 240);
              </column>
              <column>
               <property name="text">
-               <string>Source No</string>
+               <string>Nr źr.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Point</string>
+               <string>Punkt</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Repeat</string>
+               <string>Powtórzenie</string>
               </property>
              </column>
              <column>
@@ -1587,17 +1590,17 @@ background-color: rgb(240, 240, 240);
              </column>
              <column>
               <property name="text">
-               <string>Source No</string>
+               <string>Nr źr.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Point</string>
+               <string>Punkt</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Repeat</string>
+               <string>Powtórzenie</string>
               </property>
              </column>
              <column>
@@ -1704,7 +1707,7 @@ background-color: rgb(240, 240, 240);
        <item row="0" column="3">
         <widget class="QRadioButton" name="counts_radioButton">
          <property name="text">
-          <string>Counts</string>
+          <string>Zliczenia</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -1743,7 +1746,7 @@ background-color: rgb(240, 240, 240);
      <item row="1" column="1">
       <widget class="QLabel" name="label_30">
        <property name="text">
-        <string>Accepted</string>
+        <string>Zaakceptowane</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1799,7 +1802,7 @@ background-color: rgb(240, 240, 240);
      <item>
       <widget class="QPushButton" name="remove_pushButton">
        <property name="text">
-        <string>Remove</string>
+        <string>Usuń</string>
        </property>
       </widget>
      </item>
@@ -1825,7 +1828,7 @@ background-color: rgb(240, 240, 240);
         </font>
        </property>
        <property name="text">
-        <string>Accept measurement</string>
+        <string>Akceptuj pomiar</string>
        </property>
       </widget>
      </item>
@@ -1845,7 +1848,7 @@ background-color: rgb(240, 240, 240);
      <item>
       <widget class="QPushButton" name="export_pushButton">
        <property name="text">
-        <string>Export</string>
+        <string>Eksportuj dane</string>
        </property>
       </widget>
      </item>

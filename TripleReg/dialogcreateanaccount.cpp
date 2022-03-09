@@ -28,11 +28,11 @@ void DialogCreateAnAccount::on_username_lineEdit_editingFinished()
         ui->warnigUsername_label->clear();
         break;
     case 0:
-        ui->warnigUsername_label->setText(tr("This username not allowed.\nTry another?"));
+        ui->warnigUsername_label->setText(tr("Ta nazwa użytkownika jest niedozwolona.\nSpróbuj inną?"));
         ui->username_lineEdit->setFocus();
         break;
     case -1:
-        QMessageBox::warning(this,tr("Database"),tr("Reading error from database!\nPlease contact the administrator."));
+        QMessageBox::warning(this,tr("Baza danych"),tr("Błąd odczytu z bazy danych!\nSkontaktuj się z administratorem."));
         break;
     }
 }
@@ -41,7 +41,7 @@ void DialogCreateAnAccount::on_username_lineEdit_editingFinished()
 void DialogCreateAnAccount::on_password_lineEdit_editingFinished()
 {
     if(ui->password_lineEdit->text().size() < 3) {
-        ui->warnigPassword_label->setText(tr("3 minimum characters!"));
+        ui->warnigPassword_label->setText(tr("Minimum 3 znaki!"));
         ui->password_lineEdit->setFocus();
     }else {
         ui->warnigPassword_label->clear();
@@ -52,7 +52,7 @@ void DialogCreateAnAccount::on_password_lineEdit_editingFinished()
 void DialogCreateAnAccount::on_confirmPassword_lineEdit_editingFinished()
 {
     if(ui->password_lineEdit->text() != ui->confirmPassword_lineEdit->text()) {
-        ui->warnigConfirmPassword_label->setText(tr("Password must match!"));
+        ui->warnigConfirmPassword_label->setText(tr("Hasło musi być zgodne!"));
         ui->confirmPassword_lineEdit->setFocus();
     }else {
         ui->warnigConfirmPassword_label->clear();
@@ -63,19 +63,19 @@ void DialogCreateAnAccount::on_confirmPassword_lineEdit_editingFinished()
 void DialogCreateAnAccount::on_singUp_pushButton_clicked()
 {
     if(!ui->warnigConfirmPassword_label->text().isEmpty() || !ui->warnigPassword_label->text().isEmpty() || !ui->warnigUsername_label->text().isEmpty()) {
-        QMessageBox::warning(this,tr("Error"),tr("Incorrect login details.\nPlease check and try again."));
+        QMessageBox::warning(this,tr("Bład"),tr("Błędne dane logowania.\nProszę sprawdzić i spróbować ponownie."));
         return;
     }
 
     if(ui->firstName_lineEdit->text().isEmpty() || ui->lastName_lineEdit->text().isEmpty()) {
-        QMessageBox::warning(this,tr("Error"),tr("No first name or last name.\nPlease give your first name and  last name."));
+        QMessageBox::warning(this,tr("Bład"),tr("Brak imienia i nazwiska.\nNależy podać imię i nazwisko."));
         return;
     }
     bool ok;
 
-    QString username = QInputDialog::getText(this,tr("Authorization"),tr("Approving username"),QLineEdit::Normal,QString(),&ok);
+    QString username = QInputDialog::getText(this,tr("Autoryzacja"),tr("Nazwa użytkonika zatwierdzającego"),QLineEdit::Normal,QString(),&ok);
     if(ok && !username.isEmpty()) {
-        QString password = QInputDialog::getText(this,tr("Authorization"),tr("Password"),QLineEdit::Password,QString(),&ok);
+        QString password = QInputDialog::getText(this,tr("Autoryzacja"),tr("Hasło zatwierdzającego"),QLineEdit::Password,QString(),&ok);
         if(ok && !password.isEmpty()) {
             DatabaseStarlingLab db;
             int approvingUserId = db.signInUser(username,password);
@@ -94,11 +94,11 @@ void DialogCreateAnAccount::on_singUp_pushButton_clicked()
                 if(db.insert(&newUser)){
                     accept();
                 }else {
-                    QMessageBox::warning(this,tr("Database"),tr("Inserting error from database!\nPlease contact the administrator."));
+                    QMessageBox::warning(this,tr("Baza danych"),tr("Błąd zapisu do bazy danych!\nSkontaktuj się z administratorem."));
                     return;
                 }
             }else {
-                QMessageBox::warning(this,tr("Authorization"),tr("Authorization error!\nPlease try again?"));
+                QMessageBox::warning(this,tr("Autoryzacja"),tr("Błąd autoryzacji!\nProszę spróbować ponownie?"));
                 return;
             }
 

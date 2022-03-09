@@ -88,6 +88,7 @@ void Utils::addItemTableWidget(QTableWidget *table, const QStringList &record)
     }
     table->resizeColumnsToContents();
     table->resizeRowsToContents();
+    table->scrollToBottom();
     table->blockSignals(false);
 }
 

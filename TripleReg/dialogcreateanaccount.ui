@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>441</height>
+    <width>382</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Create an account</string>
+   <string>Nowe konto - TripleReg</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {
@@ -46,7 +46,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="cancel_pushButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -101,13 +101,13 @@
    <item row="1" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Create an account</string>
+      <string>Utwórz nowe konto</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="1" rowspan="2">
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
-         <string>Personal data</string>
+         <string>Dane personalne</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -125,7 +125,7 @@
             </font>
            </property>
            <property name="text">
-            <string>First name</string>
+            <string>Imie</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -145,7 +145,7 @@
          <item row="0" column="1">
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Degree</string>
+            <string>Stopień naukowy</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -155,7 +155,7 @@
          <item row="4" column="1">
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Second name</string>
+            <string>Drugie imie</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -177,7 +177,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Last name</string>
+            <string>Nazwisko</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -190,7 +190,7 @@
       <item row="0" column="0" rowspan="2">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
-         <string>Login data</string>
+         <string>Dane do logowania</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -205,7 +205,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Confirm password</string>
+            <string>Potwierdź hasło</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -235,7 +235,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Username</string>
+            <string>Nazwa użytkonika</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -273,7 +273,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Password</string>
+            <string>Hasło</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -352,7 +352,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Sing up</string>
+      <string>Zarejestruj się</string>
      </property>
     </widget>
    </item>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>563</height>
+    <width>1286</width>
+    <height>668</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -611,16 +611,6 @@ QDialog {
              </property>
             </spacer>
            </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_61">
-             <property name="text">
-              <string>Enter the data of the measurement object and the measurement parameters.</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0" rowspan="5">
             <spacer name="horizontalSpacer_2">
              <property name="orientation">
@@ -644,7 +634,7 @@ QDialog {
               </font>
              </property>
              <property name="text">
-              <string>New measurement</string>
+              <string>Nowy pomiar</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -654,7 +644,7 @@ QDialog {
            <item row="1" column="1" colspan="2">
             <widget class="QGroupBox" name="groupBox_12">
              <property name="title">
-              <string>Object of measurement</string>
+              <string>Obiekt pomiaru</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_11">
               <item row="0" column="0">
@@ -668,7 +658,7 @@ QDialog {
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Nuclide</string>
+                   <string>Radionuklid</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -710,7 +700,7 @@ QDialog {
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Solution ID</string>
+                   <string>Identyfikator roztworu</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -724,6 +714,9 @@ QDialog {
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string/>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -743,7 +736,7 @@ QDialog {
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Source ID</string>
+                   <string>Identyfikator źródeł</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -773,7 +766,7 @@ QDialog {
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string>Source No</string>
+                   <string>Ilość źródeł</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -796,7 +789,7 @@ QDialog {
                 <item>
                  <widget class="QCheckBox" name="isBlank_checkBox">
                   <property name="text">
-                   <string>Blank</string>
+                   <string>tło</string>
                   </property>
                   <property name="checked">
                    <bool>true</bool>
@@ -811,7 +804,7 @@ QDialog {
            <item row="2" column="1" colspan="2">
             <widget class="QGroupBox" name="groupBox_10">
              <property name="title">
-              <string>Time of measurement</string>
+              <string>Czas pomiaru</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
@@ -823,7 +816,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Blank</string>
+                 <string>Tło</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -846,7 +839,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Source</string>
+                 <string>Źródło</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -869,7 +862,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Repeat</string>
+                 <string>Liczba powtórzeń</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -889,7 +882,7 @@ QDialog {
            <item row="3" column="1" colspan="2">
             <widget class="QGroupBox" name="groupBox_11">
              <property name="title">
-              <string>System parameters of measurement</string>
+              <string>Elektroniczne parametry układu</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
@@ -901,7 +894,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Protocol</string>
+                 <string>Protokół</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -914,21 +907,21 @@ QDialog {
               <item>
                <widget class="QPushButton" name="editProtocol_pushButton">
                 <property name="text">
-                 <string>Edit</string>
+                 <string>Edytuj</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="removeProtocol_pushButton">
                 <property name="text">
-                 <string>Remove</string>
+                 <string>Usuń</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="addProtocol_pushButton">
                 <property name="text">
-                 <string>Add</string>
+                 <string>Dodaj</string>
                 </property>
                </widget>
               </item>
@@ -938,7 +931,7 @@ QDialog {
            <item row="4" column="1" colspan="2">
             <widget class="QGroupBox" name="groupBox_9">
              <property name="title">
-              <string>Additional information</string>
+              <string>Dodatkowe informacje</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_2">
               <item row="0" column="0">
@@ -950,7 +943,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Linked</string>
+                 <string>Połączone</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -964,6 +957,9 @@ QDialog {
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>-</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -979,7 +975,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Category</string>
+                 <string>Kategoria</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -990,17 +986,17 @@ QDialog {
                <widget class="QComboBox" name="category_comboBox">
                 <item>
                  <property name="text">
-                  <string>Standardization</string>
+                  <string>Pomiar</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Control</string>
+                  <string>Kontrola</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Characteristic</string>
+                  <string>Charakterystyka</string>
                  </property>
                 </item>
                </widget>
@@ -1014,7 +1010,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Comment</string>
+                 <string>Uwagi</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1035,6 +1031,9 @@ QDialog {
                   <height>100</height>
                  </size>
                 </property>
+                <property name="plainText">
+                 <string/>
+                </property>
                </widget>
               </item>
              </layout>
@@ -1045,7 +1044,7 @@ QDialog {
              <item>
               <widget class="QPushButton" name="cancelNewMeasurement_pushButton">
                <property name="text">
-                <string>Cancel</string>
+                <string>Anuluj</string>
                </property>
               </widget>
              </item>
@@ -1071,13 +1070,13 @@ QDialog {
            <item row="1" column="2">
             <widget class="QGroupBox" name="groupBox_18">
              <property name="title">
-              <string>Filter</string>
+              <string>Filtruj</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_14">
               <item row="0" column="0">
                <widget class="QLabel" name="label_32">
                 <property name="text">
-                 <string>Nuclide</string>
+                 <string>Radiunuklid</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1087,7 +1086,7 @@ QDialog {
               <item row="0" column="2">
                <widget class="QLabel" name="label_48">
                 <property name="text">
-                 <string>Solution</string>
+                 <string>Rzotwór</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1127,7 +1126,7 @@ QDialog {
               </font>
              </property>
              <property name="text">
-              <string>Measurement register</string>
+              <string>Rejestr pomiarów</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1170,42 +1169,42 @@ QDialog {
              </column>
              <column>
               <property name="text">
-               <string>Date</string>
+               <string>Data</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Nuclide</string>
+               <string>Radionuklid</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Solution</string>
+               <string>Roztwór</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Measurement object</string>
+               <string>Obiekt pomiaru</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Linked</string>
+               <string>Połączone</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Category</string>
+               <string>Kategoria</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Author</string>
+               <string>Wykonał</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Accepted</string>
+               <string>Zaakceptował</string>
               </property>
              </column>
             </widget>
@@ -1223,19 +1222,6 @@ QDialog {
              </property>
             </spacer>
            </item>
-           <item row="0" column="1" colspan="2">
-            <widget class="QLabel" name="label_57">
-             <property name="text">
-              <string>a list of performed standardization and control measurements as well as the characteristics of the measurement system</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="pageLogbook">
@@ -1249,7 +1235,7 @@ QDialog {
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Add event</string>
+              <string>Dodaj zdarzenie</string>
              </property>
             </widget>
            </item>
@@ -1269,7 +1255,7 @@ QDialog {
               </font>
              </property>
              <property name="text">
-              <string>Logbook</string>
+              <string>Dziennik zadarzeń</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1304,22 +1290,22 @@ QDialog {
              </attribute>
              <column>
               <property name="text">
-               <string>Date</string>
+               <string>Data</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Type</string>
+               <string>Zdarzenie</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Desciption</string>
+               <string>Opis zdarzenia</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Root</string>
+               <string>Miejsce</string>
               </property>
              </column>
              <column>
@@ -1332,7 +1318,7 @@ QDialog {
              </column>
              <column>
               <property name="text">
-               <string>User</string>
+               <string>Autor</string>
               </property>
               <property name="textAlignment">
                <set>AlignCenter</set>
@@ -1343,13 +1329,13 @@ QDialog {
            <item row="1" column="3">
             <widget class="QGroupBox" name="groupBox_19">
              <property name="title">
-              <string>Filter</string>
+              <string>Filtruj</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_13">
               <item row="0" column="0">
                <widget class="QLabel" name="label_31">
                 <property name="text">
-                 <string>Root</string>
+                 <string>Miejsce</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1396,13 +1382,6 @@ QDialog {
              </property>
             </spacer>
            </item>
-           <item row="0" column="1" colspan="3">
-            <widget class="QLabel" name="label_52">
-             <property name="text">
-              <string>monitoring of changes and log of the measurement system</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="pageSettings">
@@ -1427,13 +1406,13 @@ QDialog {
              </property>
              <widget class="QWidget" name="tab">
               <attribute name="title">
-               <string>General</string>
+               <string>Ogólne</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_20">
                <item row="2" column="1" colspan="3">
                 <widget class="QGroupBox" name="groupBox_14">
                  <property name="title">
-                  <string>Power supply</string>
+                  <string>Zasilanie wysokiego napięcia</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_17">
                   <item row="0" column="0">
@@ -1445,7 +1424,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Start delay</string>
+                     <string>Opóżnienie startu</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1471,7 +1450,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Max voltage of PMT</string>
+                     <string>Mak. napięcie na PMT</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1504,7 +1483,7 @@ QDialog {
                <item row="0" column="1" colspan="3">
                 <widget class="QGroupBox" name="groupBox_13">
                  <property name="title">
-                  <string>Default measurement time </string>
+                  <string>Domyślny czas pomiaru</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_16">
                   <item row="0" column="0">
@@ -1516,7 +1495,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Blank</string>
+                     <string>Tło</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1542,7 +1521,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Source</string>
+                     <string>Źrdóło</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1568,7 +1547,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Repeat</string>
+                     <string>Liczba powtórzeń</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1636,7 +1615,7 @@ QDialog {
                     <item>
                      <widget class="QPushButton" name="connectionTestMAC3Counter_pushButton">
                       <property name="text">
-                       <string>Connection test</string>
+                       <string>Test połączenia</string>
                       </property>
                      </widget>
                     </item>
@@ -1755,7 +1734,7 @@ QDialog {
                     <item>
                      <widget class="QPushButton" name="connectionTestN1470_pushButton">
                       <property name="text">
-                       <string>Connection test</string>
+                       <string>Test połaczenia</string>
                       </property>
                      </widget>
                     </item>
@@ -1783,7 +1762,7 @@ QDialog {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Save</string>
+                  <string>Zapisz</string>
                  </property>
                 </widget>
                </item>
@@ -1824,7 +1803,7 @@ QDialog {
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string>User</string>
+               <string>Użytkownik</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_28">
                <item row="0" column="0" rowspan="3">
@@ -1843,7 +1822,7 @@ QDialog {
                <item row="0" column="1">
                 <widget class="QGroupBox" name="groupBox_21">
                  <property name="title">
-                  <string>Login data</string>
+                  <string>Dane do logowania</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_27">
                   <item row="0" column="0">
@@ -1855,7 +1834,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Username</string>
+                     <string>Nazwa użytkownika</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1875,7 +1854,7 @@ QDialog {
                   <item row="1" column="1">
                    <widget class="QPushButton" name="passwordChange_pushButton">
                     <property name="text">
-                     <string>Password change</string>
+                     <string>Zmień hasło</string>
                     </property>
                    </widget>
                   </item>
@@ -1898,7 +1877,7 @@ QDialog {
                <item row="1" column="1">
                 <widget class="QGroupBox" name="groupBox_22">
                  <property name="title">
-                  <string>User data</string>
+                  <string>Dane personalne</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_26">
                   <item row="0" column="1">
@@ -1919,7 +1898,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Degree</string>
+                     <string>Stopień naukowy</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1935,7 +1914,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Second name</string>
+                     <string>Drugie imie</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1954,7 +1933,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>Last name</string>
+                     <string>Nazwisko</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1970,7 +1949,7 @@ QDialog {
                      </sizepolicy>
                     </property>
                     <property name="text">
-                     <string>First name</string>
+                     <string>Imie</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1989,7 +1968,7 @@ QDialog {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Save</string>
+                  <string>Zapisz</string>
                  </property>
                 </widget>
                </item>
@@ -2010,7 +1989,7 @@ QDialog {
              </widget>
              <widget class="QWidget" name="tab_3">
               <attribute name="title">
-               <string>System</string>
+               <string>Układ</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_24">
                <item row="0" column="0" rowspan="2">
@@ -2029,7 +2008,7 @@ QDialog {
                <item row="0" column="1">
                 <widget class="QGroupBox" name="groupBox_17">
                  <property name="title">
-                  <string>System information</string>
+                  <string>Informacje o układzie</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -2038,7 +2017,7 @@ QDialog {
                   <item row="0" column="0">
                    <widget class="QLabel" name="label_42">
                     <property name="text">
-                     <string>ID</string>
+                     <string>Numer układu</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2048,7 +2027,7 @@ QDialog {
                   <item row="0" column="2">
                    <widget class="QLabel" name="label_43">
                     <property name="text">
-                     <string>Name</string>
+                     <string>Nazwa</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2061,7 +2040,7 @@ QDialog {
                   <item row="1" column="0">
                    <widget class="QLabel" name="label_44">
                     <property name="text">
-                     <string>Full name</string>
+                     <string>Pełna nazwa</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2081,7 +2060,7 @@ QDialog {
                   <item row="2" column="0">
                    <widget class="QLabel" name="label_45">
                     <property name="text">
-                     <string>Measurement procedure name</string>
+                     <string>Nazwa procedury pomiarowej</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2104,7 +2083,7 @@ QDialog {
                   <item row="3" column="0">
                    <widget class="QLabel" name="label_46">
                     <property name="text">
-                     <string>Location</string>
+                     <string>Lokalizacja</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2137,7 +2116,7 @@ QDialog {
                   <item row="4" column="0">
                    <widget class="QLabel" name="label_47">
                     <property name="text">
-                     <string>Notes</string>
+                     <string>Uwagi</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2202,207 +2181,9 @@ QDialog {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Save</string>
+                  <string>Zapisz</string>
                  </property>
                 </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="tab_4">
-              <attribute name="title">
-               <string>Lab</string>
-              </attribute>
-              <layout class="QGridLayout" name="gridLayout_29">
-               <item row="0" column="0" rowspan="2">
-                <spacer name="horizontalSpacer_15">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>144</width>
-                   <height>318</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="1">
-                <widget class="QGroupBox" name="groupBox_20">
-                 <property name="title">
-                  <string>Laboratory information</string>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_25">
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="label_64">
-                    <property name="text">
-                     <string>ZIP / Postal code</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_65">
-                    <property name="text">
-                     <string>Address line 1</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="label_66">
-                    <property name="text">
-                     <string>Address line 2</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="3">
-                   <widget class="QLineEdit" name="city_lineEdit"/>
-                  </item>
-                  <item row="4" column="1" colspan="3">
-                   <widget class="QLineEdit" name="addressLine2_lineEdit"/>
-                  </item>
-                  <item row="7" column="3">
-                   <widget class="QLineEdit" name="email_lineEdit"/>
-                  </item>
-                  <item row="7" column="0">
-                   <widget class="QLabel" name="label_67">
-                    <property name="text">
-                     <string>Phone</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="2">
-                   <widget class="QLabel" name="label_68">
-                    <property name="text">
-                     <string>City</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1" colspan="3">
-                   <widget class="QLineEdit" name="addressLine1_lineEdit"/>
-                  </item>
-                  <item row="7" column="2">
-                   <widget class="QLabel" name="label_69">
-                    <property name="text">
-                     <string>E-mail</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_70">
-                    <property name="text">
-                     <string>Institute</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_71">
-                    <property name="text">
-                     <string>Department</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="label_72">
-                    <property name="text">
-                     <string>Country</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="1">
-                   <widget class="QLineEdit" name="zip_lineEdit"/>
-                  </item>
-                  <item row="7" column="1">
-                   <widget class="QLineEdit" name="phone_lineEdit"/>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_73">
-                    <property name="text">
-                     <string>Lab</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1" colspan="3">
-                   <widget class="QLineEdit" name="lab_lineEdit"/>
-                  </item>
-                  <item row="1" column="1" colspan="3">
-                   <widget class="QLineEdit" name="department_lineEdit"/>
-                  </item>
-                  <item row="0" column="1" colspan="3">
-                   <widget class="QLineEdit" name="institute_lineEdit"/>
-                  </item>
-                  <item row="6" column="1" colspan="3">
-                   <widget class="QLineEdit" name="country_lineEdit"/>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item row="0" column="2" rowspan="2">
-                <spacer name="horizontalSpacer_16">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>144</width>
-                   <height>318</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="1">
-                <widget class="QPushButton" name="saveLab_pushButton">
-                 <property name="font">
-                  <font>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Save</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <spacer name="verticalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>59</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </widget>
@@ -2411,7 +2192,7 @@ QDialog {
            <item row="2" column="1">
             <widget class="QPushButton" name="cancelSettings_pushButton">
              <property name="text">
-              <string>Cancel</string>
+              <string>Anuluj</string>
              </property>
             </widget>
            </item>
@@ -2425,7 +2206,7 @@ QDialog {
               </font>
              </property>
              <property name="text">
-              <string>Settings</string>
+              <string>Ustawienia</string>
              </property>
             </widget>
            </item>
@@ -2450,7 +2231,7 @@ QDialog {
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/logo_tripleReg.png</pixmap>
+         <pixmap resource="resources.qrc">:/logo_tripleReg.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -2460,7 +2241,7 @@ QDialog {
       <item row="0" column="4" rowspan="2">
        <widget class="QPushButton" name="exit_pushButton">
         <property name="text">
-         <string>EXIT</string>
+         <string>WYJŚCIE</string>
         </property>
         <property name="autoDefault">
          <bool>false</bool>
@@ -2513,20 +2294,20 @@ QDialog {
          <item>
           <widget class="QPushButton" name="newMeasurement_pushButton">
            <property name="text">
-            <string>New measurement</string>
+            <string>+ Nowy</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QGroupBox" name="groupBox">
            <property name="title">
-            <string>Register</string>
+            <string>Rejestry</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QPushButton" name="measReg_pushButton">
               <property name="text">
-               <string>Measurement</string>
+               <string>Pomiary</string>
               </property>
              </widget>
             </item>
@@ -2536,7 +2317,7 @@ QDialog {
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>Logbook</string>
+               <string>Dziennik</string>
               </property>
              </widget>
             </item>
@@ -2559,14 +2340,14 @@ QDialog {
          <item>
           <widget class="QPushButton" name="settings_pushButton">
            <property name="text">
-            <string>Settings</string>
+            <string>Ustawienia</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="version_label">
            <property name="text">
-            <string>Version 1.0.0</string>
+            <string>Wersja 1.0.0</string>
            </property>
           </widget>
          </item>
@@ -2603,6 +2384,8 @@ QDialog {
   <tabstop>measReg_pushButton</tabstop>
   <tabstop>logbook_pushButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

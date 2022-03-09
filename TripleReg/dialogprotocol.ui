@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
-    <height>530</height>
+    <width>486</width>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,7 +44,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="cancel_pushButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -61,7 +61,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Protocol</string>
+        <string>Protokół</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -99,7 +99,7 @@
    <item row="1" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Measurement parameter protocol </string>
+      <string>Protokół pomiarowy parametrów elektronicznych układu</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -129,7 +129,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Protocol name</string>
+           <string>Nazwa protokołu</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -157,7 +157,7 @@
       <item row="0" column="1">
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
-         <string>Copy parameters from</string>
+         <string>Kopiuj parametry z</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
@@ -185,7 +185,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Copy</string>
+            <string>Kopiuj</string>
            </property>
           </widget>
          </item>
@@ -195,7 +195,7 @@
       <item row="1" column="0">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
-         <string>PMT voltage</string>
+         <string>Napięcia fotopowielaczy</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
@@ -209,7 +209,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Anode</string>
+              <string>Anoda</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -245,7 +245,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Focusing dynoda</string>
+              <string>Fokalizacja</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -288,7 +288,7 @@
            <item>
             <widget class="QCheckBox" name="setUpTableVoltage_checkBox">
              <property name="text">
-              <string>Set up voltage tables</string>
+              <string>Ustaw tabele napięć</string>
              </property>
             </widget>
            </item>
@@ -328,11 +328,14 @@
              <property name="prefix">
               <string/>
              </property>
+             <property name="minimum">
+              <number>-1000</number>
+             </property>
              <property name="maximum">
               <number>8000</number>
              </property>
              <property name="singleStep">
-              <number>50</number>
+              <number>10</number>
              </property>
             </widget>
            </item>
@@ -344,11 +347,14 @@
              <property name="prefix">
               <string/>
              </property>
+             <property name="minimum">
+              <number>-1000</number>
+             </property>
              <property name="maximum">
               <number>8000</number>
              </property>
              <property name="singleStep">
-              <number>50</number>
+              <number>10</number>
              </property>
             </widget>
            </item>
@@ -360,11 +366,14 @@
              <property name="prefix">
               <string/>
              </property>
+             <property name="minimum">
+              <number>-1000</number>
+             </property>
              <property name="maximum">
               <number>8000</number>
              </property>
              <property name="singleStep">
-              <number>50</number>
+              <number>10</number>
              </property>
             </widget>
            </item>
@@ -398,7 +407,7 @@
            <item row="0" column="0" colspan="3">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Matching PMT voltages</string>
+              <string>Dopasowanie napięć PMT</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -413,7 +422,7 @@
       <item row="1" column="1">
        <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
-         <string>MAC3 parameters</string>
+         <string>MAC3</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
@@ -427,7 +436,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Resolving time</string>
+              <string>Czas rozdzielczy</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -463,7 +472,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Dead-time</string>
+              <string>Czas martwy</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -591,7 +600,7 @@
            <item row="0" column="0" colspan="3">
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>PMT Discrimination Level</string>
+              <string>Poziom dyskryminacji PMT</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -606,7 +615,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_5">
         <property name="title">
-         <string>Notes</string>
+         <string>Uwagi</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
          <item row="0" column="0">
@@ -641,7 +650,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Save</string>
+      <string>Zapisz</string>
      </property>
     </widget>
    </item>

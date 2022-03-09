@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>526</height>
+    <width>286</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
      <item row="0" column="4" rowspan="2">
       <widget class="QPushButton" name="cancel_pushButton">
        <property name="text">
-        <string>Cancel</string>
+        <string>Anuluj</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -64,7 +64,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Voltage table</string>
+        <string>Tabela napieć</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -95,7 +95,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Set</string>
+      <string>Zapisz</string>
      </property>
      <property name="default">
       <bool>true</bool>
@@ -137,13 +137,13 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>PMT anode voltage</string>
+      <string>Napięcie anodowe PMT</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>From</string>
+         <string>Od</string>
         </property>
        </widget>
       </item>
@@ -163,7 +163,7 @@
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>To</string>
+         <string>Do</string>
         </property>
        </widget>
       </item>
@@ -186,7 +186,7 @@
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Step</string>
+         <string>Co</string>
         </property>
        </widget>
       </item>
@@ -227,7 +227,7 @@
         </row>
         <column>
          <property name="text">
-          <string>Anode (V)</string>
+          <string>Anoda [V]</string>
          </property>
         </column>
         <item row="0" column="0">
@@ -240,7 +240,7 @@
       <item>
        <widget class="QPushButton" name="clearAnode_pushButton">
         <property name="text">
-         <string>Clear</string>
+         <string>Wyczyść</string>
         </property>
        </widget>
       </item>
@@ -256,13 +256,13 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>PMT focusing voltage</string>
+      <string>Napięcie fokalizującej</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>From</string>
+         <string>Od</string>
         </property>
        </widget>
       </item>
@@ -282,7 +282,7 @@
       <item>
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>To</string>
+         <string>Do</string>
         </property>
        </widget>
       </item>
@@ -305,7 +305,7 @@
       <item>
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Step</string>
+         <string>Co</string>
         </property>
        </widget>
       </item>
@@ -346,7 +346,7 @@
         </row>
         <column>
          <property name="text">
-          <string>Focusing (V)</string>
+          <string>Fokalizacja [V]</string>
          </property>
         </column>
         <item row="0" column="0">
@@ -359,7 +359,7 @@
       <item>
        <widget class="QPushButton" name="clearFocusing_pushButton">
         <property name="text">
-         <string>Clear</string>
+         <string>Wyczyść</string>
         </property>
        </widget>
       </item>

@@ -317,7 +317,7 @@ void DialogMeasurementReport::on_export_pushButton_clicked()
         dirReport.mkpath(dirReport.path());
 
 
-    QString fileNameReport = QFileDialog::getSaveFileName(this,tr("Export"),dirReport.path()+"/"+_reg.measurementId+".tdk",tr("TDK (*.tdk);;TD (*.td);;RES (*.res)"));
+    QString fileNameReport = QFileDialog::getSaveFileName(this,tr("Eksportuj"),dirReport.path()+"/"+_reg.measurementId+".tdk",tr("TDK (*.tdk);;TD (*.td);;RES (*.res)"));
     ReportGenerator report(fileNameReport);
     report.setMeasurementRegister(_reg);
     report.setMeasurementProtocol(_protocol);

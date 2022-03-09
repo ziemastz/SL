@@ -15,14 +15,14 @@ DialogPowerSupplyProcess::~DialogPowerSupplyProcess()
 
 void DialogPowerSupplyProcess::setSetupHV(const int &maxVoltage)
 {
-    ui->text_label->setText(tr("High voltage setup in progress ..."));
+    ui->text_label->setText(tr("Trwa ustawianie wysokiego napięcia... "));
     ui->progressBar->setValue(0);
     ui->progressBar->setMaximum(maxVoltage);
 }
 
 void DialogPowerSupplyProcess::setStabilization(const int &startDelay)
 {
-    ui->text_label->setText(tr("High voltage stabilization in progress ..."));
+    ui->text_label->setText(tr("Trwa stabilizacja wysokiego napięcia... "));
     ui->progressBar->setValue(0);
     ui->progressBar->setMaximum(startDelay);
 }
