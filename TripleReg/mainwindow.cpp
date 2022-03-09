@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //connect(ui->measurementRegister_tableWidget, &QTableWidget::customContextMenuRequested, this, &MainWindow::on_measurementRegister_tableWidget_customContextMenuRequested);
     ui->version_label->setText(tr("Wersja ")+QApplication::applicationVersion());
     on_measReg_pushButton_clicked();
 }
@@ -696,6 +697,7 @@ void MainWindow::on_measurementRegister_tableWidget_customContextMenuRequested(c
                     }
                     db.remove(&_protocol);
                     db.remove(new TripleRegMeasurementRAWModel,"measurementId="+QString::number(_reg.id));
+                    on_measReg_pushButton_clicked();
                 }
             }
 
