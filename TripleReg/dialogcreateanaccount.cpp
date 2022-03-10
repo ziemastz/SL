@@ -29,7 +29,6 @@ void DialogCreateAnAccount::on_username_lineEdit_editingFinished()
         break;
     case 0:
         ui->warnigUsername_label->setText(tr("Ta nazwa użytkownika jest niedozwolona.\nSpróbuj inną?"));
-        ui->username_lineEdit->setFocus();
         break;
     case -1:
         QMessageBox::warning(this,tr("Baza danych"),tr("Błąd odczytu z bazy danych!\nSkontaktuj się z administratorem."));
@@ -42,7 +41,6 @@ void DialogCreateAnAccount::on_password_lineEdit_editingFinished()
 {
     if(ui->password_lineEdit->text().size() < 3) {
         ui->warnigPassword_label->setText(tr("Minimum 3 znaki!"));
-        ui->password_lineEdit->setFocus();
     }else {
         ui->warnigPassword_label->clear();
     }
@@ -73,36 +71,33 @@ void DialogCreateAnAccount::on_singUp_pushButton_clicked()
     }
     bool ok;
 
-    QString username = QInputDialog::getText(this,tr("Autoryzacja"),tr("Nazwa użytkonika zatwierdzającego"),QLineEdit::Normal,QString(),&ok);
-    if(ok && !username.isEmpty()) {
-        QString password = QInputDialog::getText(this,tr("Autoryzacja"),tr("Hasło zatwierdzającego"),QLineEdit::Password,QString(),&ok);
-        if(ok && !password.isEmpty()) {
-            DatabaseStarlingLab db;
-            int approvingUserId = db.signInUser(username,password);
-            if(approvingUserId > 0) {
-                UserModel newUser;
-                newUser.id = 0;
-                newUser.username = ui->username_lineEdit->text();
-                newUser.password = ui->password_lineEdit->text();
-                newUser.degree = ui->degree_lineEdit->text();
-                newUser.firstName = ui->firstName_lineEdit->text();
-                newUser.secondName = ui->secondName_lineEdit->text();
-                newUser.lastName = ui->lastName_lineEdit->text();
-                newUser.isActive = 1;
-                newUser.userId = approvingUserId;
+    QString password = QInputDialog::getText(this,tr("Autoryzacja"),tr("Wprowadź hasło administratora"),QLineEdit::Password,QString(),&ok);
+    if(ok && !password.isEmpty()) {
+        DatabaseStarlingLab db;
+        int approvingUserId = db.signInUser("admin",password);
+        if(approvingUserId > 0) {
+            UserModel newUser;
+            newUser.id = 0;
+            newUser.username = ui->username_lineEdit->text();
+            newUser.password = ui->password_lineEdit->text();
+            newUser.degree = ui->degree_lineEdit->text();
+            newUser.firstName = ui->firstName_lineEdit->text();
+            newUser.secondName = ui->secondName_lineEdit->text();
+            newUser.lastName = ui->lastName_lineEdit->text();
+            newUser.isActive = 1;
+            newUser.userId = approvingUserId;
 
-                if(db.insert(&newUser)){
-                    accept();
-                }else {
-                    QMessageBox::warning(this,tr("Baza danych"),tr("Błąd zapisu do bazy danych!\nSkontaktuj się z administratorem."));
-                    return;
-                }
+            if(db.insert(&newUser)){
+                accept();
             }else {
-                QMessageBox::warning(this,tr("Autoryzacja"),tr("Błąd autoryzacji!\nProszę spróbować ponownie?"));
+                QMessageBox::warning(this,tr("Baza danych"),tr("Błąd zapisu do bazy danych!\nSkontaktuj się z administratorem."));
                 return;
             }
-
+        }else {
+            QMessageBox::warning(this,tr("Autoryzacja"),tr("Błąd autoryzacji!\nProszę spróbować ponownie?"));
+            return;
         }
+
     }
 }
 
