@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     //QCoreApplication::addLibraryPath(QDir::currentPath()+"/bin");
     QApplication a(argc, argv);
     QApplication::setApplicationName("TripleReg");
-    QApplication::setApplicationVersion("1.0.0");
+    QApplication::setApplicationVersion("1.2");
 /*
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

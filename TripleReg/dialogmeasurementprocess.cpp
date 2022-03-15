@@ -19,16 +19,16 @@ DialogMeasurementProcess::DialogMeasurementProcess(const TripleRegMeasurementReg
     connect(workerProcess, SIGNAL(finished()), thread, SLOT(quit()));
 
     //connection worker with dialog
-    connect(workerProcess, SIGNAL(setMeasurementObject(QString,QString,QString)), this, SLOT(setMeasurementObject(QString,QString,QString)));
-    connect(workerProcess, SIGNAL(setParameter(int,int,int,int)), this, SLOT(setParameter(int,int,int,int)));
+    connect(workerProcess, SIGNAL(setMeasurementObject(QString,QString,QString)), this, SLOT(setMeasurementObject(QString,QString,QString)),Qt::QueuedConnection);
+    connect(workerProcess, SIGNAL(setParameter(int,int,int,int)), this, SLOT(setParameter(int,int,int,int)),Qt::QueuedConnection);
 
-    connect(workerProcess, SIGNAL(setEndTime(QString)), this, SLOT(setEndTime(QString)));
-    connect(workerProcess, SIGNAL(setTimeLeft(int)), this, SLOT(setTimeLeft(int)));
+    connect(workerProcess, SIGNAL(setEndTime(QString)), this, SLOT(setEndTime(QString)),Qt::QueuedConnection);
+    connect(workerProcess, SIGNAL(setTimeLeft(int)), this, SLOT(setTimeLeft(int)),Qt::QueuedConnection);
 
-    connect(workerProcess, SIGNAL(setCurrentSource(int)), this, SLOT(setCurrentSource(int)));
-    connect(workerProcess, SIGNAL(setCurrentPoint(int)), this, SLOT(setCurrentPoint(int)));
-    connect(workerProcess, SIGNAL(setCurrentRepeat(int)), this, SLOT(setCurrentRepeat(int)));
-    connect(workerProcess, SIGNAL(setCurrentTime(int)), this, SLOT(setCurrentTime(int)));
+    connect(workerProcess, SIGNAL(setCurrentSource(int)), this, SLOT(setCurrentSource(int)),Qt::QueuedConnection);
+    connect(workerProcess, SIGNAL(setCurrentPoint(int)), this, SLOT(setCurrentPoint(int)),Qt::QueuedConnection);
+    connect(workerProcess, SIGNAL(setCurrentRepeat(int)), this, SLOT(setCurrentRepeat(int)),Qt::QueuedConnection);
+    connect(workerProcess, SIGNAL(setCurrentTime(int)), this, SLOT(setCurrentTime(int)),Qt::QueuedConnection);
 
     connect(workerProcess, SIGNAL(showPowerSupplyProcessBox()), this, SLOT(showPowerSupplyProcessBox()));
     connect(workerProcess, SIGNAL(hidePowerSupplyProcessBox()), this, SLOT(hidePowerSupplyProcessBox()));
@@ -112,6 +112,8 @@ void DialogMeasurementProcess::addRecord(const QStringList &record, const QStrin
 {
     Utils::addItemTableWidget(ui->short_tableWidget,record);
     Utils::addItemTableWidget(ui->full_tableWidget,fullRecord);
+    ui->short_tableWidget->scrollToBottom();
+    ui->full_tableWidget->scrollToBottom();
 }
 
 void DialogMeasurementProcess::updateLastRecord(const QStringList &record, const QStringList &fullRecord)

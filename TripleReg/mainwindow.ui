@@ -1210,6 +1210,11 @@ QDialog {
                <string>Zaakceptował</string>
               </property>
              </column>
+             <column>
+              <property name="text">
+               <string>Komentarz</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item row="1" column="0" colspan="2">

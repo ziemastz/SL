@@ -80,9 +80,9 @@ void MainWindow::on_newMeasurement_pushButton_clicked(const TripleRegMeasurement
     db.select(reg.protocolId,&protocol);
     ui->protocol_comboBox->setCurrentText(protocol.name);
 
-    ui->linked_lineEdit->setPlaceholderText(reg.linked);
+    ui->linked_lineEdit->setText(reg.linked);
     ui->category_comboBox->setCurrentText(reg.category);
-    ui->comment_plainTextEdit->setPlaceholderText(reg.comments);
+    ui->comment_plainTextEdit->setPlainText(reg.comments);
 }
 
 void MainWindow::on_cancelNewMeasurement_pushButton_clicked()
@@ -380,10 +380,10 @@ void MainWindow::on_startNewMeasurement_pushButton_clicked()
         db.remove(&reg);
         return;
     }
-    DialogMeasurementProcess dialogMeasurementProcess(reg,this);
-    //this->show();
+    DialogMeasurementProcess dialogMeasurementProcess(reg);
+    this->hide();
     dialogMeasurementProcess.exec();
-    //this->show();
+    this->show();
     this->setFocus();
     on_measReg_pushButton_clicked();
 
@@ -458,7 +458,8 @@ void MainWindow::on_measReg_pushButton_clicked()
                    << reg.linked
                    << reg.category
                    << autor.captionShort()
-                   << acceptedUser.captionShort()+" "+reg.acceptedDateTime;
+                   << acceptedUser.captionShort()+" "+reg.acceptedDateTime
+                   << reg.comments;
             table << record;
         }
         ui->measurementRegister_tableWidget->setSortingEnabled(false);
