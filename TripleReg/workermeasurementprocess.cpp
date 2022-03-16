@@ -283,7 +283,7 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
 
         int currValue = qRound(n1470->monVoltCh0() + n1470->monVoltCh1() + n1470->monVoltCh2() + n1470->monVoltCh3());
         emit setCurrentStatusPowerSupplyProcess(maxValue - currValue);
-        if(currValue <= 2) {
+        if(currValue <= 100) {
             break;
         }
         n1470->refresh();

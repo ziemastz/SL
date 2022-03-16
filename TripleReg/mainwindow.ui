@@ -43,7 +43,7 @@ QDialog {
 }</string>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">
@@ -1263,7 +1263,7 @@ QDialog {
               </font>
              </property>
              <property name="text">
-              <string>Dziennik zadarzeń</string>
+              <string>Dziennik zdarzeń</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
