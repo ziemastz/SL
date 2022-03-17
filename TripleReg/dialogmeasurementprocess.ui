@@ -49,7 +49,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Nuklid</string>
+           <string>Radionuklid</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

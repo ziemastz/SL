@@ -112,6 +112,8 @@ void DialogMeasurementReport::load()
     for(int i=0;i<ui->counts_tableWidget->columnCount();i++)
         labels << ui->counts_tableWidget->horizontalHeaderItem(i)->text();
     _counts << labels;
+    Utils::clearTableWidget(ui->counts_tableWidget);
+    Utils::clearTableWidget(ui->csp_tableWidget);
 
     TripleRegMeasurementRAWModel raw;
     Counter counter(new MAC3Counter);
