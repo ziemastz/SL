@@ -103,20 +103,23 @@ void WorkerMeasurementProcess::process()
             stateProcess = WorkerMeasurementProcess::Finished;
             break;
         }
-        emit showMessageBox(tr("Blank measurement"),tr("Please put the blank vial for measurement."));
+        emit showMessageBox(tr("Pomiar tła"),tr("Proszę umieścić próbke do pomiaru tła."));
         stateProcess = PlacingVial;
         break;
     }
     case WorkerMeasurementProcess::NextSource: {
-        isBlank = false;
-        maxTime = _measurement.sourceTime;
+        if(isBlank) {
+            isBlank = false;
+            maxTime = _measurement.sourceTime;
+            emit setParameter(maxSource,maxPoint,maxRepeat,maxTime);
+        }
         currSource++;
         if(currSource<=maxSource) {
             if(!turnOffPowerSupply()) {
                 stateProcess = WorkerMeasurementProcess::Finished;
                 break;
             }
-            emit showMessageBox(tr("Source measurement"),tr("Please put the source vial for measurement.\nSource No: ")+QString::number(currSource));
+            emit showMessageBox(tr("Pomiar źródła nr ")+QString::number(currSource),tr("Proszę umieścić źródło do pomiaru.\nŹródło nr: ")+QString::number(currSource));
             stateProcess = WorkerMeasurementProcess::PlacingVial;
             emit setCurrentSource(currSource);
         }else {
@@ -136,6 +139,7 @@ void WorkerMeasurementProcess::process()
             currFocusing = 0;
             stateProcess = WorkerMeasurementProcess::NextSource;
         }else {
+            emit setCurrentPoint(currPoint);
             qDebug() << "Start setup HV";
            // emit setCurrentPoint(currPoint);
             if(!turnOnPowerSupply()) {
@@ -283,7 +287,7 @@ bool WorkerMeasurementProcess::turnOffPowerSupply()
 
         int currValue = qRound(n1470->monVoltCh0() + n1470->monVoltCh1() + n1470->monVoltCh2() + n1470->monVoltCh3());
         emit setCurrentStatusPowerSupplyProcess(maxValue - currValue);
-        if(currValue <= 100) {
+        if(currValue <= 3000) {
             break;
         }
         n1470->refresh();

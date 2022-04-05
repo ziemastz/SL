@@ -46,6 +46,7 @@ void MainWindow::on_newMeasurement_pushButton_clicked()
         protocol.setRecord(result.at(i)->record());
         ui->protocol_comboBox->addItem(protocol.name);
     }
+    ui->protocol_comboBox->setCurrentIndex(-1);
 
     ui->linked_lineEdit->clear();
     ui->category_comboBox->setCurrentIndex(0);
@@ -78,7 +79,7 @@ void MainWindow::on_newMeasurement_pushButton_clicked(const TripleRegMeasurement
         ui->protocol_comboBox->addItem(protocol.name);
     }
     db.select(reg.protocolId,&protocol);
-    ui->protocol_comboBox->setCurrentText(protocol.name);
+    ui->protocol_comboBox->setCurrentIndex(ui->protocol_comboBox->findText(protocol.name));
 
     ui->linked_lineEdit->setText(reg.linked);
     ui->category_comboBox->setCurrentText(reg.category);

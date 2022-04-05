@@ -78,9 +78,13 @@ void DialogProtocol::on_setUpTableVoltage_checkBox_stateChanged(int arg1)
     switch (arg1) {
     case Qt::Unchecked:
         ui->table_pushButton->setEnabled(false);
+        ui->anode_spinBox->setEnabled(true);
+        ui->focusing_spinBox->setEnabled(true);
         break;
     case Qt::Checked:
         ui->table_pushButton->setEnabled(true);
+        ui->anode_spinBox->setEnabled(false);
+        ui->focusing_spinBox->setEnabled(false);
         break;
     }
 }

@@ -167,14 +167,14 @@ void DialogMeasurementProcess::setCurrentStatusPowerSupplyProcess(const int &val
 
 void DialogMeasurementProcess::on_stop_pushButton_clicked()
 {
-    if(QMessageBox::question(this,tr("Stop measuring"),tr("Are you sure you want to stop measuring?")) == QMessageBox::Yes) {
+    if(QMessageBox::question(this,tr("Przerwij pomiar"),tr("Czy napewno chcesz przerwać pomiar?")) == QMessageBox::Yes) {
         emit rejectedMessageBox();
     }
 }
 
 void DialogMeasurementProcess::finished()
 {
-    QMessageBox::information(this,tr("Finished"),tr("The measurement is finished."));
+    QMessageBox::information(this,tr("Koniec"),tr("Pomiar skończony!"));
     close();
 }
 

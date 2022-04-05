@@ -495,6 +495,9 @@ background-color: rgb(240, 240, 240);
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
                </property>
+               <property name="decimals">
+                <number>3</number>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -603,6 +606,9 @@ background-color: rgb(240, 240, 240);
                <property name="maximum">
                 <number>9999</number>
                </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -642,6 +648,9 @@ background-color: rgb(240, 240, 240);
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
                </property>
+               <property name="decimals">
+                <number>3</number>
+               </property>
               </widget>
              </item>
              <item row="2" column="3">
@@ -657,6 +666,9 @@ background-color: rgb(240, 240, 240);
                </property>
                <property name="buttonSymbols">
                 <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+               <property name="decimals">
+                <number>3</number>
                </property>
               </widget>
              </item>
@@ -676,6 +688,9 @@ background-color: rgb(240, 240, 240);
                </property>
                <property name="suffix">
                 <string/>
+               </property>
+               <property name="minimum">
+                <number>-3000</number>
                </property>
                <property name="maximum">
                 <number>0</number>

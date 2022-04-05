@@ -43,7 +43,7 @@ QDialog {
 }</string>
          </property>
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="page">
           <property name="enabled">
@@ -943,7 +943,7 @@ QDialog {
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Połączone</string>
+                 <string>Nr KP/zlecenia</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

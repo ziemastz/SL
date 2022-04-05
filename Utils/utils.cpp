@@ -135,10 +135,10 @@ QString Utils::generatorMeasurementId(const QString &systemId, const int &id)
 
 QString Utils::generatorTimeDHMSString(const int &leftTime)
 {
-    int minute = leftTime/60;
-    int second = leftTime - (minute*50);
-    int hour = minute/60;
-    int day = hour/24;
+    int minute = (int)((float)leftTime/60);
+    int second = leftTime - (minute*60);
+    int hour = (int)((float)minute/60);
+    int day = (int)((float)hour/24);
 
     if(leftTime <= 60) {
         return QString("%1s").arg(leftTime);
