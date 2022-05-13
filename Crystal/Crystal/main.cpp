@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QCoreApplication::addLibraryPath("/bin");
     QApplication a(argc, argv);
     QApplication::setApplicationName("Crystal");
-    QApplication::setApplicationVersion("1.0.0");
+    QApplication::setApplicationVersion("1.0.1");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

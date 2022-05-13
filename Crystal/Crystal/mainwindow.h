@@ -75,7 +75,9 @@ private slots:
     void on_elementFilter_comboBox_currentIndexChanged(const QString &arg1);
 
     void on_addEventLogbook_pushButton_clicked();
-
+    void keyPressEvent(QKeyEvent *e);
+protected:
+    void closeEvent(QCloseEvent *event);
 private:
     Ui::MainWindow *ui;
     void addFormSystem();

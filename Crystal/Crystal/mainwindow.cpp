@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     addFormSystem();
     on_measurementRegister_pushButton_clicked();
+    ui->versionApp_label->setText("v"+QApplication::applicationVersion());
 }
 
 MainWindow::~MainWindow()
@@ -155,7 +156,9 @@ void MainWindow::addFormSystem()
 void MainWindow::on_exit_pushButton_clicked()
 {
     //messageboc are you sure and finished measurement
-    close();
+    if(QMessageBox::Yes == QMessageBox::question(this,tr("Exit"),tr("Are you sure?")))
+        close();
+
 }
 
 void MainWindow::on_newMeasurement_pushButton_clicked()
@@ -807,5 +810,20 @@ void MainWindow::on_addEventLogbook_pushButton_clicked()
         on_logbook_pushButton_clicked();
         this->setFocus();
     }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Escape)
+            return;
+    QMainWindow::keyPressEvent(e);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if(QMessageBox::Yes == QMessageBox::question(this,tr("Exit"),tr("Are you sure?")))
+        event->accept();
+    else
+        event->ignore();
 }
 

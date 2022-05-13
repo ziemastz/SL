@@ -158,7 +158,7 @@ BEGIN
 END^_
 CREATE TRIGGER IF NOT EXISTS measurementRegisterUpdate AFTER UPDATE ON crystalMeasurementRegister
 BEGIN
-	INSERT INTO crystalRegLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
+        INSERT INTO crystalLogbook VALUES(NULL, 'Modify', 'The following changes have been made:'||char(10)||
 		iif(new.nuclide<>old.nuclide,' - Nuclide from '||old.nuclide||' to '||new.nuclide||'.'||char(10),'')||
 		iif(new.geometry<>old.geometry,' - Geometry from '||old.geometry||' to '||new.geometry||'.'||char(10),'')||
 		iif(new.sourceId<>old.sourceId,' - Source ID from '||old.sourceId||' to '||new.sourceId||'.'||char(10),'')||

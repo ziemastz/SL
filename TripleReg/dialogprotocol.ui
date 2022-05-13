@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Protocol</string>
+   <string>Protokół pomiarowy</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{background-color: rgb(255, 255, 255);}</string>
@@ -61,7 +61,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Protokół</string>
+        <string>Protokół pomiarowy</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

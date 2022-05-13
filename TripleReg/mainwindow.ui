@@ -1076,7 +1076,7 @@ QDialog {
               <item row="0" column="0">
                <widget class="QLabel" name="label_32">
                 <property name="text">
-                 <string>Radiunuklid</string>
+                 <string>Radionuklid</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1086,7 +1086,7 @@ QDialog {
               <item row="0" column="2">
                <widget class="QLabel" name="label_48">
                 <property name="text">
-                 <string>Rzotwór</string>
+                 <string>Roztwór</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1192,7 +1192,7 @@ QDialog {
              </column>
              <column>
               <property name="text">
-               <string>Połączone</string>
+               <string>Nr KP/zlecenia</string>
               </property>
              </column>
              <column>

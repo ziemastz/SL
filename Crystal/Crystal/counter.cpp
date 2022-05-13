@@ -8,6 +8,20 @@ Counter::Counter()
         _deviceName = settings.deviceName;
     }
     connect();
+    _countsA = 0;
+    _countsB = 0;
+    _countsC = 0;
+    _countsD = 0;
+
+    _liveTimeA = 0;
+    _liveTimeB = 0;
+    _liveTimeC = 0;
+    _liveTimeD = 0;
+
+    _realTimeA = 0;
+    _realTimeB = 0;
+    _realTimeC = 0;
+    _realTimeD = 0;
 }
 
 Counter::~Counter()

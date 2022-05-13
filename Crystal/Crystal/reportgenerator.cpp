@@ -144,8 +144,12 @@ void ReportGenerator::generatorNaI()
     UserModel user;
     db.select(_reg.authorId,&user);
     list.insert("Made by",user.caption());
-    db.select(_reg.acceptedId,&user);
-    list.insert("Accepted by",user.caption()+" "+_reg.acceptedDateTime);
+    if(_reg.acceptedId>0){
+        db.select(_reg.acceptedId,&user);
+        list.insert("Accepted by",user.caption()+" "+_reg.acceptedDateTime);
+    }else{
+        list.insert("Accepted by","-");
+    }
     appendList(list,"|");
     appendLine();
 

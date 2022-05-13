@@ -225,11 +225,14 @@ void ReportGenerator::generatorTD()
             pointTag = _counts.at(i).at(2);
             pointNo++;
         }
+        if(_counts.at(i).at(3).toInt() == 1) {
+            pointNo = 1;
+        }
         QStringList record;
         record << _counts.at(i).at(0).split(" ").at(1)
                << _counts.at(i).at(1)
                << QString::number(pointNo)
-               << pointTag.replace(" ","")
+               << pointTag
                << _counts.at(i).at(3) // Repeat
                << _counts.at(i).at(4) // A
                << _counts.at(i).at(5)

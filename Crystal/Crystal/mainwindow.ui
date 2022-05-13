@@ -144,7 +144,7 @@ QGroupBox {
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="versionApp_label">
         <property name="text">
          <string>Version 1.0.0</string>
         </property>

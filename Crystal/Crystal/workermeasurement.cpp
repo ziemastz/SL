@@ -169,6 +169,9 @@ void WorkerMeasurement::process()
         break;
     }
     case WorkerMeasurement::Measurement: {
+        mutex.lock();
+        _counter->readData();
+        mutex.unlock();
         currTime = qRound(_counter->realTime(_port));
         if(currTime>maxTime) {
             mutex.lock();

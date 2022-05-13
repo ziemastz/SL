@@ -416,11 +416,11 @@ QString WorkerMeasurementProcess::generatorPointTag() const
         tag = "1";
     }else {
         if(maxAnode > 1)
-            tag.append("(A) "+QString::number(_protocol.anodaVoltage.at(currAnode-1))+" V");
+            tag.append("A:"+QString::number(_protocol.anodaVoltage.at(currAnode-1))+"V");
         if(maxFocusing > 1){
             if(!tag.isEmpty())
                 tag.append(" | ");
-            tag.append("(F) "+QString::number(_protocol.focusingVoltage.at(currFocusing-1))+" V");
+            tag.append("F:"+QString::number(_protocol.focusingVoltage.at(currFocusing-1))+"V");
         }
     }
     return tag;
